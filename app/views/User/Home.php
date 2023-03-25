@@ -1,494 +1,318 @@
 <?php
 require APPROOT . '/views/Parts/header.php';
 ?>
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg py-3 sticky-top navbar-light bg-white">
+<!-- banner section start -->
+<section class="banner-section d-flex align-items-center position-relative">
+    <!-- bubble animation start -->
+    <div class="bubble-animation">
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+        <div class="bubble-animation-item"></div>
+    </div>
+    <!-- bubble animation end -->
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img class="logo" src="img/logo-dark.svg" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#features">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#portfolio">Portfolio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#pricing">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#team">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#blog">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
-            <button class="btn btn-primary ms-lg-3">Join Us</button>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="banner-text">
+                    <h2 class="mb-3">An investment in knowledge pays the best interest.</h2>
+                    <h1 class="mb-3 text-capitalize">best online platform for learning.</h1>
+                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, numquam! Obcaecati repellat non sed maxime!</p>
+                    <a href="#" class="btn btn-theme">join free</a>
+                </div>
+            </div>
+            <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
+                <div class="banner-img">
+                    <div class="circular-img">
+                        <div class="circular-img-inner">
+                            <div class="circular-img-circle"></div>
+                            <img src="img/banner-img.png" alt="banner img">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</nav><!-- //NAVBAR -->
+</section>
+<!-- banner section end -->
 
-<!-- HERO -->
-<div class="hero vh-100 d-flex align-items-center" id="home">
+<!-- fun facts section start -->
+<section class="fun-facts-section">
     <div class="container">
+        <div class="box py-2">
+            <div class="row text-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="fun-facts-item">
+                        <h2 class="style-1">800k</h2>
+                        <p>students we've</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="fun-facts-item">
+                        <h2 class="style-2">500+</h2>
+                        <p>courses</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="fun-facts-item">
+                        <h2 class="style-3">50+</h2>
+                        <p>countries</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="fun-facts-item">
+                        <h2 class="style-4">100+</h2>
+                        <p>skilled instructors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- fun facts section end -->
+
+<!-- courses section start -->
+<section class="courses-section section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="section-title text-center">
+                    <h2 class="title">courses</h2>
+                    <p class="sub-title">Find the right course for you</p>
+                </div>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-                <h1 class="display-4 text-white">Build robust landing pages now</h1>
-                <p class="text-white my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque quia
-                    sequi eius. Quas, totam aliquid. Repudiandae reiciendis vel excepturi ipsa voluptate dicta!</p>
-                <a href="#" class="btn me-2 btn-primary">Get Started</a>
-                <a href="#" class="btn btn-outline-light">My Portfolio</a>
+            <!-- courses item start -->
+            <div class="col-md-6 col-lg-3">
+                <div class="courses-item">
+                    <a href="course-details.html" class="link">
+                        <div class="courses-item-inner">
+                            <div class="img-box">
+                                <img src="img/courses/web-development/1.jpg" alt="course img">
+                            </div>
+                            <h3 class="title">html for beginners</h3>
+                            <div class="instructor">
+                                <img src="img/instructor/1.png" alt="instructor img">
+                                <span class="instructor-name">john doe</span>
+                            </div>
+                            <div class="rating">
+                                <span class="average-rating">(4.5)</span>
+                                <span class="average-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="reviews">(230)</span>
+                            </div>
+                            <div class="price">$ 49</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- courses item end -->
+            <!-- courses item start -->
+            <div class="col-md-6 col-lg-3">
+                <div class="courses-item">
+                    <a href="course-details.html" class="link">
+                        <div class="courses-item-inner">
+                            <div class="img-box">
+                                <img src="img/courses/web-development/2.jpg" alt="course img">
+                            </div>
+                            <h3 class="title">css for beginners</h3>
+                            <div class="instructor">
+                                <img src="img/instructor/1.png" alt="instructor img">
+                                <span class="instructor-name">john doe</span>
+                            </div>
+                            <div class="rating">
+                                <span class="average-rating">(4.5)</span>
+                                <span class="average-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="reviews">(230)</span>
+                            </div>
+                            <div class="price">$ 49</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- courses item end -->
+            <!-- courses item start -->
+            <div class="col-md-6 col-lg-3">
+                <div class="courses-item">
+                    <a href="course-details.html" class="link">
+                        <div class="courses-item-inner">
+                            <div class="img-box">
+                                <img src="img/courses/web-development/3.jpg" alt="course img">
+                            </div>
+                            <h3 class="title">javascript for beginners</h3>
+                            <div class="instructor">
+                                <img src="img/instructor/1.png" alt="instructor img">
+                                <span class="instructor-name">john doe</span>
+                            </div>
+                            <div class="rating">
+                                <span class="average-rating">(4.5)</span>
+                                <span class="average-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="reviews">(230)</span>
+                            </div>
+                            <div class="price">$ 49</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- courses item end -->
+            <!-- courses item start -->
+            <div class="col-md-6 col-lg-3">
+                <div class="courses-item">
+                    <a href="course-details.html" class="link">
+                        <div class="courses-item-inner">
+                            <div class="img-box">
+                                <img src="img/courses/web-development/4.jpg" alt="course img">
+                            </div>
+                            <h3 class="title">php for beginners</h3>
+                            <div class="instructor">
+                                <img src="img/instructor/1.png" alt="instructor img">
+                                <span class="instructor-name">john doe</span>
+                            </div>
+                            <div class="rating">
+                                <span class="average-rating">(4.5)</span>
+                                <span class="average-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                <span class="reviews">(230)</span>
+                            </div>
+                            <div class="price">$ 49</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- courses item end -->
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-3">
+                <a href="courses.html" class="btn btn-theme">view all courses</a>
             </div>
         </div>
     </div>
-</div><!-- //HERO -->
+</section>
+<!-- courses section end -->
 
-<!-- SERVICES -->
-<section id="services">
+<!-- testimonials section start -->
+<section class="testimonials-section section-padding position-relative">
+    <div class="decoration-circles d-none d-lg-block">
+        <div class="decoration-circles-item"></div>
+        <div class="decoration-circles-item"></div>
+        <div class="decoration-circles-item"></div>
+        <div class="decoration-circles-item"></div>
+    </div>
+    <div class="decoration-imgs d-none d-lg-block">
+        <img src="img/testimonial/1.png" alt="decoration img" class="decoration-imgs-item">
+        <img src="img/testimonial/2.png" alt="decoration img" class="decoration-imgs-item">
+        <img src="img/testimonial/3.png" alt="decoration img" class="decoration-imgs-item">
+    </div>
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">SERIVCES</h6>
-                <h1>Our Services</h1>
-                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="section-title text-center">
+                    <h2 class="title">students feedback</h2>
+                    <p class="sub-title">What our students say</p>
+                </div>
             </div>
         </div>
-        <div class="row g-4">
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect bounceInUp">
-                    <div class="iconbox">
-                        <i class='bx bxs-check-shield'></i>
-                    </div>
-                    <h5 class="mt-4 mb-2">Service</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
-                        perferendis </p>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="img-box rounded-circle position-relative">
+                    <img src="img/testimonial/1.png" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
                 </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect">
-                    <div class="iconbox">
-                        <i class='bx bxs-comment-detail'></i>
+                <div id="carouselOne" class="carousel slide text-center" data-bs-ride="carousel">
+                    <div class="carousel-inner mb-4">
+                        <div class="carousel-item active" data-js-testimonial-img="img/testimonial/1.png">
+                            <div class="testimonials-item">
+                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
+                                <h3>john doe</h3>
+                                <p class="text-2">web developer</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-js-testimonial-img="img/testimonial/2.png">
+                            <div class="testimonials-item">
+                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
+                                <h3>john doe</h3>
+                                <p class="text-2">web developer</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-js-testimonial-img="img/testimonial/3.png">
+                            <div class="testimonials-item">
+                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
+                                <h3>john doe</h3>
+                                <p class="text-2">web developer</p>
+                            </div>
+                        </div>
                     </div>
-                    <h5 class="mt-4 mb-2">Service</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
-                        perferendis </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect">
-                    <div class="iconbox">
-                        <i class='bx bxs-cog'></i>
-                    </div>
-                    <h5 class="mt-4 mb-2">Service</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
-                        perferendis </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect">
-                    <div class="iconbox">
-                        <i class='bx bxs-heart'></i>
-                    </div>
-                    <h5 class="mt-4 mb-2">Service</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
-                        perferendis </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect">
-                    <div class="iconbox">
-                        <i class='bx bxs-rocket'></i>
-                    </div>
-                    <h5 class="mt-4 mb-2">Service</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
-                        perferendis </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="service card-effect">
-                    <div class="iconbox">
-                        <i class='bx bxs-doughnut-chart'></i>
-                    </div>
-                    <h5 class="mt-4 mb-2">Service</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo asperiores
-                        perferendis </p>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselOne" data-bs-slide="prev">
+                        <i class="fas fa-arrow-left"></i>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselOne" data-bs-slide="next">
+                        <i class="fas fa-arrow-right"></i>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-</section><!-- SERVICES -->
+</section>
+<!-- testimonials section end -->
 
-<!-- FEATURES -->
-<section class="row w-100 py-0 bg-light" id="features">
-    <div class="col-lg-6 col-img"></div>
-    <div class="col-lg-6 py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <h6 class="text-primary">WHY TO CHOOES US</h6>
-                    <h1>Best solution for your business</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque
-                        fuga
-                        in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-
-                    <div class="feature d-flex mt-5">
-                        <div class="iconbox me-3">
-                            <i class='bx bxs-comment-edit'></i>
-                        </div>
-                        <div>
-                            <h5>Feature</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
-                        </div>
-                    </div>
-                    <div class="feature d-flex">
-                        <div class="iconbox me-3">
-                            <i class='bx bxs-user-circle'></i>
-                        </div>
-                        <div>
-                            <h5>Feature</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
-                        </div>
-                    </div>
-                    <div class="feature d-flex">
-                        <div class="iconbox me-3">
-                            <i class='bx bxs-download'></i>
-                        </div>
-                        <div>
-                            <h5>Feature</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil perspiciatis illo </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section><!-- FEATURES -->
-
-<!-- PROJECTS -->
-<section id="portfolio">
-    <div class="container-fluid">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">PROJECTS</h6>
-                <h1>Our Recent Work</h1>
-                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-            </div>
-        </div>
-        <div class="row g-3">
-            <div class="col-lg-4 col-sm-6">
-                <div class="project">
-                    <img src="img/pro1.jpg" alt="">
-                    <div class="overlay">
-                        <div>
-                            <h4 class="text-white">Project Title</h4>
-                            <h6 class="text-white">Website Design</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="project">
-                    <img src="img/pro2.jpg" alt="">
-                    <div class="overlay">
-                        <div>
-                            <h4 class="text-white">Project Title</h4>
-                            <h6 class="text-white">Website Design</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="project">
-                    <img src="img/pro3.jpg" alt="">
-                    <div class="overlay">
-                        <div>
-                            <h4 class="text-white">Project Title</h4>
-                            <h6 class="text-white">Website Design</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="project">
-                    <img src="img/pro4.jpg" alt="">
-                    <div class="overlay">
-                        <div>
-                            <h4 class="text-white">Project Title</h4>
-                            <h6 class="text-white">Website Design</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="project">
-                    <img src="img/pro5.jpg" alt="">
-                    <div class="overlay">
-                        <div>
-                            <h4 class="text-white">Project Title</h4>
-                            <h6 class="text-white">Website Design</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="project">
-                    <img src="img/pro6.jpg" alt="">
-                    <div class="overlay">
-                        <div>
-                            <h4 class="text-white">Project Title</h4>
-                            <h6 class="text-white">Website Design</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section><!-- PROJECTS -->
-
-<!-- PRICING -->
-<section id="pricing" class="bg-light">
+<!-- become a instructor section start -->
+<section class="bai-section section-padding">
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">PRICING</h6>
-                <h1>Our Fair & Simple Pricing</h1>
-                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-3 col-sm-6">
-                <div class="pricing card-effect text-center">
-                    <h6>STARTER</h6>
-                    <h1>$99</h1>
-                    <hr>
-                    <ul class="list-unstyled mb-4">
-                        <li><i class='bx bxs-check-circle'></i>
-                            Premium support</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            30+ Webmaster Tools</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            Drag & Drop Builder</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            eCommerce Store</li>
-                        <li><i class='bx bxs-check-circle'></i>Wordpress plugins</li>
-                    </ul>
-                    <button class="btn btn-primary">Get Started</button>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="pricing card-effect text-center">
-                    <h6>STARTER</h6>
-                    <h1>$199</h1>
-                    <hr>
-                    <ul class="list-unstyled mb-4">
-                        <li><i class='bx bxs-check-circle'></i>
-                            Premium support</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            30+ Webmaster Tools</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            Drag & Drop Builder</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            eCommerce Store</li>
-                        <li><i class='bx bxs-check-circle'></i>Wordpress plugins</li>
-                    </ul>
-                    <button class="btn btn-primary">Get Started</button>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="pricing card-effect text-center">
-                    <h6>STARTER</h6>
-                    <h1>$299</h1>
-                    <hr>
-                    <ul class="list-unstyled mb-4">
-                        <li><i class='bx bxs-check-circle'></i>
-                            Premium support</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            30+ Webmaster Tools</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            Drag & Drop Builder</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            eCommerce Store</li>
-                        <li><i class='bx bxs-check-circle'></i>Wordpress plugins</li>
-                    </ul>
-                    <button class="btn btn-primary">Get Started</button>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="pricing card-effect text-center">
-                    <h6>STARTER</h6>
-                    <h1>$399</h1>
-                    <hr>
-                    <ul class="list-unstyled mb-4">
-                        <li><i class='bx bxs-check-circle'></i>
-                            Premium support</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            30+ Webmaster Tools</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            Drag & Drop Builder</li>
-                        <li><i class='bx bxs-check-circle'></i>
-                            eCommerce Store</li>
-                        <li><i class='bx bxs-check-circle'></i>Wordpress plugins</li>
-                    </ul>
-                    <button class="btn btn-primary">Get Started</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section><!-- PRICING -->
-
-<!-- TEAM -->
-<section id="team">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">TEAM</h6>
-                <h1>Meet Our Crew Members</h1>
-                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-            </div>
-        </div>
-        <div class="row text-center g-4">
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member card-effect">
-                    <img src="img/team1.jpg" alt="">
-                    <h5 class="mb-0 mt-4">Sharbat Khan</h5>
-                    <p>Web Developer</p>
-                    <div class="social-icons">
-                        <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-twitter'></i></a>
-                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member card-effect">
-                    <img src="img/team2.jpg" alt="">
-                    <h5 class="mb-0 mt-4">Sharbat Khan</h5>
-                    <p>Web Developer</p>
-                    <div class="social-icons">
-                        <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-twitter'></i></a>
-                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member card-effect">
-                    <img src="img/team3.jpg" alt="">
-                    <h5 class="mb-0 mt-4">Sharbat Khan</h5>
-                    <p>Web Developer</p>
-                    <div class="social-icons">
-                        <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-twitter'></i></a>
-                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="team-member card-effect">
-                    <img src="img/team4.jpg" alt="">
-                    <h5 class="mb-0 mt-4">Sharbat Khan</h5>
-                    <p>Web Developer</p>
-                    <div class="social-icons">
-                        <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-twitter'></i></a>
-                        <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="box">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-4 m-md-0">
+                            <div class="circular-img">
+                                <div class="circular-img-inner">
+                                    <div class="circular-img-circle"></div>
+                                    <img src="img/bai-img.png" alt="bai img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="section-title m-0">
+                                <h2 class="title">become a instructor</h2>
+                                <p class="sub-title">Become a Instructor</p>
+                            </div>
+                            <a href="#" class="btn btn-theme">apply now</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section><!-- TEAM -->
-
-<!-- BLOG -->
-<section id="blog" class="bg-light">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">BLOG</h6>
-                <h1>Latest News From The Blog</h1>
-                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-            </div>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="blog-post card-effect">
-                    <img src="img/blog1.jpg" alt="">
-                    <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="blog-post card-effect">
-                    <img src="img/blog2.jpg" alt="">
-                    <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="blog-post card-effect">
-                    <img src="img/blog3.jpg" alt="">
-                    <h5 class="mt-4"><a href="#">harum vitae debitis sapiente praesentium aperiam au</a></h5>
-                    <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet </p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section><!-- BLOG -->
-
-<!-- CONTACT -->
-<section id="contact">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-8 mx-auto text-center">
-                <h6 class="text-primary">CONTACT</h6>
-                <h1>Get In Touch</h1>
-                <p>Lorem ipsum dolor sit amet consectetur nisi necessitatibus repellat distinctio eveniet eaque fuga
-                    in cumque optio consectetur harum vitae debitis sapiente praesentium aperiam aut</p>
-            </div>
-        </div>
-
-        <form action="" class="row g-3 justify-content-center">
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Full Name">
-            </div>
-            <div class="col-md-5">
-                <input type="text" class="form-control" placeholder="Enter E-mail">
-            </div>
-            <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Enter Subject">
-            </div>
-            <div class="col-md-10">
-                <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Enter Message"></textarea>
-            </div>
-            <div class="col-md-10 d-grid">
-                <button class="btn btn-primary">Contact</button>
-            </div>
-        </form>
-
-    </div>
-</section><!-- CONTACT -->
+</section>
+<!-- become a instructor section end -->
 
 
 

@@ -15,8 +15,8 @@ Class Pages extends Controller{
         $this->view('User/Home', $data);
     }
 
-    public function about(){
-        $this->view('User/about');
+    public function contact(){
+        $this->view('User/contact');
     }
 }
 ?>
