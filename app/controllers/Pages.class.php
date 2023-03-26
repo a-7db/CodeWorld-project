@@ -18,5 +18,21 @@ Class Pages extends Controller{
     public function contact(){
         $this->view('User/contact');
     }
+    
+     public function login(){
+        $this->view('User/login');
+    }
+
+    public function registeration(){
+        $this->view('User/registeration');
+    }
+
+    public function course_details(){
+        $this->view('User/course_details');
+    }
+
+    public function categories(){
+        $this->view('User/categories');
+    }
 }
 ?>
