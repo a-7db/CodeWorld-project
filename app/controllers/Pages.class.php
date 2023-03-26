@@ -34,5 +34,9 @@ Class Pages extends Controller{
     public function categories(){
         $this->view('User/categories');
     }
+
+    public function cart(){
+        $this->view('User/cart');
+    }
 }
 ?>

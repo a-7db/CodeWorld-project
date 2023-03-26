@@ -96,7 +96,7 @@
 </div>
 <!-- style switcher end -->
 
-
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script src=" <?php echo URLROOT ?> . /js/bootstrap.bundle.min.js"></script>
 <script src=" <?php echo URLROOT ?> . /js/main.js"></script>
 </body>

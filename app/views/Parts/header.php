@@ -13,7 +13,7 @@
     <link rel="stylesheet" class="js-glass-style" href=" <?php echo URLROOT ?> ./css/glass.css" disabled>
 
 
-    <title>Hello, world!</title>
+    <title><?php echo SITENAME ?></title>
 </head>
 
 <body>
@@ -44,22 +44,22 @@
                             <i class="fas fa-times"></i>
                         </button>
                         <ul class="menu">
-                            <li class="menu-item"><a href="<?php echo URLROOT?>/">home</a></li>
+                            <li class="menu-item"><a href="<?php echo URLROOT ?>/">home</a></li>
                             <li class="menu-item menu-item-has-children">
-                                <a href="#" class="js-toggle-sub-menu">courses <i class="fas fa-chevron-down"></i></a>
+                                <a href="" class="js-toggle-sub-menu">courses <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
-                                    <li class="sub-menu-item"><a href="courses.html">course</a></li>
-                                    <li class="sub-menu-item"><a href="course-details.html">course details</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/categories">course</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/course_details">course details</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item menu-item-has-children">
                                 <a href="#" class="js-toggle-sub-menu">pages <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
-                                    <li class="sub-menu-item"><a href="log-in.html">log in</a></li>
-                                    <li class="sub-menu-item"><a href="sign-up.html">sign up</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/login">log in</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/registeration">sign up</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-item"><a href="Pages/contact">contact</a></li>
+                            <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>
                         </ul>
                     </nav>
                 </div>

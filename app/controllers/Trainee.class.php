@@ -9,6 +9,11 @@ class Trainee extends User {
     {
     }
 
+    public function register()
+    {
+        
+    }
+
     public function ShowPaidCourse()
     {
     }

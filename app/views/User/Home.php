@@ -28,12 +28,13 @@ require APPROOT . '/views/Parts/header.php';
             </div>
             <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
                 <div class="banner-img">
-                    <div class="circular-img">
+                    <!-- <div class="circular-img">
                         <div class="circular-img-inner">
                             <div class="circular-img-circle"></div>
                             <img src="img/banner-img.png" alt="banner img">
                         </div>
-                    </div>
+                    </div> -->
+                    <lottie-player src="<?php echo URLROOT ?>/lottiefiles/laptop.json" background="transparent" speed="1" style="width: 650px; " loop autoplay></lottie-player>
                 </div>
             </div>
         </div>
@@ -293,10 +294,11 @@ require APPROOT . '/views/Parts/header.php';
                     <div class="row align-items-center">
                         <div class="col-md-6 mb-4 m-md-0">
                             <div class="circular-img">
-                                <div class="circular-img-inner">
+                                <!-- <div class="circular-img-inner">
                                     <div class="circular-img-circle"></div>
                                     <img src="img/bai-img.png" alt="bai img">
-                                </div>
+                                </div> -->
+                                <lottie-player src="<?php echo URLROOT ?>/lottiefiles/online-learning.json" background="transparent" speed="1" style="width: 400px; " loop autoplay></lottie-player>
                             </div>
                         </div>
                         <div class="col-md-6">
