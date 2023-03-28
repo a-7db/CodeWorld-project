@@ -20,22 +20,21 @@ require APPROOT . '/views/Parts/header.php';
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="banner-text">
-                    <h2 class="mb-3">An investment in knowledge pays the best interest.</h2>
-                    <h1 class="mb-3 text-capitalize">best online platform for learning.</h1>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, numquam! Obcaecati repellat non sed maxime!</p>
+                    <h2 class="mb-3">Learn without limits</h2>
+                    <h1 class="mb-3 text-capitalize">Start solving the world's problem</h1>
+                    <p class="mb-4">Take the next step toward your personal and professional goals with Code World</p>
                     <a href="#" class="btn btn-theme">join free</a>
                 </div>
             </div>
             <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
                 <div class="banner-img">
-                    <!-- <div class="circular-img">
+                    <div class="circular-img">
                         <div class="circular-img-inner">
-                            <div class="circular-img-circle"></div>
-                            <img src="img/banner-img.png" alt="banner img">
+
                         </div>
-                    </div> -->
-                    <lottie-player src="<?php echo URLROOT ?>/lottiefiles/laptop.json" background="transparent" speed="1" style="width: 650px; " loop autoplay></lottie-player>
+                    </div>
                 </div>
+                <lottie-player class="lottie-size" src="<?php echo URLROOT ?>/lottiefiles/laptop.json" background="transparent" speed="1" loop autoplay></lottie-player>
             </div>
         </div>
     </div>
@@ -298,7 +297,7 @@ require APPROOT . '/views/Parts/header.php';
                                     <div class="circular-img-circle"></div>
                                     <img src="img/bai-img.png" alt="bai img">
                                 </div> -->
-                                <lottie-player src="<?php echo URLROOT ?>/lottiefiles/online-learning.json" background="transparent" speed="1" style="width: 400px; " loop autoplay></lottie-player>
+                                <lottie-player class="lottie-size" src="<?php echo URLROOT ?>/lottiefiles/online-learning.json" background="transparent" speed="1" loop autoplay></lottie-player>
                             </div>
                         </div>
                         <div class="col-md-6">

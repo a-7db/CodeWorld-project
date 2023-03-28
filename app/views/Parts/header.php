@@ -33,7 +33,7 @@
             <div class="container">
                 <div class="header-main d-flex justify-content-between align-items-center">
                     <div class="header-logo">
-                        <a href="index.html"><span>tws</span>tudy</a>
+                        <a href="<?php echo URLROOT ?>/"><span>Code</span> World</a>
                     </div>
                     <button type="button" class="header-hamburger-btn js-header-menu-toggler">
                         <span></span>
@@ -52,14 +52,14 @@
                                     <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/course_details">course details</a></li>
                                 </ul>
                             </li>
+                            <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>
                             <li class="menu-item menu-item-has-children">
-                                <a href="#" class="js-toggle-sub-menu">pages <i class="fas fa-chevron-down"></i></a>
+                                <a href="" class="js-toggle-sub-menu">Join <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/login">log in</a></li>
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/registeration">sign up</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User">log in</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User/registeration">sign up</a></li>
                                 </ul>
                             </li>
-                            <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>
                         </ul>
                     </nav>
                 </div>

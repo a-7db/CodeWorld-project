@@ -20,7 +20,7 @@ Class Pages extends Controller{
     }
     
      public function login(){
-        $this->view('User/login');
+        
     }
 
     public function registeration(){

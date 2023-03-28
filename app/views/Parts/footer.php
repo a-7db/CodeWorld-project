@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="footer-item">
-                        <h3 class="footer-logo"><span>tws</span>tudy</h3>
+                        <h3 class="footer-logo"><span>Code</span> World</h3>
                         <ul>
                             <li><a href="#">about</a></li>
                             <li><a href="#">what we offer</a></li>

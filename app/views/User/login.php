@@ -6,13 +6,13 @@ require APPROOT . '/views/Parts/header.php';
 <!-- main wrapper start -->
 <div class="main-wrapper">
 
-  
- <!-- breadcrumb start -->
- <div class="breadcrumb-nav">
+
+  <!-- breadcrumb start -->
+  <div class="breadcrumb-nav">
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo URLROOT ?>/">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Log In</li>
         </ol>
       </nav>
@@ -46,5 +46,5 @@ require APPROOT . '/views/Parts/header.php';
   <!-- login section end -->
 
   <?php
-require APPROOT . '/views/Parts/footer.php';
-?>
+  require APPROOT . '/views/Parts/footer.php';
+  ?>

@@ -1,6 +1,6 @@
 <?php
 
-abstract class User extends Controller {
+ class User extends Controller {
 
     protected $User_ID;
     protected $Role_ID;
@@ -11,9 +11,13 @@ abstract class User extends Controller {
 
     public function index()
     {
+        $this->view('User/login');
     }
 
-    abstract public function register();
+    public function registeration()
+    {
+        $this->view('User/registeration');
+    }
 
     public function ShowProfile()
     {
