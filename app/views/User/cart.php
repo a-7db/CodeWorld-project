@@ -51,7 +51,7 @@ require APPROOT . '/views/Parts/header.php';
 
 
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-5 box">
 
                                 <div class="section-title rounded-3">
                                     <div class="card-body bai-section">
@@ -68,7 +68,7 @@ require APPROOT . '/views/Parts/header.php';
                                         <form class="mt-4">
                                             <div class="form-outline form-white mb-4">
                                                 <input type="text" id="typeName" class="form-control form-control-lg" siez="17" />
-                                                <label class="form-label" for="typeName">Cardholder's Name</label>
+                                                <label class="form-label" for="typeName">Name On Card</label>
                                             </div>
 
                                             <div class="form-outline form-white mb-4">
@@ -86,7 +86,7 @@ require APPROOT . '/views/Parts/header.php';
                                                 <div class="col-md-6">
                                                     <div class="form-outline form-white">
                                                         <input type="password" id="typeText" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                                                        <label class="form-label" for="typeText">Cvv</label>
+                                                        <label class="form-label" for="typeText">CVV/CVC</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@ require APPROOT . '/views/Parts/header.php';
                                         <button type="button" class="btn-theme btn btn-block btn-lg">
                                             <div class="d-flex justify-content-between">
                                                 <span>$4818.00</span>
-                                                <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                <span>Pay <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                             </div>
                                         </button>
 

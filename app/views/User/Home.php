@@ -23,7 +23,7 @@ require APPROOT . '/views/Parts/header.php';
                     <h2 class="mb-3">Learn without limits</h2>
                     <h1 class="mb-3 text-capitalize">Start solving the world's problem</h1>
                     <p class="mb-4">Take the next step toward your personal and professional goals with Code World</p>
-                    <a href="#" class="btn btn-theme">join free</a>
+                    <a href="<?php echo URLROOT?>/User/register" class="btn btn-theme">join free</a>
                 </div>
             </div>
             <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
@@ -94,11 +94,11 @@ require APPROOT . '/views/Parts/header.php';
                     <a href="course-details.html" class="link">
                         <div class="courses-item-inner">
                             <div class="img-box">
-                                <img src="img/courses/web-development/1.jpg" alt="course img">
+                                <img src="<?php echo URLROOT ?>/images/courses/web-development/1.jpg" alt="course img">
                             </div>
                             <h3 class="title">html for beginners</h3>
                             <div class="instructor">
-                                <img src="img/instructor/1.png" alt="instructor img">
+                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
                                 <span class="instructor-name">john doe</span>
                             </div>
                             <div class="rating">
@@ -124,11 +124,11 @@ require APPROOT . '/views/Parts/header.php';
                     <a href="course-details.html" class="link">
                         <div class="courses-item-inner">
                             <div class="img-box">
-                                <img src="img/courses/web-development/2.jpg" alt="course img">
+                                <img src="<?php echo URLROOT ?>/images/courses/web-development/2.jpg" alt="course img">
                             </div>
                             <h3 class="title">css for beginners</h3>
                             <div class="instructor">
-                                <img src="img/instructor/1.png" alt="instructor img">
+                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
                                 <span class="instructor-name">john doe</span>
                             </div>
                             <div class="rating">
@@ -154,11 +154,11 @@ require APPROOT . '/views/Parts/header.php';
                     <a href="course-details.html" class="link">
                         <div class="courses-item-inner">
                             <div class="img-box">
-                                <img src="img/courses/web-development/3.jpg" alt="course img">
+                                <img src="<?php echo URLROOT ?>/images/courses/web-development/3.jpg" alt="course img">
                             </div>
                             <h3 class="title">javascript for beginners</h3>
                             <div class="instructor">
-                                <img src="img/instructor/1.png" alt="instructor img">
+                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
                                 <span class="instructor-name">john doe</span>
                             </div>
                             <div class="rating">
@@ -184,11 +184,11 @@ require APPROOT . '/views/Parts/header.php';
                     <a href="course-details.html" class="link">
                         <div class="courses-item-inner">
                             <div class="img-box">
-                                <img src="img/courses/web-development/4.jpg" alt="course img">
+                                <img src="<?php echo URLROOT ?>/images/courses/web-development/4.jpg" alt="course img">
                             </div>
                             <h3 class="title">php for beginners</h3>
                             <div class="instructor">
-                                <img src="img/instructor/1.png" alt="instructor img">
+                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
                                 <span class="instructor-name">john doe</span>
                             </div>
                             <div class="rating">
@@ -226,11 +226,6 @@ require APPROOT . '/views/Parts/header.php';
         <div class="decoration-circles-item"></div>
         <div class="decoration-circles-item"></div>
     </div>
-    <div class="decoration-imgs d-none d-lg-block">
-        <img src="img/testimonial/1.png" alt="decoration img" class="decoration-imgs-item">
-        <img src="img/testimonial/2.png" alt="decoration img" class="decoration-imgs-item">
-        <img src="img/testimonial/3.png" alt="decoration img" class="decoration-imgs-item">
-    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -243,25 +238,25 @@ require APPROOT . '/views/Parts/header.php';
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="img-box rounded-circle position-relative">
-                    <img src="img/testimonial/1.png" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
+                    <img src="<?php echo URLROOT ?>/images/testimonial/1.png" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
                 </div>
                 <div id="carouselOne" class="carousel slide text-center" data-bs-ride="carousel">
                     <div class="carousel-inner mb-4">
-                        <div class="carousel-item active" data-js-testimonial-img="img/testimonial/1.png">
+                        <div class="carousel-item active" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/1.png">
                             <div class="testimonials-item">
                                 <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
                                 <h3>john doe</h3>
                                 <p class="text-2">web developer</p>
                             </div>
                         </div>
-                        <div class="carousel-item" data-js-testimonial-img="img/testimonial/2.png">
+                        <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/2.png">
                             <div class="testimonials-item">
                                 <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
                                 <h3>john doe</h3>
                                 <p class="text-2">web developer</p>
                             </div>
                         </div>
-                        <div class="carousel-item" data-js-testimonial-img="img/testimonial/3.png">
+                        <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/3.png">
                             <div class="testimonials-item">
                                 <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
                                 <h3>john doe</h3>

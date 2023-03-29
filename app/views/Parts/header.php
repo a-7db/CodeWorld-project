@@ -57,7 +57,7 @@
                                 <a href="" class="js-toggle-sub-menu">Join <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
                                     <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User">log in</a></li>
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User/registeration">sign up</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User/register">sign up</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -55,7 +55,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <p class="m-0 py-4 text-center">Copyright &copy;2021 The WebShala</p>
+            <p class="m-0 py-4 text-center">Copyright &copy;2023 <?php echo SITENAME?></p>
         </div>
     </div>
 </footer>
