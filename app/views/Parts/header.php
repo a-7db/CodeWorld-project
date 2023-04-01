@@ -46,20 +46,36 @@
                         <ul class="menu">
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/">home</a></li>
                             <li class="menu-item menu-item-has-children">
-                                <a href="" class="js-toggle-sub-menu">courses <i class="fas fa-chevron-down"></i></a>
+                                <a class="js-toggle-sub-menu">courses <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
                                     <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/categories">course</a></li>
                                     <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/course_details">course details</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="" class="js-toggle-sub-menu">Join <i class="fas fa-chevron-down"></i></a>
-                                <ul class="sub-menu js-sub-menu">
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User">log in</a></li>
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/User/register">sign up</a></li>
-                                </ul>
-                            </li>
+
+                            <!-- SESSION -->
+                            <?php session_start();
+                            if (isset($_SESSION['user_id'])) : ?>
+                                <li class="menu-item menu-item-has-children">
+                                    <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="sub-menu js-sub-menu">
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/profile">profile</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
+                                    </ul>
+                                </li>
+
+                            <?php else : ?>
+
+                                <li class="menu-item menu-item-has-children">
+                                    <a class="js-toggle-sub-menu">Join <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="sub-menu js-sub-menu">
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/login">log in</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/register">sign up</a></li>
+                                    </ul>
+                                </li>
+
+                            <?php endif; ?>
                         </ul>
                     </nav>
                 </div>
