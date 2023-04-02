@@ -38,5 +38,9 @@ Class Pages extends Controller{
     public function cart(){
         $this->view('User/cart');
     }
+
+    public function dashboard(){
+        $this->view('Admin/dashboard');
+    }
 }
 ?>
