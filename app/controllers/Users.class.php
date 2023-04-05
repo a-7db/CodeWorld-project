@@ -49,7 +49,12 @@
                 $loggedInUser = $this->userModel->login($data['email'], $data['pass']);
 
                 if($loggedInUser){
-                    $this->createUserSession($loggedInUser);
+                    if($loggedInUser->statu = false){
+                        $this->createUserSession($loggedInUser);
+                    }
+                    else{
+                        die('Waiting the acception');
+                    }
                 } else{
                     $data['pass_err'] = 'Incorrect Password';
                     $this->view('User/login', $data);
@@ -154,6 +159,7 @@
         $_SESSION['user_id'] = $user->user_ID;
         $_SESSION['user_name'] = $user->fname;
         $_SESSION['user_email'] = $user->email;
+        $_SESSION['Role'] = $user->Role_ID;
         redirect();
     }
 
@@ -162,6 +168,7 @@
         unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
         unset($_SESSION['user_email']);
+        unset($_SESSION['Role']);
         session_destroy();
         redirect('Users/login');
     }
