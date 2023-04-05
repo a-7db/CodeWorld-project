@@ -40,7 +40,10 @@ Class Pages extends Controller{
     }
 
     public function dashboard(){
-        $this->view('Admin/dashboard');
+        $this->view('Admin/content');
+    }
+    public function Instructor_Dashboard(){
+        $this->view('Instructor/content');
     }
 }
 ?>

@@ -32,7 +32,7 @@ require APPROOT . '/views/Parts/header.php';
                     <div class="contact-item">
                         <div class="icon-box"><i class="fas fa-phone"></i></div>
                         <h3>Phone</h3>
-                        <p>91 9654 *** 000</p>
+                        <p>+966 5654 *** 000</p>
                     </div>
                     <div class="contact-item">
                         <div class="icon-box"><i class="fas fa-envelope"></i></div>

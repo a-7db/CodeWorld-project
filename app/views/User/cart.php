@@ -131,6 +131,13 @@ require APPROOT . '/views/Parts/header.php';
     </div>
 </section>
 
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+<br/><br/><br/>
+
 <?php
 require APPROOT . '/views/Parts/footer.php';
 ?>

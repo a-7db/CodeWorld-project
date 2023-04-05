@@ -15,7 +15,6 @@
 	<title>AdminHub</title>
 </head>
 <body>
-
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">

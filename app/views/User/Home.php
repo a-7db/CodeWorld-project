@@ -297,8 +297,8 @@ require APPROOT . '/views/Parts/header.php';
                         </div>
                         <div class="col-md-6">
                             <div class="section-title m-0">
-                                <h2 class="title">become a instructor</h2>
-                                <p class="sub-title">Become a Instructor</p>
+                                <h2 class="title">become an instructor</h2>
+                                <p class="sub-title">Become an Instructor</p>
                             </div>
                             <a href="#" class="btn btn-theme">apply now</a>
                         </div>
