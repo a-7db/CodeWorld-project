@@ -1,6 +1,6 @@
 <?php
 
-class Trainee extends User {
+class Trainee extends Users {
     public function index()
     {
     }

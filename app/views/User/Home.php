@@ -23,7 +23,7 @@ require APPROOT . '/views/Parts/header.php';
                     <h2 class="mb-3">Learn without limits</h2>
                     <h1 class="mb-3 text-capitalize">Start solving the world's problem</h1>
                     <p class="mb-4">Take the next step toward your personal and professional goals with Code World</p>
-                    <a href="<?php echo URLROOT?>/User/register" class="btn btn-theme">join free</a>
+                    <a href="<?php echo URLROOT ?>/Users/register" class="btn btn-theme">join free</a>
                 </div>
             </div>
             <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
@@ -300,7 +300,7 @@ require APPROOT . '/views/Parts/header.php';
                                 <h2 class="title">become an instructor</h2>
                                 <p class="sub-title">Become an Instructor</p>
                             </div>
-                            <a href="#" class="btn btn-theme">apply now</a>
+                            <a href="<?php echo URLROOT ?>/Instructors/register" class="btn btn-theme">apply now</a>
                         </div>
                     </div>
                 </div>

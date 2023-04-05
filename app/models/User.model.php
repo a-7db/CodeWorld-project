@@ -1,8 +1,8 @@
 <?php
 class User {
-    private $db;
-    private $userRole = 3;
-    private $status = true;
+    protected $db;
+    protected $userRole = 3;
+    protected $status = true;
 
     public function __construct()
     {

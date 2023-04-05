@@ -8,10 +8,7 @@ Class Pages extends Controller{
 
     public function index(){
     
-        $data = [
-            'name' => 'Ali',
-            
-        ];
+        $data = [];
         $this->view('User/Home', $data);
     }
 
@@ -19,12 +16,8 @@ Class Pages extends Controller{
         $this->view('User/contact');
     }
     
-     public function login(){
-        
-    }
-
     public function registeration(){
-        $this->view('User/registeration');
+        $this->view('User/regiAsInstuructor');
     }
 
     public function course_details(){

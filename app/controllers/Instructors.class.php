@@ -1,0 +1,88 @@
+<?php
+
+class Instructors extends Users {
+
+    protected $InsturctorModel;
+    public function __construct()
+    {
+        $this->userModel = $this->model('User');
+        $this->InsturctorModel = $this->model('Instructor');
+    }
+
+    public function register(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'fname' => trim($_POST['Fname']),
+                'email' => trim($_POST['email']),
+                'pass' => trim($_POST['pass']),
+                'confirm_pass' => trim($_POST['confirm_pass']),
+
+                # ERROR MESSAGES
+                'fname_err' => '',
+                'email_err' => '',
+                'pass_err' => '',
+                'confirm_pass_err' => '',
+            ];
+
+            if (empty($data['fname'])) {
+                $data['fname_err'] = 'Please Enter Your Name';
+            }
+
+            if (empty($data['email'])) {
+                $data['email_err'] = 'Please Enter Your Email';
+            } else {
+                if (!preg_match($this->regx, $data['email'])) {
+                    $data['email_err'] = 'Email Is Not Correct';
+                } elseif ($this->userModel->findUserByEmail($data['email'])) {
+                    $data['email_err'] = 'Email Is Already Taken';
+                }
+            }
+
+            if (empty($data['pass'])) {
+                $data['pass_err'] = 'Please Enter Password';
+            } elseif (strlen($data['pass']) < 6 || strlen($data['pass']) > 15) {
+                $data['pass_err'] = 'Password Must Be Between 6 - 15 Characters';
+            }
+
+            if (empty($data['confirm_pass'])) {
+                $data['confirm_pass_err'] = 'Please Confirm Your Password';
+            } else {
+                if ($data['pass'] != $data['confirm_pass']) {
+                    $data['confirm_pass_err'] = 'Passwords Do Not Match';
+                }
+            }
+
+            if (
+                empty($data['fname_err']) &&
+                empty($data['email_err']) &&
+                empty($data['pass_err']) &&
+                empty($data['confirm_pass_err'])
+            ) {
+                $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
+
+                if ($this->InsturctorModel->register($data)) {
+                    redirect('Users/login');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                $this->view('User/register_as_insturctor', $data);
+            }
+        } else {
+            $data = [
+                'fname' => '',
+                'email' => '',
+                'pass' => '',
+                'confirm_pass' => '',
+
+                # ERROR MESSAGES
+                'fname_err' => '',
+                'email_err' => '',
+                'pass_err' => '',
+                'confirm_pass_err' => '',
+            ];
+            $this->view('User/register_as_insturctor', $data);
+        }
+    }
+}

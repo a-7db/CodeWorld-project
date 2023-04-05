@@ -40,7 +40,7 @@ require APPROOT . '/views/Parts/header.php'
               <p class="title invalid-feedback"><?php echo $data['confirm_pass_err'] ?></p>
             </div>
             <button type="submit" class="btn btn-block btn-theme btn-form">sign up</button>
-            <p class="text-center mt-4 mb-0">Already have an account ? <a href="<?php echo URLROOT ?>/User/login">Log In</a></p>
+            <p class="text-center mt-4 mb-0">Already have an account ? <a href="<?php echo URLROOT ?>/Users/login">Log In</a></p>
           </form>
         </div>
       </div>
