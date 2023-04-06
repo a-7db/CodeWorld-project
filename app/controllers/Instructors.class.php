@@ -62,7 +62,8 @@ class Instructors extends Users {
                 $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
 
                 if ($this->InsturctorModel->register($data)) {
-                    redirect('Users/login');
+                    flash('watit_acception', 'Wait Email', 'Please wait for our acceptance and then you can log in');
+                    redirect();
                 } else {
                     die('Something went wrong');
                 }

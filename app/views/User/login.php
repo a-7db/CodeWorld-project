@@ -13,7 +13,8 @@ require APPROOT . '/views/Parts/header.php';
   </div>
 </div>
 <!-- breadcrumb end -->
-
+<?php flash('watit_acception'); ?>
+<?php flash('rege_success'); ?>
 <!-- login section start -->
 <section class="login-section section-padding">
   <div class="container">
@@ -31,7 +32,8 @@ require APPROOT . '/views/Parts/header.php';
               <p class="title invalid-feedback"><?php echo $data['pass_err'] ?></p>
               <div class="d-flex mb-2 mt-2 justify-content-end"><a href="#">Forgot Password ?</a></div>
             </div>
-            <button type="submit" class="btn btn-theme btn-block btn-form">log in</button>
+            <button class="btn btn-theme btn-block btn-form">log in</button>
+
             <p class="text-center mt-4 mb-0">Don't have an account ? <a href="Pages/registeration">Sign Up</a></p>
           </form>
         </div>

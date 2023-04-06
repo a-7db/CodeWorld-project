@@ -1,8 +1,11 @@
 <?php
 
-class Admin extends User {
-    public function index()
+class Admins extends Users {
+
+    private $adminModel;
+    public function __construct()
     {
+        
     }
 
     public function ShowUsers()

@@ -49,11 +49,11 @@
                 $loggedInUser = $this->userModel->login($data['email'], $data['pass']);
 
                 if($loggedInUser){
-                    if($loggedInUser->statu = false){
+                    if($loggedInUser->statu == true){
                         $this->createUserSession($loggedInUser);
-                    }
-                    else{
-                        die('Waiting the acception');
+                    } else{
+                        flash('watit_acception', 'Wait Email', 'Please wait for our acceptance and then you can log in');
+                        redirect('Users/login');
                     }
                 } else{
                     $data['pass_err'] = 'Incorrect Password';
@@ -128,6 +128,7 @@
                 $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
                 
                 if ($this->userModel->register($data)) {
+                    flash('rege_success', 'Well done', 'You are registered and can log in.');
                     redirect('Users/login');
                 } else{
                     die('Something went wrong');
@@ -155,7 +156,6 @@
     }
 
     public function createUserSession($user){
-        session_start();
         $_SESSION['user_id'] = $user->user_ID;
         $_SESSION['user_name'] = $user->fname;
         $_SESSION['user_email'] = $user->email;

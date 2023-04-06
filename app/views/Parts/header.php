@@ -55,7 +55,7 @@
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>
 
                             <!-- SESSION -->
-                            <?php session_start();
+                            <?php
                             if (isset($_SESSION['user_id'])) : ?>
                                 <li class="menu-item menu-item-has-children">
                                     <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>

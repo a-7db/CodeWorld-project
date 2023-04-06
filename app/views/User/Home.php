@@ -1,6 +1,9 @@
 <?php
 require APPROOT . '/views/Parts/header.php';
 ?>
+
+<?php flash('watit_acception');?>
+
 <!-- banner section start -->
 <section class="banner-section d-flex align-items-center position-relative">
     <!-- bubble animation start -->
@@ -24,6 +27,7 @@ require APPROOT . '/views/Parts/header.php';
                     <h1 class="mb-3 text-capitalize">Start solving the world's problem</h1>
                     <p class="mb-4">Take the next step toward your personal and professional goals with Code World</p>
                     <a href="<?php echo URLROOT ?>/Users/register" class="btn btn-theme">join free</a>
+                    
                 </div>
             </div>
             <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
