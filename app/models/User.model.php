@@ -46,9 +46,47 @@ class User {
         $row = $this->db->fetchOne();
 
         if($this->db->count() > 0){
-            return true;
+            return $row;
         }
         else{
+            return false;
+        }
+    }
+
+    public function forgotpass($email, $code, $expire){
+        $this->db->query('UPDATE users SET code = :code, expire = :expire WHERE email = :email');
+        $this->db->bind(':code', $code);
+        $this->db->bind(':expire', $expire);
+        $this->db->bind(':email', $email);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getCodeFromUser($email, $code){
+        $this->db->query('SELECT * FROM users WHERE email = :email && code = :code limit 1');
+        $this->db->bind(':code', $code);
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->fetchOne();
+
+        if($this->db->count() > 0){
+            return $row;
+        }
+        return false;
+    }
+
+    public function updateUserPassword($newPassword, $email){
+        $this->db->query('UPDATE users SET pass = :pass WHERE email = :email');
+        $this->db->bind(':pass', $newPassword);
+        $this->db->bind(':email', $email);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
             return false;
         }
     }

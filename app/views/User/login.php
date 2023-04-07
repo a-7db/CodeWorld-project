@@ -13,8 +13,11 @@ require APPROOT . '/views/Parts/header.php';
   </div>
 </div>
 <!-- breadcrumb end -->
-<?php flash('watit_acception'); ?>
-<?php flash('rege_success'); ?>
+<?php
+  flash('watit_acception'); 
+  flash('rege_success'); 
+  flash('updatePassword');
+?>
 <!-- login section start -->
 <section class="login-section section-padding">
   <div class="container">
@@ -30,11 +33,11 @@ require APPROOT . '/views/Parts/header.php';
             <div class="form-group">
               <input type="password" name="pass" class="form-control <?php echo (empty($data['pass_err']) ? '' : 'is-invalid') ?>" placeholder="Password">
               <p class="title invalid-feedback"><?php echo $data['pass_err'] ?></p>
-              <div class="d-flex mb-2 mt-2 justify-content-end"><a href="#">Forgot Password ?</a></div>
+              <div class="d-flex mb-2 mt-2 justify-content-end"><a href="forgot_password">Forgot Password ?</a></div>
             </div>
             <button class="btn btn-theme btn-block btn-form">log in</button>
 
-            <p class="text-center mt-4 mb-0">Don't have an account ? <a href="Pages/registeration">Sign Up</a></p>
+            <p class="text-center mt-4 mb-0">Don't have an account ? <a href="Users/register">Sign Up</a></p>
           </form>
         </div>
       </div>

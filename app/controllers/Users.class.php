@@ -182,6 +182,133 @@
     {
     }
 
+    public function forgot_password(){
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $data = [
+                'email' => '',
+                'email_err' => '',
+
+                'code' => '',
+                'code_err' => '',
+
+                'password' => '',
+                'password2' => '',
+                'password_err' => '',
+
+                'mode' => '',
+            ];
+
+
+            
+            // ENTER EMAIL
+            if(isset($_POST['enter_email'])){
+                $data['email'] = trim($_POST['enter_email']);
+
+                if (empty($data['email'])) {
+                    $data['email_err'] = 'Please Enter Your Email';
+                    $this->view('User/forgot_password', $data);
+                } else {
+                    $_SESSION['email'] = $data['email'];
+                    if ($this->userModel->findUserByEmail($data['email'])) {
+                        $this->send_email($data['email']);
+
+                        $data['mode'] = 'enter_code';
+                        $this->view('User/forgot_password', $data);
+                    } else {
+                        $data['email_err'] = 'No User Found';
+                        $this->view('User/forgot_password', $data);
+                    }
+                }
+            }
+
+
+
+            // ENTER CODE
+            if(isset($_POST['enter_code'])){
+                $data['code'] = trim($_POST['enter_code']);
+
+                if (empty($data['code'])) {
+                    $data['mode'] = 'enter_code';
+                    $data['code_err'] = 'Please Enter The Code';
+                    $this->view('User/forgot_password', $data);
+                } else {
+                    $currentExpire = time();
+                    if($row = $this->userModel->getCodeFromUser($_SESSION['email'], $data['code'])){
+                        if($row->expire > $currentExpire){
+                            $data['mode'] = 'change_pass';
+                            $this->view('User/forgot_password', $data);
+                        }else{
+                            $data['mode'] = 'enter_code';
+                            $data['code_err'] = 'The Code Is Expired';
+                            $this->view('User/forgot_password', $data);
+                        }
+                    }else {
+                        $data['mode'] = 'enter_code';
+                        $data['code_err'] = 'The Code Is Incorrect';
+                        $this->view('User/forgot_password', $data);
+                    }
+                }
+            }
+
+
+
+            // CHANGE PASSWORD
+            if(isset($_POST['password']) && isset($_POST['password2'])){
+                $data['password'] = trim($_POST['password']);
+                $data['password2'] = trim($_POST['password2']);
+
+                if (empty($data['password']) || empty($data['password2'])) {
+                    $data['mode'] = 'change_pass';
+                    $data['password_err'] = 'Please Enter The New Password';
+                    $this->view('User/forgot_password', $data);
+                } else {
+                    if($data['password'] != $data['password2']){
+                        $data['password_err'] = 'Passwords Do Not Match';
+                    } else{
+                        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                        if($this->userModel->updateUserPassword($data['password'], $_SESSION['email'])){
+                            flash('updatePassword', 'Password is Updated', 'Password is updated successfully and you can log in right now.');
+                            redirect('Users/login');
+                        } else{
+                            flash('updatePassword', 'Error', 'Something went wrong.');
+                            redirect('Users/login');
+                        }
+                    }
+                }
+            }
+
+        } else{
+
+            $data = [
+                'email' => '',
+                'email_err' => '',
+                'mode' => '',
+            ];
+
+            $this->view('User/forgot_password', $data);
+        }
+    }
+
+    private function send_email($email){
+        $expire = time() + (60 * 1);
+        $code = rand(1000, 9999);
+
+        $this->userModel->forgotpass($email, $code, $expire);
+
+        
+        send_mail($email, 'Password Reset', 'Your code is ' . $code);
+    }
+
+    public function resend(){
+
+        $this->send_email($_SESSION['email']);
+
+        $data['email'] = $_SESSION['email'];
+        $data['mode'] = 'enter_code';
+        $this->view('User/forgot_password', $data);
+    }
+
 }
 
 ?>
