@@ -128,10 +128,16 @@
                 $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
                 
                 if ($this->userModel->register($data)) {
+                    $this->send_email($data['email']);
+
                     flash('rege_success', 'Well done', 'You are registered and can log in.');
                     redirect('Users/login');
+
+                    // $_SESSION['emailverify'] = $data['email'];
+                    // $this->view('User/Verify', $data['email']);
                 } else{
-                    die('Something went wrong');
+                    flash('rege_success', 'Erorr', 'Something went wrong!.');
+                    redirect('Users/login');
                 }
             }
             else{
@@ -153,6 +159,44 @@
             ];
             $this->view('User/registeration', $data);
         }
+    }
+
+    public function verifyEmail()
+    {
+        // if(isset($_POST['enter_code'])){
+        //     $data = [
+        //      'code' => '',
+        //      'code_err' => '',
+        //      'email' => $_SESSION['emailverify']
+        //       ];
+        //     $data['code'] = trim($_POST['enter_code']);
+            
+        //     if(empty($data['code'])){
+        //         $data['code_err'] = 'Please Enter The Code';
+        //         $this->view('User/verify', $data);
+        //     } else{
+        //         $currentExpire = time();
+        //         if ($row = $this->userModel->getCodeFromUser($data['email'], $data['code'])) {
+        //             if ($row->expire > $currentExpire) {
+        //                 flash('rege_success', 'Well done', 'You are registered and can log in.');
+        //                 redirect('Users/login');
+        //             } else {
+        //                 $data['code_err'] = 'The Code Is Expired';
+        //                 $this->view('User/verify', $data);
+        //             }
+        //         } else {
+        //             $data['code_err'] = 'The Code Is Incorrect';
+        //             $this->view('User/verify', $data);
+        //         }
+        //     }
+        // } else{
+        //     $data = [
+        //         'code' => '',
+        //         'code_err' => '',
+        //         'email' => $_SESSION['emailverify']
+        //     ];
+        //     $this->view('User/verify', $data);
+        // }
     }
 
     public function createUserSession($user){
@@ -296,8 +340,8 @@
 
         $this->userModel->forgotpass($email, $code, $expire);
 
-        
-        send_mail($email, 'Password Reset', 'Your code is ' . $code);
+        $message = '<p>Your code is <b style="font-size: 25px;">' . $code . '<b/><p/>';
+        send_mail($email, 'Password Reset', $message);
     }
 
     public function resend(){

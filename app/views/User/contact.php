@@ -27,17 +27,17 @@ require APPROOT . '/views/Parts/header.php';
                     <div class="contact-item">
                         <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
                         <h3>Address</h3>
-                        <p>34 glassmorphism street, display flex city, New Delhi</p>
+                        <p>Dammam, Institute of Public Administration</p>
                     </div>
                     <div class="contact-item">
                         <div class="icon-box"><i class="fas fa-phone"></i></div>
                         <h3>Phone</h3>
-                        <p>+966 5654 *** 000</p>
+                        <p>+966 5654 252 540</p>
                     </div>
                     <div class="contact-item">
                         <div class="icon-box"><i class="fas fa-envelope"></i></div>
                         <h3>Email</h3>
-                        <p>info@gmail.com</p>
+                        <p>codeworld@gmail.com</p>
                     </div>
                 </div>
             </div>

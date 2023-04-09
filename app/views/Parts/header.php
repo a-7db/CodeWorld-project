@@ -56,11 +56,31 @@
 
                             <!-- SESSION -->
                             <?php
-                            if (isset($_SESSION['user_id'])) : ?>
+                            if (isset($_SESSION['user_id']) && $_SESSION['Role'] == 3) : ?>
                                 <li class="menu-item menu-item-has-children">
                                     <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>
                                     <ul class="sub-menu js-sub-menu">
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/profile">profile</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
+                                    </ul>
+                                </li>
+
+                            <?php elseif (isset($_SESSION['user_id']) && $_SESSION['Role'] == 2) : ?>
+
+                                <li class="menu-item menu-item-has-children">
+                                    <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="sub-menu js-sub-menu">
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Instructors/">Dashboard</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
+                                    </ul>
+                                </li>
+
+                            <?php elseif (isset($_SESSION['user_id']) && $_SESSION['Role'] == 1) : ?>
+
+                                <li class="menu-item menu-item-has-children">
+                                    <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="sub-menu js-sub-menu">
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Admins/">Dashboard</a></li>
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
                                     </ul>
                                 </li>

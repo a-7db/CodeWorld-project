@@ -1,4 +1,5 @@
-<?php require APPROOT .'/views/Admin/dashboard.php'?>
+<?php if(!isset($_SESSION['user_id']) || !$_SESSION['Role'] != 1) : redirect()?>
+<?php else : require APPROOT .'/views/Admin/dashboard.php'?>
 
 <!-- CONTENT -->
 <section id="content">
@@ -163,4 +164,4 @@
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-    <?php require APPROOT .'/views/Admin/footerDash.php'?>
+    <?php require APPROOT .'/views/Admin/footerDash.php'; endif;?>

@@ -37,7 +37,7 @@ require APPROOT . '/views/Parts/header.php';
             </div>
             <button class="btn btn-theme btn-block btn-form">log in</button>
 
-            <p class="text-center mt-4 mb-0">Don't have an account ? <a href="Users/register">Sign Up</a></p>
+            <p class="text-center mt-4 mb-0">Don't have an account ? <a href="register">Sign Up</a></p>
           </form>
         </div>
       </div>

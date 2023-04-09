@@ -9,6 +9,10 @@ class Instructors extends Users {
         $this->InsturctorModel = $this->model('Instructor');
     }
 
+    public function index(){
+        $this->view('Instructor/content');
+    }
+
     public function register(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

@@ -8,6 +8,11 @@ class Admins extends Users {
         
     }
 
+    public function index()
+    {
+        $this->view('Admin/content');
+    }
+
     public function ShowUsers()
     {
     }
