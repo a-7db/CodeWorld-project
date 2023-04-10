@@ -219,7 +219,27 @@
 
     public function profile()
     {
-        $this->view('User/profile');
+        if(isset($_SESSION['user_id'])){
+        
+        $row=$this->userModel->getInfo($_SESSION['user_id']);
+        $data =[
+            'name' =>$row->fname,
+            'email' =>$row->email,
+           
+        ];
+
+        $this->view('User/profile',$data);
+       
+       }
+       else{
+        $data =[
+            'name' =>'',
+            'email' =>'',
+           
+        ];
+
+        $this->view('User/profile',$data);
+       }
     }
 
     public function EditProfile()
