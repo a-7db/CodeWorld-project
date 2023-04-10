@@ -90,6 +90,21 @@ class User {
             return false;
         }
     }
+    
+    public function getInfo($id){
+
+        $this->db->query('SELECT * FROM users  where user_ID=:id');
+        $this->db->bind(':id', $id);
+        $row=$this->db->fetchone();
+        if($this->db->count()> 0){
+            return $row;
+
+        }
+        else{
+           return false;
+        }
+
+    }
 
 }
 
