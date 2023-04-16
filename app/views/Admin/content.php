@@ -1,4 +1,4 @@
-<?php if(!isset($_SESSION['user_id']) || !$_SESSION['Role'] != 1) : redirect()?>
+<?php if( !$_SESSION['Role'] != 1) : redirect()?>
 <?php else : require APPROOT .'/views/Admin/dashboard.php'?>
 
 <!-- CONTENT -->

@@ -7,8 +7,10 @@ Class Pages extends Controller{
     }
 
     public function index(){
-    
-        $data = [];
+        $course = $this->crsModel->showCourses();
+        $data = [
+            'course' => $course
+        ];
         $this->view('User/Home', $data);
     }
 
@@ -30,6 +32,9 @@ Class Pages extends Controller{
 
     public function cart(){
         $this->view('User/cart');
+    }
+    public function profile(){
+        $this->view('User/profile');
     }
 
     public function dashboard(){

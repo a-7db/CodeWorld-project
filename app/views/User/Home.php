@@ -2,7 +2,7 @@
 require APPROOT . '/views/Parts/header.php';
 ?>
 
-<?php flash('watit_acception');?>
+<?php flash('watit_acception'); ?>
 
 <!-- banner section start -->
 <section class="banner-section d-flex align-items-center position-relative">
@@ -27,7 +27,7 @@ require APPROOT . '/views/Parts/header.php';
                     <h1 class="mb-3 text-capitalize">Start solving the world's problem</h1>
                     <p class="mb-4">Take the next step toward your personal and professional goals with Code World</p>
                     <a href="<?php echo URLROOT ?>/Users/register" class="btn btn-theme">join free</a>
-                    
+
                 </div>
             </div>
             <div class="col-md-6 order-first order-md-last mb-5 mb-md-0">
@@ -93,124 +93,37 @@ require APPROOT . '/views/Parts/header.php';
         </div>
         <div class="row">
             <!-- courses item start -->
-            <div class="col-md-6 col-lg-3">
-                <div class="courses-item">
-                    <a href="course-details.html" class="link">
-                        <div class="courses-item-inner">
-                            <div class="img-box">
-                                <img src="<?php echo URLROOT ?>/images/courses/web-development/1.jpg" alt="course img">
+            <?php foreach ($data['course'] as $crs) : ?>
+                <div class="col-md-6 col-lg-3">
+                    <div class="courses-item">
+                        <a href="<?php echo URLROOT . '/courses/details/' . $crs->crs_ID?>" class="link">
+                            <div class="courses-item-inner">
+                                <div class="img-box">
+                                    <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
+                                </div>
+                                <h3 class="title"><?php echo $crs->title ?></h3>
+                                <div class="instructor">
+                                    <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
+                                    <span class="instructor-name"><?php echo $crs->fname ?></span>
+                                </div>
+                                <div class="rating">
+                                    <span class="average-rating">(4.5)</span>
+                                    <span class="average-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </span>
+                                    <span class="reviews">(230)</span>
+                                </div>
+                                <div class="price">SR <?php echo $crs->price ?></div>
                             </div>
-                            <h3 class="title">html for beginners</h3>
-                            <div class="instructor">
-                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
-                                <span class="instructor-name">john doe</span>
-                            </div>
-                            <div class="rating">
-                                <span class="average-rating">(4.5)</span>
-                                <span class="average-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </span>
-                                <span class="reviews">(230)</span>
-                            </div>
-                            <div class="price">$ 49</div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <!-- courses item end -->
-            <!-- courses item start -->
-            <div class="col-md-6 col-lg-3">
-                <div class="courses-item">
-                    <a href="course-details.html" class="link">
-                        <div class="courses-item-inner">
-                            <div class="img-box">
-                                <img src="<?php echo URLROOT ?>/images/courses/web-development/2.jpg" alt="course img">
-                            </div>
-                            <h3 class="title">css for beginners</h3>
-                            <div class="instructor">
-                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
-                                <span class="instructor-name">john doe</span>
-                            </div>
-                            <div class="rating">
-                                <span class="average-rating">(4.5)</span>
-                                <span class="average-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </span>
-                                <span class="reviews">(230)</span>
-                            </div>
-                            <div class="price">$ 49</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- courses item end -->
-            <!-- courses item start -->
-            <div class="col-md-6 col-lg-3">
-                <div class="courses-item">
-                    <a href="course-details.html" class="link">
-                        <div class="courses-item-inner">
-                            <div class="img-box">
-                                <img src="<?php echo URLROOT ?>/images/courses/web-development/3.jpg" alt="course img">
-                            </div>
-                            <h3 class="title">javascript for beginners</h3>
-                            <div class="instructor">
-                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
-                                <span class="instructor-name">john doe</span>
-                            </div>
-                            <div class="rating">
-                                <span class="average-rating">(4.5)</span>
-                                <span class="average-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </span>
-                                <span class="reviews">(230)</span>
-                            </div>
-                            <div class="price">$ 49</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- courses item end -->
-            <!-- courses item start -->
-            <div class="col-md-6 col-lg-3">
-                <div class="courses-item">
-                    <a href="course-details.html" class="link">
-                        <div class="courses-item-inner">
-                            <div class="img-box">
-                                <img src="<?php echo URLROOT ?>/images/courses/web-development/4.jpg" alt="course img">
-                            </div>
-                            <h3 class="title">php for beginners</h3>
-                            <div class="instructor">
-                                <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
-                                <span class="instructor-name">john doe</span>
-                            </div>
-                            <div class="rating">
-                                <span class="average-rating">(4.5)</span>
-                                <span class="average-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </span>
-                                <span class="reviews">(230)</span>
-                            </div>
-                            <div class="price">$ 49</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <?php endforeach; ?>
+
             <!-- courses item end -->
         </div>
         <div class="row">
