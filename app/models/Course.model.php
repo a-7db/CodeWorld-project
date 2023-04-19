@@ -59,5 +59,48 @@ class Course{
 
         return $this->db->fetchOne();
     }
+
+   public function fill_Cart($Course_ID){
+
+     $this->db->query(
+        'INSERT INTO cart (user_ID, course_ID)
+      VALUES (:userID , :crsID )'
+      );
+
+      $this->db->bind(':userID',  $_SESSION['user_id']);
+      $this->db->bind(':crsID',  $Course_ID);
+
+      if ($this->db->execute()) {
+
+        return true;
+        flash('AddToCart','done','course is added ');
+    } else{
+        return false;
+    }
+
+      
+
+    }
+
+    public function getCart()
+    {
+        
+       $this->db->query('SELECT * FROM cart 
+       
+       inner join courses crs
+       on crs.crs_ID = course_ID
+       
+
+       where user_ID = :userID
+       order by cart_ID desc
+       
+       ');
+        
+        $this->db->bind(':userID',  $_SESSION['user_id']);
+
+
+       return $this->db->fetchAll();
+
+    }
 }
 ?>
