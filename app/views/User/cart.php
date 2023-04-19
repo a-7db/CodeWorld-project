@@ -25,22 +25,31 @@ require APPROOT . '/views/Parts/header.php';
 
                                 <!-- COURSE CARD -->
 
-                                <div class="col mb-3" style="max-width: 540px;">
+
+
+
+                                <!-- foreach start -->
+
+                              <?php foreach ($data['cart'] as $cart) : ?>
+
+                               
+
+                                 <div class="col mb-3" style="max-width: 540px;">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
                                                 <div>
-                                                    <img src="<?php echo URLROOT ?>\images\courses\health\2.jpg" style="max-width: 180px;" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                <img width="333px" hight="333px" src="<?php echo URLROOT . '/images/courses/' . $cart->image ?> " alt="course img">
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h5>Iphone 11 pro</h5>
-                                                    <p class="small mb-0">256GB, Navy Blue</p>
+                                                    <h5>Course</h5>
+                                                    <p class="small mb-0"><?php echo  $cart->title ?></p>
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row align-items-center">
 
                                                 <div style="width: 80px;">
-                                                    <h5 class="mb-0">$900</h5>
+                                                    <h5 class="mb-0">SR <?php echo  $cart->price ?></h5>
                                                 </div>
                                                 <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                             </div>
@@ -49,8 +58,15 @@ require APPROOT . '/views/Parts/header.php';
                                 </div>
 
 
+                               <?php endforeach; ?>
+                               
+                                <!-- foreach end -->
 
+                               
                             </div>
+
+                            
+
                             <div class="col-lg-5 box">
 
                                 <div class="section-title rounded-3">
@@ -72,7 +88,7 @@ require APPROOT . '/views/Parts/header.php';
                                             </div>
 
                                             <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="0000 0000 0000 0000" minlength="19" maxlength="19" />
+                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
                                                 <label class="form-label" for="typeText">Card Number</label>
                                             </div>
 
@@ -93,30 +109,49 @@ require APPROOT . '/views/Parts/header.php';
 
                                         </form>
 
-                                        <hr class="my-4">
+                                  <hr class="my-4">
+                                        
+
+                                         
+
+                                         <?php $subtotal = 0 ;?>
+                                          <!-- foreach start -->
+
+                                        <?php foreach ($data['cart'] as $cart) : ?>
+
+                                           <!-- calculate total -->
+
+                                           <?php  $pro = $cart->price * 1 ;
+                                           $subtotal = $subtotal + $pro ;?>
+
+                                          <?php endforeach; ?>
+                               
+                                        <!-- foreach end -->
+                                        <?php $total = $subtotal * 0.15 ;?>
+                                        <?php $total2 = $total + $subtotal  ;?>
 
                                         <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Subtotal</p>
-                                            <p class="mb-2">$4798.00</p>
+                                            <p class="mb-2">Subtotal: </p>
+                                            <p class="mb-2"> SR <?php echo $subtotal?></p>
                                         </div>
-
+                                       
                                         <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Shipping</p>
-                                            <p class="mb-2">$20.00</p>
+                                            <p class="mb-2">Tax: </p>
+                                            <p class="mb-2"> SR <?php echo $total?></p>
                                         </div>
-
+                                       
                                         <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-2">Total(Incl. taxes)</p>
-                                            <p class="mb-2">$4818.00</p>
+                                            <p class="mb-2">Total: </p>
+                                            <p class="mb-2"> SR <?php echo $total2?></p>
                                         </div>
 
                                         <button type="button" class="btn-theme btn btn-block btn-lg">
                                             <div class="d-flex justify-content-between">
-                                                <span>$4818.00</span>
+                                                <span> SR <?php echo $total2?></span>
                                                 <span>Pay <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                             </div>
                                         </button>
-
+                                      
                                     </div>
                                 </div>
 
@@ -137,7 +172,6 @@ require APPROOT . '/views/Parts/header.php';
 <br/><br/><br/>
 <br/><br/><br/>
 <br/><br/><br/>
-
 <?php
 require APPROOT . '/views/Parts/footer.php';
 ?>
