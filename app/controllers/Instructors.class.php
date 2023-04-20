@@ -5,11 +5,15 @@ class Instructors extends Users {
     protected $InsturctorModel;
     public function __construct()
     {
+        
         $this->userModel = $this->model('User');
         $this->InsturctorModel = $this->model('Instructor');
     }
 
     public function index(){
+        if (!isInstructor()) {
+            redirect();
+        }
         $this->view('Instructor/content');
     }
 

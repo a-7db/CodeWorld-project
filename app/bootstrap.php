@@ -10,6 +10,7 @@
     });
 
     require_once '../app/controllers/Users.class.php';
+    require_once '../app/models/User.model.php';
 
     
 ?>

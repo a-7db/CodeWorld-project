@@ -225,7 +225,7 @@
         $data =[
             'name' =>$row->fname,
             'email' =>$row->email,
-           
+            'avatar' =>$row->profile
         ];
 
         $this->view('User/profile',$data);

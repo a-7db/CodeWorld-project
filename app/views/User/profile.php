@@ -10,7 +10,7 @@ require APPROOT . '/views/Parts/header.php';
         <div class="box" style="border-radius: 15px;">
           <div class="card-body text-center">
             <div class="mt-3 mb-4">
-              <img src="<?php echo URLROOT?>/public/images/review/1.png"
+              <img src="<?php echo URLROOT?>/public/images/profile/<?php echo $data['avatar']?>"
                 class="rounded-circle img-fluid" style="width: 100px;" />
             </div>
             <h4 class="mb-2"><?php echo $data['name'] ?></h4>

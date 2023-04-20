@@ -37,7 +37,7 @@ require APPROOT . '/views/Parts/header.php';
           </div>
           <ul>
             <li>enrolled students - <span>2200</span></li>
-            <li>created by - <span><a href="#"><?php echo $data->fname?></a></span></li>
+            <li>created by - <span><a href="#"><?php echo $data->fname ?></a></span></li>
             <li>last updated - <span>10/10/2021</span></li>
             <li>language - <span>english</span></li>
           </ul>
@@ -338,7 +338,7 @@ require APPROOT . '/views/Parts/header.php';
                 <!-- reviews item start -->
                 <div class="reviews-item">
                   <div class="img-box">
-                    <img src="img/review/1.png" alt="review img">
+                    <img src="img/profile/user.png" alt="review img">
                   </div>
                   <h4>john doe</h4>
                   <div class="stars-rating">
@@ -372,7 +372,7 @@ require APPROOT . '/views/Parts/header.php';
                 <!-- reviews item start -->
                 <div class="reviews-item">
                   <div class="img-box">
-                    <img src="img/review/1.png" alt="review img">
+                    <img src="img/profile/user.png" alt="review img">
                   </div>
                   <h4>john doe</h4>
                   <div class="stars-rating">

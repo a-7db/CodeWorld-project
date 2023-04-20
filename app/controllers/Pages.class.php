@@ -37,11 +37,5 @@ Class Pages extends Controller{
         $this->view('User/profile');
     }
 
-    public function dashboard(){
-        $this->view('Admin/content');
-    }
-    public function Instructor_Dashboard(){
-        $this->view('Instructor/content');
-    }
 }
 ?>
