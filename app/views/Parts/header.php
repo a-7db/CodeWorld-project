@@ -62,6 +62,7 @@
                                     <ul class="sub-menu js-sub-menu">
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/profile">profile</a></li>
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/courses/cart">cart</a></li>
                                     </ul>
                                 </li>
 
