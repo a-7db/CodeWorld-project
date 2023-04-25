@@ -17,7 +17,8 @@ class Course{
                                 crs.price,
                                 usr.fname,
                                 cate.name,
-                                crs.image
+                                crs.image,
+                                usr.profile
                             FROM
                                 courses crs
                             INNER JOIN
@@ -25,8 +26,11 @@ class Course{
                             ON crs.instructor_ID = usr.user_ID 
                             INNER JOIN category cate
                             ON cate.category_ID = crs.cate_ID
-                            LIMIT 4;
+                            WHERE crs.public = :isPublic
+                            LIMIT :limli;
         ');
+        $this->db->bind(':isPublic', 1);
+        $this->db->bind(':limli', 4);
 
         return $this->db->fetchAll();
 
@@ -49,9 +53,10 @@ class Course{
                             ON crs.instructor_ID = usr.user_ID 
                             INNER JOIN category cate
                             ON cate.category_ID = crs.cate_ID
-                            WHERE crs.crs_ID = :id;');
+                            WHERE crs.crs_ID = :id AND crs.public = :isPublic;');
 
         $this->db->bind(':id', $id);
+        $this->db->bind(':isPublic', 1);
 
         return $this->db->fetchOne();
     }

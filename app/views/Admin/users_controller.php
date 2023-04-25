@@ -36,7 +36,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="<?php echo URLROOT . './public/images/profile/' . $user->profile ?>" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm"><?php echo $user->fname ?></h6>
@@ -89,7 +89,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="<?php echo URLROOT . './public/images/instructor/' . $inst->profile ?>" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm"><?php echo $inst->fname ?></h6>
@@ -119,40 +119,40 @@
                                         </td>
                                     </tr>
 
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="editmodel" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Are sure?</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        You are going to active <b id="userEmail"></b> to be able to access his account.
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="editmodel" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Are sure?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    You are going to active <b id="userEmail"></b> to be able to access his account.
 
-                                    </div>
-                                    <div class="modal-footer">
+                                </div>
+                                <div class="modal-footer">
 
-                                        <form action="<?php echo URLROOT . '/Admins/deleteUser' ?>" method="GET">
-                                            <input type="hidden" name="user_id" id="user_id">
+                                    <form action="<?php echo URLROOT . '/Admins/deleteUser' ?>" method="GET">
+                                        <input type="hidden" name="user_id" id="user_id">
 
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
 
 
-                                        <form action="<?php echo URLROOT . '/Admins/activeUser' ?>" method="GET">
-                                            <input type="hidden" name="user_id_active" id="user_id_active">
-                                            <button type="submit" class="btn btn-primary">Active</button>
-                                        </form>
-                                    </div>
+                                    <form action="<?php echo URLROOT . '/Admins/activeUser' ?>" method="GET">
+                                        <input type="hidden" name="user_id_active" id="user_id_active">
+                                        <button type="submit" class="btn btn-primary">Active</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                 </div>
             </div>
@@ -176,7 +176,7 @@
             $tr = $(this).closest('tr');
 
             var data = $tr.children("td").map(function() {
-                return $(this).text();
+                return $(this).va();
             }).get();
 
             console.log(data);

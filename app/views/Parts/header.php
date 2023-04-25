@@ -61,8 +61,8 @@
                                     <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>
                                     <ul class="sub-menu js-sub-menu">
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/profile">profile</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/courses/cart">My cart</a></li>
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
-                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/courses/cart">cart</a></li>
                                     </ul>
                                 </li>
 

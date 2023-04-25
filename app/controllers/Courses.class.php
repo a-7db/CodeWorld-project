@@ -11,7 +11,7 @@ class Courses extends Controller {
     private $IsLocked;
 
 
-    public function __construct()   //hdb
+    public function __construct()
     {
          $this->cmodel = $this->model('course');
 
@@ -19,7 +19,7 @@ class Courses extends Controller {
     }
 
 
-    public function index()  //hdb
+    public function index()
     {
 
         $showctc = $this->cmodel->ShowCourses();

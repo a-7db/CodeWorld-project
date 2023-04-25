@@ -2,10 +2,11 @@
 
 class Instructors extends Users {
 
-    protected $InsturctorModel;
+    private $InsturctorModel;
+    private $cmodel;
     public function __construct()
     {
-        
+        $this->cmodel = $this->model('course');
         $this->userModel = $this->model('User');
         $this->InsturctorModel = $this->model('Instructor');
     }
@@ -14,7 +15,81 @@ class Instructors extends Users {
         if (!isInstructor()) {
             redirect();
         }
-        $this->view('Instructor/content');
+        $this->view('Instructor/instructorHome');
+    }
+
+    public function myCourses(){
+        $myCourses = $this->InsturctorModel->ViewMyCourses($_SESSION['user_id']);
+        $cate = $this->InsturctorModel->get_categories();
+
+        $data = [
+            'crs' => $myCourses,
+            'cate' => $cate
+        ];
+
+        $this->view('Instructor/myCourses', $data);
+    }
+
+    public function create_course(){
+        if(isset($_POST['title'])){
+            $date = date("j, n, Y");
+            print_r($_FILES['video']);
+            $data = [
+                'title' => $_POST['title'],
+                'desc' => $_POST['desc'],
+                'price' => $_POST['price'],
+                'cate' => $_POST['cate'],
+                'image' => '',
+                'video' => $_FILES['video'],
+                'public' => $_POST['public'] == 'on' ? 1 : 0,
+                'time' => $date
+            ];
+
+            $img_name = $_FILES['image']['name'];
+            $tmp_name = $_FILES['image']['tmp_name'];
+            $error = $_FILES['image']['error'];
+
+            if($error === 0){
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                $allowed_img_ex = array('jpg', 'png', 'jpeg');
+
+                if(in_array($img_ex_lc, $allowed_img_ex)){
+                    $new_img_name = uniqid('CRS-', true) . '.' . $img_ex_lc;
+                    $img_path = '../public/images/courses/' . $new_img_name;
+                    move_uploaded_file($tmp_name, $img_path);
+                    $data['image'] = $new_img_name;
+                }
+
+            } else{
+                echo '<script> alret("Something went error with your image") </script>';
+            }
+
+            if($this->InsturctorModel->createCousre($data)){
+                $this->myCourses();
+            }{
+
+            }
+
+        } else{
+            $this->myCourses();
+        }
+    }
+
+    public function delete_course(){
+        if(isset($_GET['crsID'])){
+            $crs = $this->cmodel->Showdetails($_GET['crsID']);
+            $img_name = $crs->image;
+            if ($this->InsturctorModel->delete($_GET['crsID'])) {
+                unlink('../public/images/courses/' . $img_name);
+                $this->myCourses();
+            } {
+                $this->myCourses();
+            }
+        } else{
+            $this->myCourses();
+        }
     }
 
     public function register(){

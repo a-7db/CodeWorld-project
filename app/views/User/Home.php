@@ -96,14 +96,14 @@ require APPROOT . '/views/Parts/header.php';
             <?php foreach ($data['course'] as $crs) : ?>
                 <div class="col-md-6 col-lg-3">
                     <div class="courses-item">
-                        <a href="<?php echo URLROOT . '/courses/details/' . $crs->crs_ID?>" class="link">
+                        <a href="<?php echo URLROOT . '/courses/details/' . $crs->crs_ID ?>" class="link">
                             <div class="courses-item-inner">
                                 <div class="img-box">
                                     <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
                                 </div>
                                 <h3 class="title"><?php echo $crs->title ?></h3>
                                 <div class="instructor">
-                                    <img src="<?php echo URLROOT ?>/images/instructor/1.png" alt="instructor img">
+                                    <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile?>" alt="instructor img">
                                     <span class="instructor-name"><?php echo $crs->fname ?></span>
                                 </div>
                                 <div class="rating">
