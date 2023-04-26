@@ -103,5 +103,44 @@ class Course{
        return $this->db->fetchAll();
 
     }
+    
+    public function deleteCart(){
+
+        $this->db->query('DELETE FROM cart WHERE user_ID = :user_ID');
+        $this->db->bind(':user_ID' , $_SESSION['user_id']);
+
+        if($this->db->execute()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function do_order($data){
+
+        $this->db->query(
+           'INSERT INTO orders (user_ID, price, course_ID)
+         VALUES (:user_ID , :price , :crs_ID )'
+         );
+   
+         $this->db->bind(':user_ID',  $_SESSION['user_id']);
+         $this->db->bind(':price',   $data['price']);
+         $this->db->bind(':crs_ID',   $data['crs_ID']);
+   
+        
+   
+         if ($this->db->execute()) {
+   
+            return true;
+            flash('AddToOrders','done','order is done ');
+        } else{
+            return false;
+        }
+         
+   
+    }
+
 }
 ?>
