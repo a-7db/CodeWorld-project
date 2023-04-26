@@ -72,6 +72,42 @@ class Courses extends Controller {
         $this->view('User/cart',$data);
 
     }
+    
+    
+    public function checkout(){
+      
+      
+    if(isLoggedIn()){
+       
+        $row = $this->cmodel->getCart();
+       
+       
+      
+     
+     
+      foreach($row as $cart){
+        $data=[
+            'price' => $cart->price,
+            'crs_ID'=> $cart->crs_ID
+        ];
+        $this->cmodel->do_order($data);
+       
+      }
+      foreach($row as $cart){
+       
+        $this->cmodel->deleteCart();
+       
+      }
+      $this->cart();
+      
+    }
+    else{
+        echo' you have to log in first or something is wrong';
+    }
+
+    
+
+}
 
    
 
