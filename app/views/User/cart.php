@@ -13,20 +13,8 @@ require APPROOT . '/views/Parts/header.php';
                         <div class="row">
 
                             <div class="col-lg-7 section-title">
-                                <h5 class="mb-3"><a href="#!" class="title"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                                <h5 class="mb-3">Shopping cart</h5>
                                 <hr>
-
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                        <p class="mb-1 title">Shopping cart</p>
-
-                                    </div>
-                                </div>
-
-                                <!-- COURSE CARD -->
-
-
-
 
                                 <!-- foreach start -->
 
@@ -42,8 +30,9 @@ require APPROOT . '/views/Parts/header.php';
                                                         <img width="333px" hight="333px" src="<?php echo URLROOT . '/images/courses/' . $cart->image ?> " alt="course img">
                                                     </div>
                                                     <div class="ms-3">
-                                                        <h5>Course</h5>
-                                                        <p class="small mb-0"><?php echo  $cart->title ?></p>
+                                                        <!-- <h5>Course</h5> -->
+                                                        <p class=" mb-0"><?php echo  $cart->title ?></p>
+                                                        <p class="small mt-2"><?php echo  $cart->fname ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex flex-row align-items-center">

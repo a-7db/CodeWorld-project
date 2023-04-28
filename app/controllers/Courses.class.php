@@ -1,21 +1,13 @@
 <?php
 
 class Courses extends Controller {
+    
     private $cmodel;
-    private $Course_ID;
-    private $InstructorID;
-    private $Videos = [];
-    private $Title;
-    private $Description;
-    private $Questions = [];
-    private $IsLocked;
 
 
     public function __construct()
     {
          $this->cmodel = $this->model('course');
-
-
     }
 
 
@@ -31,49 +23,27 @@ class Courses extends Controller {
 
     public function details($id)
     {
-        $data = $this->cmodel->Showdetails($id);
-
-        $data2 = [
-            // 'details' => $details
+        $course = $this->cmodel->Showdetails($id);
+        $videos = $this->cmodel->getVideos($id);
+        $count = $this->cmodel->stdTotal($id);
+        $vid_count = $this->cmodel->vidTotal($id);
+        $crs_count = $this->cmodel->crsTotal($course->userID);
+        $data = [
+            'course' => $course,
+            'videos' => $videos,
+            'count' => $count,
+            'vid_count' => $vid_count,
+            'crs_count' => $crs_count,
         ];
 
         $this->view('User/course_details', $data);
     }
 
-    public function AddToCart($Course_ID){
-      
-        if($Course_ID != null){
-          
-        if(isLoggedIn()){
-           
-            $data = $this->cmodel->Showdetails($Course_ID);
-            $cmodel = $this->cmodel->fill_Cart($Course_ID);
-            // $this->view('User/course_details', $data);
-            redirect('User/course_details/'.$data->crs_ID);
+    
 
-        }
-        else{
-            echo' you have to log in first or something is wrong';
-        }
-
-        }
-
+    public function categories($cate){
+        $this->view('User/categories');
     }
-
-
-    public function cart(){
-
-        $cart = $this->cmodel->getCart();
-
-        $data =[
-            'cart' => $cart
-        ]; 
-
-        $this->view('User/cart',$data);
-
-    }
-
-   
 
 
 

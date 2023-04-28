@@ -19,6 +19,9 @@ class Instructors extends Users {
     }
 
     public function myCourses(){
+        if (!isInstructor()) {
+            redirect();
+        }
         $myCourses = $this->InsturctorModel->ViewMyCourses($_SESSION['user_id']);
         $cate = $this->InsturctorModel->get_categories();
 
@@ -31,9 +34,12 @@ class Instructors extends Users {
     }
 
     public function create_course(){
+        if (!isInstructor()) {
+            redirect();
+        }
         if(isset($_POST['title'])){
-            $date = date("j, n, Y");
-            print_r($_FILES['video']);
+            $date = date_create();
+            
             $data = [
                 'title' => $_POST['title'],
                 'desc' => $_POST['desc'],
@@ -42,12 +48,16 @@ class Instructors extends Users {
                 'image' => '',
                 'video' => $_FILES['video'],
                 'public' => $_POST['public'] == 'on' ? 1 : 0,
-                'time' => $date
+                'time' => date_format($date, 'Y-m-d g:i:s A')
             ];
 
             $img_name = $_FILES['image']['name'];
             $tmp_name = $_FILES['image']['tmp_name'];
             $error = $_FILES['image']['error'];
+
+            $video_name = $_FILES['video']['name'];
+            $vid_tmp_name = $_FILES['video']['tmp_name'];
+            $vid_error = $_FILES['video']['error'];
 
             if($error === 0){
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
@@ -61,32 +71,76 @@ class Instructors extends Users {
                     move_uploaded_file($tmp_name, $img_path);
                     $data['image'] = $new_img_name;
                 }
-
-            } else{
-                echo '<script> alret("Something went error with your image") </script>';
             }
+            
+            $this->InsturctorModel->createCousre($data);
 
-            if($this->InsturctorModel->createCousre($data)){
-                $this->myCourses();
-            }{
 
+            if ($row = $this->InsturctorModel->return_course_byDate($data['time'])) {
+                $videoData = [
+                    'crsID' => $row->crs_ID,
+                    'vname' => $row->title,
+                    'filename' => '',
+                ];
+
+                if ($vid_error === 0) {
+                    $Vid_ex = pathinfo($video_name, PATHINFO_EXTENSION);
+                    $vid_ex_lc = strtolower($Vid_ex);
+
+                    $allowed_vid_ex = array('mp4', 'avi', 'wmv', 'mov', 'webm', 'flv');
+
+                    if (in_array($vid_ex_lc, $allowed_vid_ex)) {
+                        $new_vid_name = uniqid('VID-' . $row->crs_ID, true) . '.' . $vid_ex_lc;
+                        $vid_path = '../public/videos/' . $new_vid_name;
+                        move_uploaded_file($vid_tmp_name, $vid_path);
+                        $videoData['filename'] = $new_vid_name;
+                    }
+                    if ($this->InsturctorModel->addVideo($videoData)) {
+                        redirect('Instructors/myCourses');
+                    } else {
+                        echo 'something went wrong';
+                        redirect('Instructors/myCourses');
+                    }
+                }
+
+            } else {
+                redirect('Instructors/myCourses');
             }
-
         } else{
-            $this->myCourses();
+            redirect('Instructors/myCourses');
         }
     }
 
+    public function add_video($videoFile, $ddate){
+        if (!isInstructor()) {
+            redirect();
+        }
+
+        
+    }
+
     public function delete_course(){
+        if (!isInstructor()) {
+            redirect();
+        }
         if(isset($_GET['crsID'])){
-            $crs = $this->cmodel->Showdetails($_GET['crsID']);
+            $crsID = $_GET['crsID'];
+            $crs = $this->cmodel->Showdetails($crsID);
+            $videos = $this->InsturctorModel->getVideos($crsID);
+
             $img_name = $crs->image;
-            if ($this->InsturctorModel->delete($_GET['crsID'])) {
+            if ($this->InsturctorModel->delete($crsID)) {
                 unlink('../public/images/courses/' . $img_name);
-                $this->myCourses();
-            } {
-                $this->myCourses();
+                
+            foreach($videos as $vid){
+                unlink('../public/videos/' . $vid->filename);
             }
+                redirect('Instructors/myCourses');
+                exit;
+            } else{
+                redirect('Instructors/myCourses');
+            }
+            
         } else{
             $this->myCourses();
         }

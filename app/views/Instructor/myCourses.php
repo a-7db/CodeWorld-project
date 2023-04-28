@@ -106,7 +106,7 @@
                         <div class="mt-1">
                             Status - <span class="<?php echo $crs->public == 1 ? 'text-success' : 'text-warning' ?> font-weight-bold"><?php echo $crs->public == 1 ? 'Public' : 'Private' ?></span>
                         </div>
-                        <div class="mt-1"><?php echo $crs->ddate ?></div>
+                        <div class="mt-1"><?php echo date('Y-m-d', strtotime($crs->ddate)) ?></div>
                     </div>
 
                     <div class="card-header text-center border-0 pt-0 pb-4 pb-lg-3">
@@ -135,7 +135,6 @@
         <?php endforeach; ?>
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -250,7 +249,7 @@
                 price_err.innerHTML = '';
                 cate_err.innerHTML = '';
                 img_err.innerHTML = '';
-            } else if (!check_vid.match(/(\.mp4|\.avi|\.wmv|\.mov)$/)) {
+            } else if (!check_vid.match(/(\.mp4|\.avi|\.wmv|\.mov|\.webm|\.flv)$/)) {
 
                 vid_err.innerHTML = 'Select MP4, AVI, WMV, or MOV Extensions';
                 title_err.innerHTML = '';
@@ -289,13 +288,6 @@
 
         });
     });
-
-    function myURL(key, value) {
-        const searchParams = new URLSearchParams(window.location.search)
-        searchParams.set(key, value)
-        const pathQuery = window.location.pathname + "?" + searchParams.toString()
-        history.pushState(null, "", pathQuery)
-    }
 </script>
 
 

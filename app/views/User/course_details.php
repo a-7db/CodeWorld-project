@@ -1,20 +1,7 @@
 <?php
 require APPROOT . '/views/Parts/header.php';
 ?>
-
-<!-- breadcrumb start -->
-<div class="breadcrumb-nav">
-  <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item"><a href="courses.html">courses</a></li>
-        <li class="breadcrumb-item active" aria-current="page">course details</li>
-      </ol>
-    </nav>
-  </div>
-</div>
-<!-- breadcrumb end -->
+<?php flash('AddToCart')?>
 
 <!-- course details section start -->
 <section class="course-details section-padding">
@@ -23,7 +10,7 @@ require APPROOT . '/views/Parts/header.php';
       <div class="col-lg-8">
         <!-- course header start -->
         <div class="course-header box">
-          <h2 class="text-capitalize"><?php echo $data->title ?></h2>
+          <h2 class="text-capitalize"><?php echo $data['course']->title ?></h2>
           <div class="rating">
             <span class="average-rating">(4.5)</span>
             <span class="average-stars">
@@ -36,9 +23,9 @@ require APPROOT . '/views/Parts/header.php';
             <span class="reviews">(230 Reviews)</span>
           </div>
           <ul>
-            <li>enrolled students - <span>2200</span></li>
-            <li>created by - <span><a href="#"><?php echo $data->fname ?></a></span></li>
-            <li>last updated - <span>10/10/2021</span></li>
+            <li>enrolled students - <span><?php echo $data['count']->total ?></span></li>
+            <li>created by - <span><a href="#"><?php echo $data['course']->fname ?></a></span></li>
+            <li>last updated - <span><?php echo date('Y-m-d', strtotime($data['course']->last_updated)) ?></span></li>
             <li>language - <span>english</span></li>
           </ul>
         </div>
@@ -74,125 +61,18 @@ require APPROOT . '/views/Parts/header.php';
                   <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion">
                     <div class="accordion-body">
                       <ul>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Lexical structure
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Values
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Types
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Variables
-                          <span>06:00</span>
-                        </li>
+                        <?php foreach ($data['videos'] as $vid) : ?>
+                          <li>
+                            <i class="fas fa-play-circle"></i>
+                            <?php echo $vid->name ?>
+                            <!-- <span>06:00</span> -->
+                          </li>
+                        <?php endforeach; ?>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <!-- accordion item end -->
-                <!-- accordion item start -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="heading-2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-                      Types <span>2 lesssons | 20min</span>
-                    </button>
-                  </h2>
-                  <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordion">
-                    <div class="accordion-body">
-                      <ul>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Strings
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Booleans
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Null and undefined
-                          <span>06:00</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <!-- accordion item end -->
-                <!-- accordion item start -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="heading-3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                      Control structure <span>2 lesssons | 20min</span>
-                    </button>
-                  </h2>
-                  <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordion">
-                    <div class="accordion-body">
-                      <ul>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          If / else
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Switch
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Loops
-                          <span>06:00</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <!-- accordion item end -->
-                <!-- accordion item start -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="heading-4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
-                      Function <span>2 lesssons | 20min</span>
-                    </button>
-                  </h2>
-                  <div id="collapse-4" class="accordion-collapse collapse" aria-labelledby="heading-4" data-bs-parent="#accordion">
-                    <div class="accordion-body">
-                      <ul>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Arrow function
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          parameters
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Return value
-                          <span>06:00</span>
-                        </li>
-                        <li>
-                          <i class="fas fa-play-circle"></i>
-                          Recursion
-                          <span>06:00</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+
                 <!-- accordion item end -->
               </div>
               <!-- accordion end -->
@@ -204,11 +84,8 @@ require APPROOT . '/views/Parts/header.php';
           <div class="tab-pane fade " id="course-description" role="tabpanel" aria-labelledby="course-description-tab">
             <div class="course-description box">
               <h3 class="text-capitalize mb-4">description</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure in quas asperiores commodi nesciunt ex culpa perferendis neque error corporis, soluta vero! Nostrum magni ea asperiores suscipit saepe sit eum.</p>
-              <h4>For who is this course designed ?</h4>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae quas ullam quos, illo perferendis corrupti cum doloribus quisquam voluptate. Nesciunt, fugit perferendis. Animi molestiae quam ipsa aperiam aliquam. Perspiciatis, amet.</p>
-              <h4>Why should you take this course ?</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia eius voluptatem iusto quo perspiciatis tempora eveniet doloremque. Ab quos velit id ut? Ad voluptatem expedita fugit nulla minima nesciunt dolor.</p>
+              <p><?php echo $data['course']->description ?></p>
+
             </div>
           </div>
           <!-- course description end -->
@@ -221,21 +98,19 @@ require APPROOT . '/views/Parts/header.php';
                 <div class="details-wrap d-flex align-items-center flex-wrap">
                   <div class="left-box me-4">
                     <div class="img-box">
-                      <img src="img/instructor/1.png" class="rounded-circle" alt="instructor img">
+                      <img src="<?php echo URLROOT . './public/images/instructor/' . $data['course']->profile ?>" class="rounded-circle" alt="instructor img">
                     </div>
                   </div>
                   <div class="right-box">
-                    <h4>john doe <span>(web developer)</span></h4>
+                    <h4><?php echo $data['course']->fname ?></h4>
                     <ul>
                       <li><i class="fas fa-star"></i> 4.5 Rating</li>
-                      <li><i class="fas fa-play-circle"></i> 10 Courses</li>
+                      <li><i class="fas fa-play-circle"></i> <?php echo $data['crs_count']->crs_count ?> Courses</li>
                       <li><i class="fas fa-certificate"></i> 3000 Reviews</li>
                     </ul>
                   </div>
                 </div>
-                <div class="text">
-                  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis corrupti porro ipsa quod, numquam, doloribus quia tenetur eaque cumque inventore esse vero consequatur iusto nulla totam quidem. Fuga doloremque eveniet dicta perferendis dolor. Quasi nobis assumenda qui culpa voluptatem accusamus, ipsum architecto quidem non distinctio soluta explicabo, porro excepturi dignissimos?</p>
-                </div>
+
               </div>
             </div>
           </div>
@@ -399,26 +274,24 @@ require APPROOT . '/views/Parts/header.php';
         <!-- course sidebar start -->
         <div class="course-sidebar box">
           <div class="img-box position-relative" data-bs-toggle="modal" data-bs-target="#video-modal">
-            <img src="<?php echo URLROOT . '/images/courses/' . $data->image ?>" class="w-100" alt="course img">
+            <img src="<?php echo URLROOT . '/images/courses/' . $data['course']->image ?>" class="w-100" alt="course img">
             <div class="play-icon">
               <i class="fas fa-play"></i>
             </div>
             <p class="text-center">Course Preview</p>
           </div>
           <div class="price d-flex align-items-center mb-3">
-            <span class="price-old text-decoration-line-through">SR 100</span>
-            <span class="price-new">SR <?php echo $data->price ?></span>
-            <span class="price-discount">51% Off</span>
+            <!-- <span class="price-old text-decoration-line-through">SR 100</span> -->
+            <span class="price-new">SR <?php echo $data['course']->price ?></span>
+            <!-- <span class="price-discount">51% Off</span> -->
           </div>
           <h3 class="mb-3">Course Features</h3>
           <ul class="features-list">
-            <li>Total 15 lessons</li>
-            <li>Other feature</li>
-            <li>Other feature</li>
-            <li>Other feature</li>
+            <li>Total <?php echo $data['vid_count']->vid_count ?> lessons</li>
           </ul>
           <div class="btn-wrap">
-            <button type="button" class="btn btn-theme btn-block">Add to cart</button>
+            <a class="btn btn-theme btn-block" href="<?php echo URLROOT . '/Trainees/AddToCart/' . $data['course']->crs_ID ?>">Add to cart</a>
+            
           </div>
         </div>
         <!-- course sidebar end -->

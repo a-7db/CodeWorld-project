@@ -18,6 +18,7 @@ class Course{
                                 usr.fname,
                                 cate.name,
                                 crs.image,
+                                crs.last_updated,
                                 usr.profile
                             FROM
                                 courses crs
@@ -44,7 +45,10 @@ class Course{
                                 crs.description,
                                 crs.price,
                                 usr.fname,
+                                usr.profile,
+                                usr.user_ID as userID,
                                 cate.name,
+                                crs.last_updated,
                                 crs.image
                             FROM
                                 courses crs
@@ -61,47 +65,70 @@ class Course{
         return $this->db->fetchOne();
     }
 
-   public function fill_Cart($Course_ID){
 
-     $this->db->query(
-        'INSERT INTO cart (user_ID, course_ID)
-      VALUES (:userID , :crsID )'
-      );
-
-      $this->db->bind(':userID',  $_SESSION['user_id']);
-      $this->db->bind(':crsID',  $Course_ID);
-
-      if ($this->db->execute()) {
-
-        return true;
-        flash('AddToCart','done','course is added ');
-    } else{
-        return false;
-    }
-
-      
-
-    }
-
-    public function getCart()
+    public function get_categories()
     {
-        
-       $this->db->query('SELECT * FROM cart 
-       
-       inner join courses crs
-       on crs.crs_ID = course_ID
-       
-
-       where user_ID = :userID
-       order by cart_ID desc
-       
-       ');
-        
-        $this->db->bind(':userID',  $_SESSION['user_id']);
-
-
-       return $this->db->fetchAll();
-
+        $this->db->query('SELECT * FROM category');
+        return $this->db->fetchAll();
     }
+
+    public function getVideos($crsID)
+    {
+        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID');
+        $this->db->bind(':crsID', $crsID);
+
+        $row = $this->db->fetchAll();
+
+        if ($this->db->count() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    
+    public function stdTotal($crsID){
+        $this->db->query('SELECT COUNT(course_ID) as total FROM orders WHERE course_ID = :crsID');
+        $this->db->bind(':crsID', $crsID);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+    
+    public function vidTotal($crsID){
+        $this->db->query('SELECT COUNT(crs_ID) as vid_count FROM videos WHERE crs_ID = :crsID');
+        $this->db->bind(':crsID', $crsID);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+    
+    public function crsTotal($instructor_ID){
+        $this->db->query('SELECT COUNT(instructor_ID) as crs_count FROM courses WHERE instructor_ID  = :instructor_ID');
+        $this->db->bind(':instructor_ID', $instructor_ID);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
 }
 ?>

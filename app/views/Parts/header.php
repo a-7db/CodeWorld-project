@@ -48,8 +48,9 @@
                             <li class="menu-item menu-item-has-children">
                                 <a class="js-toggle-sub-menu">courses <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/categories">course</a></li>
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Pages/course_details">course details</a></li>
+                                    <?php foreach ($allcate['cate'] as $category) : ?>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/Courses/categories/' . $category->name ?>"><?php echo $category->name ?></a></li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </li>
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>
@@ -61,7 +62,7 @@
                                     <a class="js-toggle-sub-menu"><?php echo $_SESSION['user_name'] ?> <i class="fas fa-chevron-down"></i></a>
                                     <ul class="sub-menu js-sub-menu">
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/profile">profile</a></li>
-                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/courses/cart">My cart</a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Trainees/cart">My cart</a></li>
                                         <li class="sub-menu-item"><a href="<?php echo URLROOT ?>/Users/logout">logout</a></li>
                                     </ul>
                                 </li>

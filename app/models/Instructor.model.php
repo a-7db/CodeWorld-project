@@ -60,8 +60,7 @@ class Instructor extends User{
     }
 
     public function createCousre($data){
-        $this->db->query('INSERT INTO courses (title, description, price, instructor_ID, cate_ID, image, public, last_updated)
-                 VALUES (:title , :descc , :price, :instID, :cate, :imagee, :public, :timeNow)');
+        $this->db->query('INSERT INTO courses (title, description, price, instructor_ID, cate_ID, image, public, last_updated) VALUES (:title , :descc , :price, :instID, :cate, :imagee, :public, :timeNow)');
 
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':descc', $data['desc']);
@@ -86,6 +85,48 @@ class Instructor extends User{
 
         if ($this->db->execute()) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function return_course_byDate($date){
+        $this->db->query('SELECT * FROM courses WHERE instructor_ID = :inst_id AND last_updated = :last_updated');
+        $this->db->bind(':inst_id', $_SESSION['user_id']);
+        $this->db->bind(':last_updated', $date);
+
+        $row = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function addVideo($data){
+        $this->db->query('INSERT INTO videos (crs_ID, name, filename) 
+                    VALUES (:crsID,:Vname, :filenamee)');
+        $this->db->bind(':crsID', $data['crsID']);
+        $this->db->bind(':Vname', $data['vname']);
+        $this->db->bind(':filenamee', $data['filename']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getVideos($crsID){
+        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID');
+        $this->db->bind(':crsID', $crsID);
+
+        $row = $this->db->fetchAll();
+
+        if ($this->db->count() > 0) {
+            return $row;
         } else {
             return false;
         }
