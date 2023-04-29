@@ -66,12 +66,76 @@ class Trainee extends User{
         $this->db->bind(':crsID',  $Course_ID);
 
         $this->db->execute();
-        
+
         if($this->db->count() > 0){
             return true;
         } else{
             return false;
         }
+    }
+
+
+
+    public function deleteCart()
+    {
+
+        $this->db->query('DELETE FROM cart WHERE user_ID = :user_ID');
+        $this->db->bind(':user_ID', $_SESSION['user_id']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function do_order($data)
+    {
+
+        $this->db->query(
+            'INSERT INTO orders (user_ID, price, course_ID)
+         VALUES (:user_ID , :price , :crs_ID )'
+        );
+
+        $this->db->bind(':user_ID',  $_SESSION['user_id']);
+        $this->db->bind(':price',   $data['price']);
+        $this->db->bind(':crs_ID',   $data['crs_ID']);
+
+
+
+        if ($this->db->execute()) {
+
+            return true;
+            flash('AddToOrders', 'done', 'order is done ');
+        } else {
+            return false;
+        }
+    }
+
+    public function my_Learning()
+    {
+        $this->db->query('SELECT crs.crs_ID,
+                                crs.title,
+                                crs.description,
+                                crs.price,
+                                usr.fname,
+                                cate.name,
+                                crs.image,
+                                crs.last_updated,
+                                usr.profile
+                         FROM orders ord
+                         INNER JOIN courses crs
+                         ON ord.course_ID = crs.crs_ID
+                         INNER JOIN users usr
+                         ON crs.instructor_ID  = usr.user_ID
+                         INNER JOIN category cate
+                         ON cate.category_ID = crs.cate_ID
+                         WHERE ord.user_ID = :userID
+                         ');
+
+        $this->db->bind(':userID', $_SESSION['user_id']);
+
+        return $this->db->fetchAll();
     }
 
 }

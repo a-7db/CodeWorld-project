@@ -2,6 +2,7 @@
 require APPROOT . '/views/Parts/header.php';
 ?>
 
+<?php flash('checkout') ?>
 
 <section class="h-100 h-custom">
     <div class="container py-5 h-100">
@@ -18,9 +19,9 @@ require APPROOT . '/views/Parts/header.php';
 
                                 <!-- foreach start -->
 
-                              <?php foreach ($data['cart'] as $cart) : ?>
+                                <?php foreach ($data['cart'] as $cart) : ?>
 
-                               
+
 
                                     <div class="col mb-3" style="max-width: 540px;">
                                         <div class="card-body">
@@ -36,24 +37,24 @@ require APPROOT . '/views/Parts/header.php';
                                                 </div>
                                                 <div class="d-flex flex-row align-items-center">
 
-                                                <div style="width: 80px;">
-                                                    <h5 class="mb-0">SR <?php echo  $cart->price ?></h5>
+                                                    <div style="width: 80px;">
+                                                        <h5 class="mb-0">SR <?php echo  $cart->price ?></h5>
+                                                    </div>
+                                                    <a href="<?php echo URLROOT; ?>/courses/delete_Cart" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                 </div>
-                                                <a href="<?php echo URLROOT;?>/courses/delete_Cart" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
 
-                               <?php endforeach; ?>
-                               
+                                <?php endforeach; ?>
+
                                 <!-- foreach end -->
 
-                               
+
                             </div>
 
-                            
+
 
                             <div class="col-lg-5 box">
 
@@ -69,7 +70,7 @@ require APPROOT . '/views/Parts/header.php';
                                         <a href="#!" type="submit"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
                                         <a href="#!" type="submit"><i class="fab fa-cc-paypal fa-2x"></i></a>
 
-                                        <form class="mt-4" >
+                                        <form class="mt-4">
                                             <div class="form-outline form-white mb-4">
                                                 <input type="text" id="typeName" class="form-control form-control-lg" siez="17" />
                                                 <label class="form-label" for="typeName">Name On Card</label>
@@ -98,72 +99,55 @@ require APPROOT . '/views/Parts/header.php';
 
                                         </form>
 
-                                  <hr class="my-4">
-                                        
+                                        <hr class="my-4">
 
-                                         
 
-                                         <?php $subtotal = 0 ;?>
-                                          <!-- foreach start -->
+
+
+                                        <?php $subtotal = 0; ?>
+                                        <!-- foreach start -->
 
                                         <?php foreach ($data['cart'] as $cart) : ?>
 
-                                           <!-- calculate total -->
+                                            <!-- calculate total -->
 
-                                           <?php  $pro = $cart->price * 1 ;
-                                           $subtotal = $subtotal + $pro ;?>
+                                            <?php $pro = $cart->price * 1;
+                                            $subtotal = $subtotal + $pro; ?>
 
-                                          <?php endforeach; ?>
-                               
+                                        <?php endforeach; ?>
+
                                         <!-- foreach end -->
-                                        <?php $total = $subtotal * 0.15 ;?>
-                                        <?php $total2 = $total + $subtotal  ;?>
+                                        <?php $total = $subtotal * 0.15; ?>
+                                        <?php $total2 = $total + $subtotal; ?>
 
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">Subtotal: </p>
-                                            <p class="mb-2"> SR <?php echo $subtotal?></p>
+                                            <p class="mb-2"> SR <?php echo $subtotal ?></p>
                                         </div>
-                                       
+
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">Tax: </p>
-                                            <p class="mb-2"> SR <?php echo $total?></p>
+                                            <p class="mb-2"> SR <?php echo $total ?></p>
                                         </div>
-                                       
+
                                         <div class="d-flex justify-content-between mb-4">
                                             <p class="mb-2">Total: </p>
-                                            <p class="mb-2"> SR <?php echo $total2?></p>
+                                            <p class="mb-2"> SR <?php echo $total2 ?></p>
                                         </div>
-                                        <a href="<?php echo  URLROOT; ?>/courses/checkout/"  >
-                                        <button type="button" class="btn-theme btn btn-block btn-lg">
-                                            
-                                            <div class="d-flex justify-content-between">
-                                                <span> SR <?php echo $total2?></span>
-                                                
-                                                <span>Pay <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                                
-                                            </div>
 
-                                           
-                                           
-                                        </button>
+                                        <a href="<?php echo  URLROOT ?>/Trainees/checkout/">
+                                            <button type="button" class="btn-theme btn btn-block btn-lg">
+
+                                                <div class="d-flex justify-content-between">
+                                                    <span> SR <?php echo $total2 ?></span>
+                                                    <span>Pay <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                </div>
+
+                                            </button>
                                         </a>
-
-                                        <?php echo $cart->user_ID?></br>
-                                        <?php echo $cart->cart_ID?></br>
-                                        <?php echo $total2?>
 
                                         </br>
 
-
-                                        
-                                       
-                                        
-                                    
-                                        
-                                        
-                                        
-                                        
-                                      
                                     </div>
                                 </div>
 
@@ -178,15 +162,12 @@ require APPROOT . '/views/Parts/header.php';
     </div>
 </section>
 
-<br/><br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
+<br /><br /><br />
 <?php
 require APPROOT . '/views/Parts/footer.php';
 ?>
-
-
-

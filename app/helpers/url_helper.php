@@ -33,3 +33,12 @@
             return false;
         }
     }
+
+    function isTrainee()
+    {
+        if ($_SESSION['Role'] == 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }

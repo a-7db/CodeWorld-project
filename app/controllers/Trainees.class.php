@@ -6,6 +6,9 @@ class Trainees extends Users {
 
     public function __construct()
     {
+        if(!isLoggedIn() || isAdmin() || isInstructor()){
+            redirect();
+        }
         $this->traineeModel = $this->model('Trainee');
     }
 
@@ -31,7 +34,7 @@ class Trainees extends Users {
             }
 
         } else {
-            flash('AddToCart', 'Sorry', 'Admins and instructors cannot buy courses');
+            flash('AddToCart', 'Sorry', 'Please login to be able to buy');
             redirect('Courses/details/' . $Course_ID);
         }
 
@@ -49,8 +52,37 @@ class Trainees extends Users {
         $this->view('User/cart', $data);
     }
 
-    public function ShowPaidCourse()
+    public function checkout()
     {
+        if (isLoggedIn() && !isAdmin() && !isInstructor()) {
+
+            $row = $this->traineeModel->getCart();
+
+            foreach ($row as $cart) {
+                $data = [
+                    'price' => $cart->price,
+                    'crs_ID' => $cart->crs_ID
+                ];
+                $this->traineeModel->do_order($data);
+            }
+            foreach ($row as $cart) {
+
+                $this->traineeModel->deleteCart();
+            }
+            flash('checkout', 'Congratulations', 'Now you can watch and learn to code');
+            redirect('Trainees/myLearning');
+        } else {
+            flash('checkout', 'Sorry', 'Please login to be able to buy');
+            redirect('Trainees/cart');
+        }
+    }
+
+    public function myLearning()
+    {
+        $data = [
+            'course' => $this->traineeModel->my_Learning()
+        ];
+        $this->view('User/myLearning', $data);
     }
 }
 

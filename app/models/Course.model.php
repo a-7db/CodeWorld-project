@@ -85,6 +85,35 @@ class Course{
             return false;
         }
     }
+
+    public function showlastVid($crsID)
+    {
+        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID ORDER BY crs_ID DESC LIMIT 1');
+        $this->db->bind(':crsID', $crsID);
+
+        $row = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getSelectedLecture($crsID, $lecID)
+    {
+        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID AND vid_ID = :vidID');
+        $this->db->bind(':crsID', $crsID);
+        $this->db->bind(':vidID', $lecID);
+
+        $row = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
     
     public function stdTotal($crsID){
         $this->db->query('SELECT COUNT(course_ID) as total FROM orders WHERE course_ID = :crsID');
@@ -125,49 +154,7 @@ class Course{
         }
     }
 
-
-
-
-
-
     
-    public function deleteCart(){
-
-        $this->db->query('DELETE FROM cart WHERE user_ID = :user_ID');
-        $this->db->bind(':user_ID' , $_SESSION['user_id']);
-
-        if($this->db->execute()){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-    }
-
-    public function do_order($data){
-
-        $this->db->query(
-           'INSERT INTO orders (user_ID, price, course_ID)
-         VALUES (:user_ID , :price , :crs_ID )'
-         );
-   
-         $this->db->bind(':user_ID',  $_SESSION['user_id']);
-         $this->db->bind(':price',   $data['price']);
-         $this->db->bind(':crs_ID',   $data['crs_ID']);
-   
-        
-   
-         if ($this->db->execute()) {
-   
-            return true;
-            flash('AddToOrders','done','order is done ');
-        } else{
-            return false;
-        }
-         
-   
-    }
 
 }
 ?>

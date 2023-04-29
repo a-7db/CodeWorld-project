@@ -3,11 +3,12 @@
 class Courses extends Controller {
     
     private $cmodel;
-
+    private $traineeModel;
 
     public function __construct()
     {
          $this->cmodel = $this->model('course');
+        $this->traineeModel = $this->model('Trainee');
     }
 
 
@@ -35,70 +36,44 @@ class Courses extends Controller {
             'vid_count' => $vid_count,
             'crs_count' => $crs_count,
         ];
-
         $this->view('User/course_details', $data);
-    }
 
+    }
     
+    public function learn($params){
+        if(isLoggedIn() && $this->traineeModel->find_order($params[0])){
+            $course = $this->cmodel->Showdetails($params[0]);
+            $allClips = $this->cmodel->getVideos($params[0]);
+            $count = $this->cmodel->stdTotal($params[0]);
+            $vid_count = $this->cmodel->vidTotal($params[0]);
+            $crs_count = $this->cmodel->crsTotal($course->userID);
+            $lastVid = $this->cmodel->showlastVid($params[0]);
+            $data = [
+                    'course' => $course,
+                    'videos' => '',
+                    'count' => $count,
+                    'vid_count' => $vid_count,
+                    'crs_count' => $crs_count,
+                    'allClips' => $allClips
+                ];
+            if (empty($params[1])) {
+                $data['videos'] = $lastVid;
+                $this->view('User/course_videos', $data);
+            } else {
+                $data['videos'] = $this->cmodel->getSelectedLecture($params[0], $params[1]);
+                $this->view('User/course_videos', $data);
+            }
+        } else{
+            redirect();
+        }
+
+    }
 
     public function categories($cate){
         $this->view('User/categories');
     }
 
-
-    public function cart(){
-
-        $cart = $this->cmodel->getCart();
-
-        $data =[
-            'cart' => $cart
-        ]; 
-
-        $this->view('User/cart',$data);
-
-    }
     
-    
-    public function checkout(){
-      
-      
-    if(isLoggedIn()){
-       
-        $row = $this->cmodel->getCart();
-       
-       
-      
-     
-     
-      foreach($row as $cart){
-        $data=[
-            'price' => $cart->price,
-            'crs_ID'=> $cart->crs_ID
-        ];
-        $this->cmodel->do_order($data);
-       
-      }
-      foreach($row as $cart){
-       
-        $this->cmodel->deleteCart();
-       
-      }
-      $this->cart();
-      
-    }
-    else{
-        echo' you have to log in first or something is wrong';
-    }
-
-    
-
-}
-
-   
-
-
-
-
 
 }
 

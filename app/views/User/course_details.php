@@ -275,10 +275,7 @@ require APPROOT . '/views/Parts/header.php';
         <div class="course-sidebar box">
           <div class="img-box position-relative" data-bs-toggle="modal" data-bs-target="#video-modal">
             <img src="<?php echo URLROOT . '/images/courses/' . $data['course']->image ?>" class="w-100" alt="course img">
-            <div class="play-icon">
-              <i class="fas fa-play"></i>
-            </div>
-            <p class="text-center">Course Preview</p>
+            
           </div>
           <div class="price d-flex align-items-center mb-3">
             <!-- <span class="price-old text-decoration-line-through">SR 100</span> -->
