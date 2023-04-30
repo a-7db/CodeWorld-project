@@ -11,11 +11,9 @@ require APPROOT . '/views/Parts/header.php';
                 <!-- course header start -->
                 <div class="row box">
                     <div class="col-lg-8">
-                        <video id="player" width="100%" playsinline controls data-poster="">
+                        <video id="player" width="100%" playsinline controls data-poster="<?php echo URLROOT . '/images/courses/' . $data['course']->image ?>">
                             <source src="<?php echo URLROOT . '../public/videos/' . $data['videos']->filename ?>" type="video/mp4" />
 
-                            <!-- Captions are optional -->
-                            <!-- <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default /> -->
                         </video>
 
                         <p class="mt-2"><?php echo $data['videos']->name ?></p>

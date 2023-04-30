@@ -63,11 +63,11 @@
 </div>
 </div>
 <!--   Core JS Files   -->
-<script src="<?php echo URLROOT ?> ./dashboard/assets/js/core/popper.min.js"></script>
-<script src="<?php echo URLROOT ?> ./dashboard/assets/js/core/bootstrap.min.js"></script>
-<script src="<?php echo URLROOT ?> ./dashboard/assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="<?php echo URLROOT ?> ./dashboard/assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="<?php echo URLROOT ?> ./dashboard/assets/js/plugins/chartjs.min.js"></script>
+<script src="<?php echo URLROOT ?>./dashboard/assets/js/core/popper.min.js"></script>
+<script src="<?php echo URLROOT ?>./dashboard/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="<?php echo URLROOT ?>./dashboard/assets/js/core/bootstrap.min.js"></script>
+<script src="<?php echo URLROOT ?>./dashboard/assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="<?php echo URLROOT ?>./dashboard/assets/js/plugins/chartjs.min.js"></script>
 
 <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");

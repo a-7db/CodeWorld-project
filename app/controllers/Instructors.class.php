@@ -48,9 +48,10 @@ class Instructors extends Users {
                 'image' => '',
                 'video' => $_FILES['video'],
                 'public' => $_POST['public'] == 'on' ? 1 : 0,
-                'time' => date_format($date, 'Y-m-d g:i:s A')
+                'time' => date_format($date, 'Y-m-d g:i:s A'),
+                'slug' => ''
             ];
-
+            $data['slug'] = slug($data['title']);
             $img_name = $_FILES['image']['name'];
             $tmp_name = $_FILES['image']['tmp_name'];
             $error = $_FILES['image']['error'];
@@ -81,6 +82,7 @@ class Instructors extends Users {
                     'crsID' => $row->crs_ID,
                     'vname' => $row->title,
                     'filename' => '',
+                    'slug' => slug($row->title)
                 ];
 
                 if ($vid_error === 0) {

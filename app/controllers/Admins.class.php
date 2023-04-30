@@ -56,6 +56,41 @@ class Admins extends Users {
         }
     }
 
+    public function edit_categories(){
+        if (isset($_POST['cate'])) {
+            $data = [
+                'cate' => $_POST['cate'],
+                'cate_err' => '',
+                'slug' => '',
+                'newID' => ''
+            ];
+
+            if (empty($data['cate'])) {
+                $data['cate_err'] = 'No data to add!';
+                $this->view('Admin/cate_editing', $data);
+            } else{
+
+                $lastID = $this->adminModel->lastCateID();
+                $data['newID'] = $lastID->category_ID += 1000;
+                $data['slug'] = slug($data['cate']);
+    
+                if ($this->adminModel->insert_cate($data)) {
+                    redirect('Admins/edit_categories');
+                } else {
+                    redirect('Admins/edit_categories');
+                }
+            }
+
+        } else {
+            $data = [
+                'cate' => '',
+                'cate_err' => ''
+            ];
+            $this->view('Admin/cate_editing', $data);
+        }
+    }
+
+
     public function CreateCourse()
     {
     }

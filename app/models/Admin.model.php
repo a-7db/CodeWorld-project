@@ -45,5 +45,21 @@ class Admin extends User{
         }
     }
 
+    public function lastCateID(){
+        $this->db->query('SELECT category_ID FROM category ORDER BY category_ID DESC LIMIT 1');
+        return $this->db->fetchOne();
+    }
 
+    public function insert_cate($data){
+        $this->db->query('INSERT INTO category (category_ID, name, slug) VALUES (:cateID, :cateName, :slug)');
+        $this->db->bind(':cateID', $data['newID']);
+        $this->db->bind(':cateName', $data['cate']);
+        $this->db->bind(':slug', $data['slug']);
+        
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

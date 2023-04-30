@@ -1,7 +1,7 @@
 <?php
 require APPROOT . '/views/Parts/header.php';
 ?>
-<?php flash('AddToCart')?>
+<?php flash('AddToCart') ?>
 
 <!-- course details section start -->
 <section class="course-details section-padding">
@@ -34,7 +34,7 @@ require APPROOT . '/views/Parts/header.php';
         <!-- course tabs start -->
         <nav class="course-tabs">
           <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="course-curriculum-tab" data-bs-toggle="tab" data-bs-target="#course-curriculum" type="button" role="tab" aria-controls="course-curriculum" aria-selected="true">curriculum</button>
+            <button class="nav-link active" id="course-curriculum-tab" data-bs-toggle="tab" data-bs-target="#course-curriculum" type="button" role="tab" aria-controls="course-curriculum" aria-selected="true">Lectures</button>
             <button class="nav-link" id="course-description-tab" data-bs-toggle="tab" data-bs-target="#course-description" type="button" role="tab" aria-controls="course-description" aria-selected="false">description</button>
             <button class="nav-link" id="course-instructor-tab" data-bs-toggle="tab" data-bs-target="#course-instructor" type="button" role="tab" aria-controls="course-instructor" aria-selected="false">instructor</button>
             <button class="nav-link" id="course-reviews-tab" data-bs-toggle="tab" data-bs-target="#course-reviews" type="button" role="tab" aria-controls="course-reviews" aria-selected="false">reviews</button>
@@ -48,14 +48,14 @@ require APPROOT . '/views/Parts/header.php';
           <!-- course curriculum start -->
           <div class="tab-pane fade show active" id="course-curriculum" role="tabpanel" aria-labelledby="course-curriculum-tab">
             <div class="course-curriculum box">
-              <h3 class="text-capitalize mb-4">curriculum</h3>
+              <h3 class="text-capitalize mb-4">Lectures</h3>
               <!-- accordion start -->
               <div class="accordion" id="accordion">
                 <!-- accordion item start -->
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="heading-1">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                      Language basics <span>2 lesssons | 20min</span>
+                      Course content <span><?php echo $data['vid_count']->vid_count ?> lesssons</span>
                     </button>
                   </h2>
                   <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordion">
@@ -275,7 +275,7 @@ require APPROOT . '/views/Parts/header.php';
         <div class="course-sidebar box">
           <div class="img-box position-relative" data-bs-toggle="modal" data-bs-target="#video-modal">
             <img src="<?php echo URLROOT . '/images/courses/' . $data['course']->image ?>" class="w-100" alt="course img">
-            
+
           </div>
           <div class="price d-flex align-items-center mb-3">
             <!-- <span class="price-old text-decoration-line-through">SR 100</span> -->
@@ -288,7 +288,7 @@ require APPROOT . '/views/Parts/header.php';
           </ul>
           <div class="btn-wrap">
             <a class="btn btn-theme btn-block" href="<?php echo URLROOT . '/Trainees/AddToCart/' . $data['course']->crs_ID ?>">Add to cart</a>
-            
+
           </div>
         </div>
         <!-- course sidebar end -->

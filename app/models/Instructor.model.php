@@ -60,7 +60,7 @@ class Instructor extends User{
     }
 
     public function createCousre($data){
-        $this->db->query('INSERT INTO courses (title, description, price, instructor_ID, cate_ID, image, public, last_updated) VALUES (:title , :descc , :price, :instID, :cate, :imagee, :public, :timeNow)');
+        $this->db->query('INSERT INTO courses (title, slug, description, price, instructor_ID, cate_ID, image, public, last_updated) VALUES (:title , :slug, :descc , :price, :instID, :cate, :imagee, :public, :timeNow)');
 
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':descc', $data['desc']);
@@ -70,6 +70,7 @@ class Instructor extends User{
         $this->db->bind(':imagee', $data['image']);
         $this->db->bind(':public', $data['public']);
         $this->db->bind(':timeNow', $data['time']);
+        $this->db->bind(':slug', $data['slug']);
 
         if ($this->db->execute()) {
             return true;
@@ -106,11 +107,12 @@ class Instructor extends User{
     }
 
     public function addVideo($data){
-        $this->db->query('INSERT INTO videos (crs_ID, name, filename) 
-                    VALUES (:crsID,:Vname, :filenamee)');
+        $this->db->query('INSERT INTO videos (crs_ID, name, filename slug) 
+                    VALUES (:crsID,:Vname, :filenamee, :slug)');
         $this->db->bind(':crsID', $data['crsID']);
         $this->db->bind(':Vname', $data['vname']);
         $this->db->bind(':filenamee', $data['filename']);
+        $this->db->bind(':slug', $data['slug']);
 
         if ($this->db->execute()) {
             return true;
