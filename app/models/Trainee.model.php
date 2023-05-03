@@ -43,6 +43,20 @@ class Trainee extends User{
     }
 
 
+    public function findUserCart(){
+        $this->db->query('SELECT * FROM cart WHERE user_ID = :userID');
+
+        $this->db->bind(':userID',  $_SESSION['user_id']);
+
+        $this->db->execute();
+
+        if($this->db->count() > 0){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public function find_cart($Course_ID){
         $this->db->query('SELECT * FROM cart WHERE course_ID = :crsID AND user_ID = :userID');
 
@@ -122,7 +136,8 @@ class Trainee extends User{
                                 cate.name,
                                 crs.image,
                                 crs.last_updated,
-                                usr.profile
+                                usr.profile,
+                                crs.slug
                          FROM orders ord
                          INNER JOIN courses crs
                          ON ord.course_ID = crs.crs_ID

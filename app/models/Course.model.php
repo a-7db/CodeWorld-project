@@ -19,7 +19,8 @@ class Course{
                                 cate.name,
                                 crs.image,
                                 crs.last_updated,
-                                usr.profile
+                                usr.profile,
+                                crs.slug
                             FROM
                                 courses crs
                             INNER JOIN
@@ -49,7 +50,8 @@ class Course{
                                 usr.user_ID as userID,
                                 cate.name,
                                 crs.last_updated,
-                                crs.image
+                                crs.image,
+                                crs.slug
                             FROM
                                 courses crs
                             INNER JOIN
@@ -69,6 +71,34 @@ class Course{
     public function get_categories()
     {
         $this->db->query('SELECT * FROM category');
+        return $this->db->fetchAll();
+    }
+
+    public function get_courses_by_cate($cate){
+        $this->db->query('SELECT
+                                crs.crs_ID,
+                                cate.category_ID as cateID,
+                                crs.title,
+                                crs.description,
+                                crs.price,
+                                usr.fname,
+                                usr.profile,
+                                usr.user_ID as userID,
+                                cate.name,
+                                crs.last_updated,
+                                crs.image,
+                                crs.slug
+                            FROM
+                                courses crs
+                            INNER JOIN
+                                users usr
+                            ON crs.instructor_ID = usr.user_ID 
+                            INNER JOIN category cate
+                            ON cate.category_ID = crs.cate_ID
+                            WHERE cate.slug = :slug AND crs.public = :isPublic;');
+        $this->db->bind(':slug', $cate);
+        $this->db->bind(':isPublic', 1);
+
         return $this->db->fetchAll();
     }
 
@@ -154,7 +184,16 @@ class Course{
         }
     }
 
-    
+    public function profits(){
+        $this->db->query('SELECT SUM(ord.price) as profits FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        WHERE crs.instructor_ID = :instID ');
+
+        $this->db->bind(':instID', $_SESSION['user_id']);
+
+        return $this->db->fetchOne();
+    }
 
 }
 ?>

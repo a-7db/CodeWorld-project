@@ -60,6 +60,24 @@ class Instructor extends User{
     }
 
     public function createCousre($data){
+        $slug = $data['slug'];
+        $this->db->query('SELECT slug FROM courses WHERE slug LIKE :check_slug');
+        $this->db->bind(':check_slug', '%' . $slug . '%');
+
+        if ($this->db->execute()) {
+            $rows = $this->db->count();
+            if ($rows > 0) {
+                $obj = $this->db->fetchAll();
+                foreach ($obj as $row) {
+                    $slugs[] = $row->slug;
+                }
+                if (in_array($slug, $slugs)) {
+                    $count = 0;
+                    while (in_array(($slug . '-' . ++$count), $slugs));
+                    $slug = $slug . '-' . $count;
+                }
+            }
+        }
         $this->db->query('INSERT INTO courses (title, slug, description, price, instructor_ID, cate_ID, image, public, last_updated) VALUES (:title , :slug, :descc , :price, :instID, :cate, :imagee, :public, :timeNow)');
 
         $this->db->bind(':title', $data['title']);
@@ -70,7 +88,7 @@ class Instructor extends User{
         $this->db->bind(':imagee', $data['image']);
         $this->db->bind(':public', $data['public']);
         $this->db->bind(':timeNow', $data['time']);
-        $this->db->bind(':slug', $data['slug']);
+        $this->db->bind(':slug', $slug);
 
         if ($this->db->execute()) {
             return true;
@@ -107,12 +125,30 @@ class Instructor extends User{
     }
 
     public function addVideo($data){
+        $slug = $data['slug'];
+        $this->db->query('SELECT slug FROM videos WHERE slug LIKE :check_slug');
+        $this->db->bind(':check_slug', '%' . $slug . '%');
+
+        if ($this->db->execute()) {
+            $rows = $this->db->count();
+            if ($rows > 0) {
+                $obj = $this->db->fetchAll();
+                foreach ($obj as $row) {
+                    $slugs[] = $row->slug;
+                }
+                if (in_array($slug, $slugs)) {
+                    $count = 0;
+                    while (in_array(($slug . '-' . ++$count), $slugs));
+                    $slug = $slug . '-' . $count;
+                }
+            }
+        }
         $this->db->query('INSERT INTO videos (crs_ID, name, filename slug) 
                     VALUES (:crsID,:Vname, :filenamee, :slug)');
         $this->db->bind(':crsID', $data['crsID']);
         $this->db->bind(':Vname', $data['vname']);
         $this->db->bind(':filenamee', $data['filename']);
-        $this->db->bind(':slug', $data['slug']);
+        $this->db->bind(':slug', $slug);
 
         if ($this->db->execute()) {
             return true;

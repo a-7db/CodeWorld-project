@@ -15,7 +15,14 @@ class Instructors extends Users {
         if (!isInstructor()) {
             redirect();
         }
-        $this->view('Instructor/instructorHome');
+
+        $profits = $this->cmodel->profits();
+
+        $data = [
+            'profits' => $profits
+        ];
+
+        $this->view('Instructor/instructorHome', $data);
     }
 
     public function myCourses(){

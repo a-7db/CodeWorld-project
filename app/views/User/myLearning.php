@@ -22,7 +22,7 @@ require APPROOT . '/views/Parts/header.php';
                         <?php foreach ($data['course'] as $crs) : ?>
                             <div class="col-md-6 col-lg-3">
                                 <div class="courses-item">
-                                    <a href="<?php echo URLROOT . '/courses/learn/' . $crs->crs_ID ?>" class="link">
+                                    <a href="<?php echo URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
                                         <div class="courses-item-inner">
                                             <div class="img-box">
                                                 <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">

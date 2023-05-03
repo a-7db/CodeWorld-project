@@ -48,11 +48,11 @@
                             <li class="menu-item menu-item-has-children">
                                 <a class="js-toggle-sub-menu">Tutorials <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
-                                    <?php if(isTrainee()): ?>
-                                    <li class="sub-menu-item"><a href="<?php echo URLROOT . '/Trainees/myLearning' ?>">My Learning</a></li>
+                                    <?php if(isLoggedIn() && isTrainee()): ?>
+                                    <li class="sub-menu-item "><a href="<?php echo URLROOT . '/Trainees/myLearning' ?>">My Learning</a></li>
                                     <?php endif; ?>
                                     <?php foreach ($allcate['cate'] as $category) : ?>
-                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/Courses/categories/' . $category->slug ?>"><?php echo $category->name ?></a></li>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses/' . $category->slug ?>"><?php echo $category->name ?></a></li>
                                     <?php endforeach; ?>
                                 </ul>
                             </li>

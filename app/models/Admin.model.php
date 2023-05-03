@@ -27,7 +27,9 @@ class Admin extends User{
         $this->db->bind(':userID', $userID);
 
         if($this->db->execute()){
-            return true;
+            $this->db->query('SELECT * FROM users WHERE user_ID = :userID');
+            $this->db->bind(':userID', $userID);
+            return $this->db->fetchOne();
         }
         else{
             return false;
@@ -51,10 +53,28 @@ class Admin extends User{
     }
 
     public function insert_cate($data){
+        $slug = $data['slug'];
+        $this->db->query('SELECT slug FROM category WHERE slug LIKE :check_slug');
+        $this->db->bind(':check_slug', '%' . $slug . '%');
+
+        if($this->db->execute()){
+            $rows = $this->db->count();
+            if ($rows > 0) {
+                $obj = $this->db->fetchAll();
+                foreach ($obj as $row) {
+                    $slugs[] = $row->slug;
+                }
+                if (in_array($slug, $slugs)) {
+                    $count = 0;
+                    while (in_array(($slug . '-' . ++$count), $slugs));
+                    $slug = $slug . '-' . $count;
+                }
+            }
+        }
         $this->db->query('INSERT INTO category (category_ID, name, slug) VALUES (:cateID, :cateName, :slug)');
         $this->db->bind(':cateID', $data['newID']);
         $this->db->bind(':cateName', $data['cate']);
-        $this->db->bind(':slug', $data['slug']);
+        $this->db->bind(':slug', $slug);
         
         if($this->db->execute()){
             return true;

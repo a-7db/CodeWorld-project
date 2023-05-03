@@ -12,22 +12,22 @@ class Courses extends Controller {
     }
 
 
-    public function index()
+    public function index($cate)
     {
-
-        $showctc = $this->cmodel->ShowCourses();
-
-        $data =[
-            'dd' => $showctc
-        ]; 
+        $course = $this->cmodel->get_courses_by_cate($cate);
+        $data = [
+            'course' => $course
+        ];
+        $this->view('User/categories', $data);
     }
 
-    public function details($id)
+
+    public function details($slug)
     {
-        $course = $this->cmodel->Showdetails($id);
-        $videos = $this->cmodel->getVideos($id);
-        $count = $this->cmodel->stdTotal($id);
-        $vid_count = $this->cmodel->vidTotal($id);
+        $course = $this->cmodel->Showdetails($slug);
+        $videos = $this->cmodel->getVideos($course->crs_ID);
+        $count = $this->cmodel->stdTotal($course->crs_ID);
+        $vid_count = $this->cmodel->vidTotal($course->crs_ID);
         $crs_count = $this->cmodel->crsTotal($course->userID);
         $data = [
             'course' => $course,
@@ -56,7 +56,7 @@ class Courses extends Controller {
                     'crs_count' => $crs_count,
                     'allClips' => $allClips
                 ];
-            if (empty($params[1])) {
+            if (empty($params[2]) && empty($params[3])) {
                 $data['videos'] = $lastVid;
                 $this->view('User/course_videos', $data);
             } else {
@@ -70,7 +70,11 @@ class Courses extends Controller {
     }
 
     public function categories($cate){
-        $this->view('User/categories');
+        $course = $this->cmodel->get_courses_by_cate($cate);
+        $data = [
+            'course' => $course
+        ];
+        $this->view('User/categories', $data);
     }
 
     

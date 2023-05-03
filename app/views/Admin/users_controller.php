@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/Admin/dashboard.php' ?>
 <?php admin_flash('isActivated'); ?>
+
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
@@ -145,8 +146,9 @@
                                     </form>
 
 
-                                    <form action="<?php echo URLROOT . '/Admins/activeUser' ?>" method="GET">
+                                    <form action="<?php echo URLROOT . '/Admins/activeUser' ?>" method="POST">
                                         <input type="hidden" name="user_id_active" id="user_id_active">
+                                        <input type="hidden" name="email_active" id="email_active">
                                         <button type="submit" class="btn btn-primary">Active</button>
                                     </form>
                                 </div>
@@ -176,7 +178,7 @@
             $tr = $(this).closest('tr');
 
             var data = $tr.children("td").map(function() {
-                return $(this).va();
+                return $(this).text();
             }).get();
 
             console.log(data);
@@ -185,6 +187,7 @@
 
             $('#user_id').val(data[1]);
             $('#user_id_active').val(data[1]);
+            $('#email_active').val(data[2]);
 
         });
     });

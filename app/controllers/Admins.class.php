@@ -29,9 +29,15 @@ class Admins extends Users {
 
     public function activeUser()
     {
-        if(isset($_GET['user_id_active'])){
-            
-            if ($this->adminModel->activeUser($_GET['user_id_active'])) {
+        if(isset($_POST['user_id_active'])){
+            $userID = $_POST['user_id_active'];
+            $email = $_POST['email_active'];
+            if ($row = $this->adminModel->activeUser($userID)) {
+                if($row->Role_ID == 2){
+                    send_mail($email, 'Activating', 'Congraltions <b>Code World</b> website activate your account and you can sign-in as instructor.');
+                } else{
+                    send_mail($email, 'Activating', 'Congraltions <b>Code World</b> website activate your account and you can sign-in now.');
+                }
                 redirect('Admins/users');
                 admin_flash('isActivated', 'Success', 'user activated successfuly');
             } else {

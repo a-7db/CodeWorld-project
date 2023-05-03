@@ -3,6 +3,7 @@
 class Trainees extends Users {
 
     private $traineeModel;
+    private $cmodel;
 
     public function __construct()
     {
@@ -10,32 +11,33 @@ class Trainees extends Users {
             redirect();
         }
         $this->traineeModel = $this->model('Trainee');
+        $this->cmodel = $this->model('course');
     }
 
     public function AddToCart($Course_ID)
     {
+        $course = $this->cmodel->Showdetails($Course_ID);
         if (isLoggedIn() && !isAdmin() && !isInstructor()) {
-
             if($this->traineeModel->find_cart($Course_ID)){
                 flash('AddToCart', 'Already Exist!', 'course is already in your cart');
-                redirect('Courses/details/' . $Course_ID);
+                redirect('Courses/details/' . $Course_ID . '/' . $course->slug);
             } else if($this->traineeModel->find_order($Course_ID)){
                 flash('AddToCart', 'You already bought it!', 'sorry, you cannot buy the course twice');
-                redirect('Courses/details/' . $Course_ID);
+                redirect('Courses/details/' .$Course_ID . '/' . $course->slug);
             } else{
 
                 if($this->traineeModel->fill_Cart($Course_ID)){
                     flash('AddToCart', 'done', 'course is added ');
-                    redirect('Courses/details/' . $Course_ID);
+                    redirect('Courses/details/' .$Course_ID . '/' . $course->slug);
                 } else{
                     flash('AddToCart', 'Error', 'something went error ');
-                    redirect('Courses/details/' . $Course_ID);
+                    redirect('Courses/details/' .$Course_ID . '/' . $course->slug);
                 }
             }
 
         } else {
             flash('AddToCart', 'Sorry', 'Please login to be able to buy');
-            redirect('Courses/details/' . $Course_ID);
+            redirect('Courses/details/' .$Course_ID . '/' . $course->slug);
         }
 
     }
@@ -54,26 +56,32 @@ class Trainees extends Users {
 
     public function checkout()
     {
-        if (isLoggedIn() && !isAdmin() && !isInstructor()) {
+        if($this->traineeModel->findUserCart()){
+            if (isLoggedIn() && !isAdmin() && !isInstructor()) {
 
-            $row = $this->traineeModel->getCart();
+                $row = $this->traineeModel->getCart();
 
-            foreach ($row as $cart) {
-                $data = [
-                    'price' => $cart->price,
-                    'crs_ID' => $cart->crs_ID
-                ];
-                $this->traineeModel->do_order($data);
+                foreach ($row as $cart) {
+                    $data = [
+                        'price' => $cart->price,
+                        'crs_ID' => $cart->crs_ID
+                    ];
+                    $this->traineeModel->do_order($data);
+                }
+                foreach ($row as $cart) {
+
+                    $this->traineeModel->deleteCart();
+                }
+                flash('checkout', 'Congratulations', 'Now you can watch and learn to code');
+                redirect('Trainees/myLearning');
+            } else {
+                flash('checkout', 'Sorry', 'Please login to be able to buy');
+                redirect('Trainees/cart');
             }
-            foreach ($row as $cart) {
-
-                $this->traineeModel->deleteCart();
-            }
-            flash('checkout', 'Congratulations', 'Now you can watch and learn to code');
-            redirect('Trainees/myLearning');
-        } else {
-            flash('checkout', 'Sorry', 'Please login to be able to buy');
+        } else{
+            flash('checkout', 'No Courses There!', 'Please fill your cart to be able to buy');
             redirect('Trainees/cart');
+
         }
     }
 

@@ -72,7 +72,7 @@ require APPROOT . '/views/Parts/header.php';
                                         <div class="accordion-body">
                                             <ul>
                                                 <?php foreach ($data['allClips'] as $vid) : ?>
-                                                    <a class="text-white" href="<?php echo URLROOT . '/courses/learn/' . $vid->crs_ID . '/' . $vid->vid_ID ?>">
+                                                    <a class="text-white" href="<?php echo URLROOT . '/courses/learn/' . $vid->crs_ID . '/' . $data['course']->slug . '/' .$vid->vid_ID . '/' . $vid->slug ?>">
                                                         <li>
                                                             <i class="fas fa-play-circle"></i>
                                                             <?php echo $vid->name ?>

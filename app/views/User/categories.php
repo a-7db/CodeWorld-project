@@ -2,18 +2,6 @@
 require APPROOT . '/views/Parts/header.php';
 ?>
 
-<!-- breadcrumb start -->
-<div class="breadcrumb-nav">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">courses</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
-  <!-- breadcrumb end -->
 
   <!-- courses section start -->
   <section class="courses-section section-padding">
