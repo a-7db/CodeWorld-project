@@ -64,40 +64,88 @@ require APPROOT . '/views/Parts/header.php';
                                             <h5 class="mb-0">Card details</h5>
                                         </div>
 
+
                                         <p class="small mb-2 banner-text">Card type</p>
-                                        <a href="#!" type="submit"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
+                                        <nav>
+                                            <ul class="nav justify-content-start" id="nav-tab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-item active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-item" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fab fa-cc-paypal fa-2x"></i></a>
+                                                </li>
+                                                <!-- <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fab fa-cc-visa fa-2x me-2"></i></button> -->
+                                                <!-- <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fab fa-cc-paypal fa-2x"></i></button> -->
+                                            </ul>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                <form class="mt-4">
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="text" id="typeName" class="form-control form-control-lg" siez="17" />
+                                                        <label class="form-label" for="typeName">Name On Card</label>
+                                                    </div>
+
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
+                                                        <label class="form-label" for="typeText">Card Number</label>
+                                                    </div>
+
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-6">
+                                                            <div class="form-outline form-white">
+                                                                <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" />
+                                                                <label class="form-label" for="typeExp">Expiration</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-outline form-white">
+                                                                <input type="password" id="typeText" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                                                <label class="form-label" for="typeText">CVV/CVC</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                                                <form class="mt-4">
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="text" id="typeName" class="form-control form-control-lg" siez="17" />
+                                                        <label class="form-label" for="typeName">Email</label>
+                                                    </div>
+
+                                                    <!-- <div class="form-outline form-white mb-4">
+                                                        <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
+                                                        <label class="form-label" for="typeText">Card Number</label>
+                                                    </div>
+
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-6">
+                                                            <div class="form-outline form-white">
+                                                                <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" />
+                                                                <label class="form-label" for="typeExp">Expiration</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-outline form-white">
+                                                                <input type="password" id="typeText" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                                                <label class="form-label" for="typeText">CVV/CVC</label>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- <a href="#!" type="submit"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
                                         <a href="#!" type="submit"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
                                         <a href="#!" type="submit"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit"><i class="fab fa-cc-paypal fa-2x"></i></a>
-
-                                        <form class="mt-4">
-                                            <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17" />
-                                                <label class="form-label" for="typeName">Name On Card</label>
-                                            </div>
-
-                                            <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
-                                                <label class="form-label" for="typeText">Card Number</label>
-                                            </div>
-
-                                            <div class="row mb-4">
-                                                <div class="col-md-6">
-                                                    <div class="form-outline form-white">
-                                                        <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" />
-                                                        <label class="form-label" for="typeExp">Expiration</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-outline form-white">
-                                                        <input type="password" id="typeText" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                                                        <label class="form-label" for="typeText">CVV/CVC</label>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <a href="#!" type="submit"><i class="fab fa-cc-paypal fa-2x"></i></a> -->
 
 
-                                        </form>
 
                                         <hr class="my-4">
 
