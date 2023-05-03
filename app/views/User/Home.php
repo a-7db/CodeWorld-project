@@ -52,25 +52,25 @@ require APPROOT . '/views/Parts/header.php';
             <div class="row text-center">
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
-                        <h2 class="style-1">800k</h2>
-                        <p>students we've</p>
+                        <h2 class="style-1"> <?php echo $data['users']->users ?>+</h2>
+                        <p>students we've hehehe</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
-                        <h2 class="style-2">500+</h2>
+                        <h2 class="style-2"><?php echo $data['courses']->courses ?>+</h2>
                         <p>courses</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
                         <h2 class="style-3">50+</h2>
-                        <p>countries</p>
+                        <p>rating</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
-                        <h2 class="style-4">100+</h2>
+                        <h2 class="style-4"><?php echo $data['instructors']->instructors ?>+</h2>
                         <p>skilled instructors</p>
                     </div>
                 </div>
@@ -79,6 +79,7 @@ require APPROOT . '/views/Parts/header.php';
     </div>
 </section>
 <!-- fun facts section end -->
+
 
 <!-- courses section start -->
 <section class="courses-section section-padding">

@@ -3,17 +3,32 @@
 class Admins extends Users {
 
     private $adminModel;
+    private $cmodel;
     public function __construct()
     {
         if(!isAdmin()){
             redirect();
         }
+         $this->cmodel = $this->model('course');
         $this->adminModel = $this->model('Admin');
     }
 
     public function index()
     {
-        $this->view('Admin/adminHome');
+       $money  = $this->cmodel->Count_Money();
+         $users =  $this->cmodel->countAllusers();
+         $courses =  $this->cmodel->countAllcourses();
+
+        $data = [ 
+
+             'money' => $money,
+              'users' => $users,
+              'courses' => $courses
+
+            ];
+
+          //  $this->view('Instructor/instructorHome', $data);
+        $this->view('Admin/adminHome' ,$data);
     }
 
     public function users()

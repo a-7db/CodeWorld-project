@@ -1,4 +1,6 @@
 <?php require APPROOT . '/views/Instructor/dashboard.php' ?>
+
+
 <div class="container-fluid py-4">
 	<div class="row">
 		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -7,13 +9,20 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="numbers">
-								<p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
+
+							
+
+								<p class="text-sm mb-0 text-uppercase font-weight-bold"> Money</p>
+								
 								<h5 class="font-weight-bolder">
-									SR <?php echo $data['profits']->profits ?>
+									
+									<?php echo $data['money']->price . ' SR'?>
+									
 								</h5>
 								<p class="mb-0">
 									<span class="text-success text-sm font-weight-bolder">+55%</span>
-									since yesterday
+                                    </br>
+									until today
 								</p>
 							</div>
 						</div>
@@ -32,9 +41,11 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="numbers">
-								<p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+								<p class="text-sm mb-0 text-uppercase font-weight-bold"> Users</p>
 								<h5 class="font-weight-bolder">
-									2,300
+								<?php echo $data['users']->users . ' Users'?>
+									</br>
+									
 								</h5>
 								<p class="mb-0">
 									<span class="text-success text-sm font-weight-bolder">+3%</span>
@@ -57,9 +68,9 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="numbers">
-								<p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+								<p class="text-sm mb-0 text-uppercase font-weight-bold">Courses</p>
 								<h5 class="font-weight-bolder">
-									+3,462
+								<?php echo $data['courses']->courses . ' Courses'?>
 								</h5>
 								<p class="mb-0">
 									<span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -82,9 +93,13 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="numbers">
-								<p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+								<p class="text-sm mb-0 text-uppercase font-weight-bold">Sales & Taxes</p>
 								<h5 class="font-weight-bolder">
-									$103,430
+
+								<?php $total= $data['money']->price  ?>
+								<?php $tax= $total *0.15  ?>
+								<?php $total2= $total + $tax ?>
+								<?php echo $total2  . ' SR'?>
 								</h5>
 								<p class="mb-0">
 									<span class="text-success text-sm font-weight-bolder">+5%</span> than last month

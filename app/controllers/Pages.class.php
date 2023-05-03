@@ -8,8 +8,14 @@ Class Pages extends Controller{
 
     public function index(){
         $course = $this->crsModel->showCourses();
+        $Count_courses =  $this->crsModel->countAllcourses();
+        $users =  $this->crsModel->Count_student();
+        $instructors =  $this->crsModel->Count_instructor();
         $data = [
-            'course' => $course
+            'course' => $course,
+             'courses' => $Count_courses,
+            'users' => $users,
+            'instructors' => $instructors
         ];
         $this->view('User/Home', $data);
     }
