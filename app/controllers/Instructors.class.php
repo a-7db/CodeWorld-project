@@ -11,11 +11,25 @@ class Instructors extends Users {
         $this->InsturctorModel = $this->model('Instructor');
     }
 
-    public function index(){
+     public function index(){
         if (!isInstructor()) {
             redirect();
+            
         }
-        $this->view('Instructor/instructorHome');
+        $money  = $this->cmodel->instructor_Money();
+        $users =  $this->cmodel->count_users();
+        $courses =  $this->cmodel->count_courses();
+
+        $data = [ 
+
+             'money' => $money,
+             'users' => $users,
+             'courses' => $courses
+
+            ];
+
+            $this->view('Instructor/instructorHome', $data);
+        
     }
 
     public function myCourses(){
