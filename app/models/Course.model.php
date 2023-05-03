@@ -153,6 +153,154 @@ class Course{
             return false;
         }
     }
+    
+    
+    //-- count for instructors start --
+    public function instructor_Money(){
+        $this->db->query('SELECT distinct SUM(ord.price) as price FROM orders ord
+        inner join courses crs
+         on crs.crs_ID = ord.course_ID
+         WHERE crs.instructor_ID  = :instructor_ID');
+
+        $this->db->bind(':instructor_ID', $_SESSION['user_id']);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+    public function count_users(){
+        $this->db->query('SELECT distinct count(ord.user_ID) as users FROM orders ord
+        inner join courses crs
+         on crs.crs_ID = ord.course_ID
+         WHERE crs.instructor_ID  = :instructor_ID
+         order by ord.user_ID
+         ');
+         
+
+        $this->db->bind(':instructor_ID', $_SESSION['user_id']);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+    public function count_courses(){
+        $this->db->query(' SELECT distinct count(crs_ID) as courses  FROM courses 
+         WHERE instructor_ID  = :instructor_ID
+         
+         ');
+         
+
+        $this->db->bind(':instructor_ID', $_SESSION['user_id']);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+     //-- count for instructors End --
+
+
+     //-- count for All Start --
+
+     public function Count_Money(){
+        $this->db->query('SELECT distinct SUM(ord.price) as price FROM orders ord
+        inner join courses crs
+         on crs.crs_ID = ord.course_ID
+         ');
+
+       
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+    public function countAllusers(){
+        $this->db->query('SELECT distinct count(usr.user_ID) as users FROM users usr
+       
+         ');
+         
+
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+    public function countAllcourses(){
+        $this->db->query(' SELECT distinct count(crs_ID) as courses  FROM courses 
+        
+         
+         ');
+         
+
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+         //-- count for All End --
+
+   
+
+         public function Count_student(){
+            $this->db->query('SELECT distinct count(user_ID) as users FROM users 
+               where Role_ID = 3
+             ');
+             
+    
+    
+            $count = $this->db->fetchOne();
+    
+            if ($this->db->count() > 0) {
+                return $count;
+            } else {
+                return false;
+            }
+        }
+
+        public function Count_instructor(){
+            $this->db->query('SELECT distinct count(user_ID) as instructors FROM users 
+               where Role_ID = 2
+             ');
+             
+    
+    
+            $count = $this->db->fetchOne();
+    
+            if ($this->db->count() > 0) {
+                return $count;
+            } else {
+                return false;
+            }
+        }
 
     
 
