@@ -53,7 +53,7 @@ require APPROOT . '/views/Parts/header.php';
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
                         <h2 class="style-1"> <?php echo $data['users']->users ?>+</h2>
-                        <p>students we've</p>
+                        <p>students we've hehehe</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
