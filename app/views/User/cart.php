@@ -40,7 +40,7 @@ require APPROOT . '/views/Parts/header.php';
                                                     <div style="width: 80px;">
                                                         <h5 class="mb-0">SR <?php echo  $cart->price ?></h5>
                                                     </div>
-                                                    <a href="<?php echo URLROOT; ?>/courses/delete_Cart" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                    <a href="<?php echo URLROOT . '/Trainees/delete_Item/' . $cart->cart_ID ?>" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                 </div>
                                             </div>
                                         </div>

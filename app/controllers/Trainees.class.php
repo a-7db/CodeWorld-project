@@ -92,6 +92,14 @@ class Trainees extends Users {
         ];
         $this->view('User/myLearning', $data);
     }
+
+    public function delete_Item($id){
+        
+        $this->traineeModel->delete_Item($id);
+        redirect('Trainees/cart');
+
+
+    }
 }
 
 ?>

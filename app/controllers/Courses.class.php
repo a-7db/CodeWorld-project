@@ -77,8 +77,6 @@ class Courses extends Controller {
         $this->view('User/categories', $data);
     }
 
-    
-
 }
 
 ?>
