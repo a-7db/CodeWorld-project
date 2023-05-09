@@ -38,7 +38,8 @@ class Instructor extends User{
                                 cate.name as category,
                                 crs.image,
                                 crs.public,
-                                crs.last_updated as ddate
+                                crs.last_updated as ddate,
+                                crs.slug
                             FROM
                                 courses crs
                             INNER JOIN
@@ -143,7 +144,7 @@ class Instructor extends User{
                 }
             }
         }
-        $this->db->query('INSERT INTO videos (crs_ID, name, filename slug) 
+        $this->db->query('INSERT INTO videos (crs_ID, name, filename, slug) 
                     VALUES (:crsID,:Vname, :filenamee, :slug)');
         $this->db->bind(':crsID', $data['crsID']);
         $this->db->bind(':Vname', $data['vname']);
@@ -165,6 +166,178 @@ class Instructor extends User{
 
         if ($this->db->count() > 0) {
             return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function Showdetails($id)
+    {
+        $this->db->query('SELECT
+                                crs.crs_ID,
+                                crs.title,
+                                crs.description,
+                                crs.price,
+                                usr.fname,
+                                usr.profile,
+                                usr.user_ID as userID,
+                                cate.name,
+                                crs.cate_ID,
+                                crs.last_updated,
+                                crs.image,
+                                crs.slug,
+                                crs.public
+                            FROM
+                                courses crs
+                            INNER JOIN
+                                users usr
+                            ON crs.instructor_ID = usr.user_ID 
+                            INNER JOIN category cate
+                            ON cate.category_ID = crs.cate_ID
+                            WHERE crs.crs_ID = :id AND crs.instructor_ID  = :instID;');
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':instID', $_SESSION['user_id']);
+
+        return $this->db->fetchOne();
+    }
+
+    public function update_without_image($data){
+        $slug = $data['slug'];
+        $this->db->query('SELECT slug FROM courses WHERE slug LIKE :check_slug');
+        $this->db->bind(':check_slug', '%' . $slug . '%');
+
+        if ($this->db->execute()) {
+            $rows = $this->db->count();
+            if ($rows > 0) {
+                $obj = $this->db->fetchAll();
+                foreach ($obj as $row) {
+                    $slugs[] = $row->slug;
+                }
+                if (in_array($slug, $slugs)) {
+                    $count = 0;
+                    while (in_array(($slug . '-' . ++$count), $slugs));
+                    $slug = $slug . '-' . $count;
+                }
+            }
+        }
+        $this->db->query('UPDATE courses
+                        SET title = :title,
+                        slug = :slug,
+                        description = :desc,
+                        price = :price,
+                        cate_ID = :cate,
+                        -- public = :public,
+                        last_updated = :last_updated
+                        WHERE crs_ID = :crsID');
+
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':slug', $slug);
+        $this->db->bind(':desc', $data['desc']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':cate', $data['cate']);
+        // $this->db->bind(':public', $data['public']);
+        $this->db->bind(':last_updated', $data['time']);
+        $this->db->bind(':crsID', $data['crsID']);
+
+        if($this->db->execute()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public function update_all($data){
+        $slug = $data['slug'];
+        $this->db->query('SELECT slug FROM courses WHERE slug LIKE :check_slug');
+        $this->db->bind(':check_slug', '%' . $slug . '%');
+
+        if ($this->db->execute()) {
+            $rows = $this->db->count();
+            if ($rows > 0) {
+                $obj = $this->db->fetchAll();
+                foreach ($obj as $row) {
+                    $slugs[] = $row->slug;
+                }
+                if (in_array($slug, $slugs)) {
+                    $count = 0;
+                    while (in_array(($slug . '-' . ++$count), $slugs));
+                    $slug = $slug . '-' . $count;
+                }
+            }
+        }
+        $this->db->query('UPDATE courses
+                        SET title = :title,
+                        slug = :slug,
+                        description = :desc,
+                        price = :price,
+                        cate_ID = :cate,
+                        image = :imagee,
+                        -- public = :public,
+                        last_updated = :last_updated
+                        WHERE crs_ID = :crsID');
+
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':slug', $slug);
+        $this->db->bind(':desc', $data['desc']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':cate', $data['cate']);
+        // $this->db->bind(':public', $data['public']);
+        $this->db->bind(':imagee', $data['image']);
+        $this->db->bind(':last_updated', $data['time']);
+        $this->db->bind(':crsID', $data['crsID']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update_course_status($id){
+        $this->db->query('SELECT public FROM courses WHERE crs_ID = :crsID');
+        $this->db->bind(':crsID', $id);
+
+        $row = $this->db->fetchOne();
+
+        if($this->db->count() > 0){
+            if ($row->public == 1) {
+                $this->db->query('UPDATE courses SET public = :public WHERE crs_ID = :ID');
+                $this->db->bind(':public', 0);
+                $this->db->bind(':ID', $id);
+            } else {
+                $this->db->query('UPDATE courses SET public = :public WHERE crs_ID = :ID');
+                $this->db->bind(':public', 1);
+                $this->db->bind(':ID', $id);
+            }
+            $this->db->query('SELECT public FROM courses WHERE crs_ID = :crsID');
+            $this->db->bind(':crsID', $id);
+            return $this->db->fetchOne();
+        } else{
+            return false;
+        }
+
+        
+    }
+
+    public function update_vid_name($data){
+        $this->db->query('UPDATE videos SET name = :vidName WHERE vid_ID = :vidID');
+        $this->db->bind(':vidName', $data['vidName']);
+        $this->db->bind(':vidID', $data['vidID']);
+
+        if($this->db->execute()){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public function remove_video($vidID){
+        $this->db->query('DELETE FROM videos WHERE vid_ID = :vidID');
+        $this->db->bind(':vidID', $vidID);
+
+        if ($this->db->execute()) {
+            return true;
         } else {
             return false;
         }

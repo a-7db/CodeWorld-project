@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/Instructor/dashboard.php' ?>
 
-
+<?php admin_flash('careate_course') ?>
 <div class="col-12 text-end mt-3 mb-3">
     <button type="button" class="btn bg-gradient-dark mb-0" data-bs-toggle="modal" data-bs-target="#createCourse"><i class="fas fa-plus"></i>&nbsp;&nbsp;Create Course</button>
 </div>
@@ -90,7 +90,7 @@
 
             <div class="col-md-3 mt-5 ml-3">
                 <div class="card card-profile">
-                    <img src="<?php echo URLROOT . './public/images/courses/' . $crs->image ?>" alt="Image placeholder" class="card-img-top">
+                    <img style="width: 100%;" src="<?php echo URLROOT . './public/images/courses/' . $crs->image ?>" alt="Image placeholder" class="card-img-top">
 
                     <div class="card-body pt-0">
                         <div class="h6 mt-2">
@@ -107,6 +107,8 @@
                             Status - <span class="<?php echo $crs->public == 1 ? 'text-success' : 'text-warning' ?> font-weight-bold"><?php echo $crs->public == 1 ? 'Public' : 'Private' ?></span>
                         </div>
                         <div class="mt-1"><?php echo date('Y-m-d', strtotime($crs->ddate)) ?></div>
+                        <div><a class="mt-1" href="<?php echo URLROOT . '/Courses/learn/' . $crs->crs_ID . '/' . $crs->slug ?>">Preview</a></div>
+
                     </div>
 
                     <div class="card-header text-center border-0 pt-0 pb-4 pb-lg-3">
@@ -118,7 +120,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="btn btn-sm btn-dark mb-0 d-none d-lg-block">Edit</a>
+                                        <a href="<?php echo URLROOT . '/instructors/edit/' . $crs->crs_ID . '/' . $crs->slug ?>" class="btn btn-sm btn-dark mb-0 d-none d-lg-block">Edit</a>
                                     </td>
                                     <td class="d-none"><?php echo $crs->crs_ID ?></td>
                                     <td>
@@ -259,8 +261,6 @@
                 img_err.innerHTML = '';
 
             } else {
-                var createForm = document.getElementById(insertData);
-                var crs = [];
                 $.ajax({
                     url: "<?php echo URLROOT ?>/Instructors/create_course",
                     type: "POST",
@@ -271,6 +271,7 @@
                     success: function(data, status, err) {
                         $('#insertData')[0].reset();
                         $('#createCourse').modal('hide');
+                        location.reload();
                         console.log(data);
                     },
                     error: function(data, status, err) {
@@ -279,13 +280,6 @@
                 });
 
             }
-
-
-
-
-
-
-
         });
     });
 </script>

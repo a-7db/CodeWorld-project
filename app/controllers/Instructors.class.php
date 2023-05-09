@@ -88,51 +88,87 @@ class Instructors extends Users {
                 }
             }
             
-            $this->InsturctorModel->createCousre($data);
+            if($this->InsturctorModel->createCousre($data)){
+                if ($row = $this->InsturctorModel->return_course_byDate($data['time'])) {
+                    $videoData = [
+                        'crsID' => $row->crs_ID,
+                        'vname' => $row->title,
+                        'filename' => '',
+                        'slug' => slug($row->title)
+                    ];
 
+                    if ($vid_error === 0) {
+                        $Vid_ex = pathinfo($video_name, PATHINFO_EXTENSION);
+                        $vid_ex_lc = strtolower($Vid_ex);
 
-            if ($row = $this->InsturctorModel->return_course_byDate($data['time'])) {
-                $videoData = [
-                    'crsID' => $row->crs_ID,
-                    'vname' => $row->title,
-                    'filename' => '',
-                    'slug' => slug($row->title)
-                ];
+                        $allowed_vid_ex = array('mp4', 'avi', 'wmv', 'mov', 'webm', 'flv');
 
-                if ($vid_error === 0) {
-                    $Vid_ex = pathinfo($video_name, PATHINFO_EXTENSION);
-                    $vid_ex_lc = strtolower($Vid_ex);
-
-                    $allowed_vid_ex = array('mp4', 'avi', 'wmv', 'mov', 'webm', 'flv');
-
-                    if (in_array($vid_ex_lc, $allowed_vid_ex)) {
-                        $new_vid_name = uniqid('VID-' . $row->crs_ID, true) . '.' . $vid_ex_lc;
-                        $vid_path = '../public/videos/' . $new_vid_name;
-                        move_uploaded_file($vid_tmp_name, $vid_path);
-                        $videoData['filename'] = $new_vid_name;
+                        if (in_array($vid_ex_lc, $allowed_vid_ex)) {
+                            $new_vid_name = uniqid('VID-' . $row->crs_ID, true) . '.' . $vid_ex_lc;
+                            $vid_path = '../public/videos/' . $new_vid_name;
+                            move_uploaded_file($vid_tmp_name, $vid_path);
+                            $videoData['filename'] = $new_vid_name;
+                        }
+                        if ($this->InsturctorModel->addVideo($videoData)) {
+                            redirect('Instructors/myCourses');
+                        } else {
+                            admin_flash('careate_course', 'Error!', 'video did not add..');
+                            redirect('Instructors/myCourses');
+                        }
                     }
-                    if ($this->InsturctorModel->addVideo($videoData)) {
-                        redirect('Instructors/myCourses');
-                    } else {
-                        echo 'something went wrong';
-                        redirect('Instructors/myCourses');
-                    }
+                } else {
+                    admin_flash('careate_course', 'Error!', 'there is no course found..');
+                    redirect('Instructors/myCourses');
                 }
-
-            } else {
+            } else{
+                admin_flash('careate_course', 'Error!', 'sowething went wrong..');
                 redirect('Instructors/myCourses');
             }
+
+
+            
         } else{
             redirect('Instructors/myCourses');
         }
     }
 
-    public function add_video($videoFile, $ddate){
+    public function add_video($crsID){
         if (!isInstructor()) {
             redirect();
         }
+        $data = $this->cmodel->Showdetails($crsID);
 
-        
+        $video_name = $_FILES['video']['name'];
+        $vid_tmp_name = $_FILES['video']['tmp_name'];
+        $vid_error = $_FILES['video']['error'];
+
+        $videoData = [
+            'crsID' => $crsID,
+            'vname' => trim($_POST['video_name']),
+            'filename' => '',
+            'slug' => slug($_POST['video_name'])
+        ];
+
+        if ($vid_error === 0) {
+            $Vid_ex = pathinfo($video_name, PATHINFO_EXTENSION);
+            $vid_ex_lc = strtolower($Vid_ex);
+
+            $allowed_vid_ex = array('mp4', 'avi', 'wmv', 'mov', 'webm', 'flv');
+
+            if (in_array($vid_ex_lc, $allowed_vid_ex)) {
+                $new_vid_name = uniqid('VID-' . $crsID, true) . '.' . $vid_ex_lc;
+                $vid_path = '../public/videos/' . $new_vid_name;
+                move_uploaded_file($vid_tmp_name, $vid_path);
+                $videoData['filename'] = $new_vid_name;
+            }
+            if ($this->InsturctorModel->addVideo($videoData)) {
+                
+                redirect('Instructors/edit', $data->crs_ID . '/' . $data->slug);
+            } else {
+                echo 'something went wrong';
+                redirect('Instructors/edit', $data->crs_ID . '/' . $data->slug);
+            }
+        }
     }
 
     public function delete_course(){
@@ -160,6 +196,141 @@ class Instructors extends Users {
         } else{
             $this->myCourses();
         }
+    }
+
+    public function edit($crsID, $slug){
+        if (!isInstructor()) {
+            redirect();
+        }
+        $course = $this->InsturctorModel->Showdetails($crsID);
+        $videos = $this->cmodel->getVideos($crsID);
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $date = date_create();
+            $data = [
+                    'course' => $course,
+                    'videos' => $videos,
+
+                    'title' => trim($_POST['title']),
+                    'price' => trim($_POST['price']),
+                    'desc' => trim($_POST['desc']),
+                    'cate' => $_POST['cate'],
+                    'public' => $_POST['public'] == 'on' ? 1 : 0,
+                    'time' => date_format($date, 'Y-m-d g:i:s A'),
+                    'crsID' => $crsID,
+                    'slug' => slug($_POST['title']),
+                    'image' => '',
+
+                    # errors
+                    'title_err' => '',
+                    'price_err' => '',
+                    'desc_err' => '',
+                    'image_err' => '',
+                ];
+
+            if(empty($data['title'])){
+                $data['title_err'] = 'Title cannot be empty!';
+                $this->view('Instructor/edit_course', $data);
+            }
+
+            if (empty($data['price'])) {
+                $data['price_err'] = 'Price cannot be empty!';
+                $this->view('Instructor/edit_course', $data);
+            }
+
+            if (empty($data['desc'])) {
+                $data['desc_err'] = 'Description cannot be empty!';
+                $this->view('Instructor/edit_course', $data);
+            }
+
+            $img_name = $_FILES['image']['name'];
+            $tmp_name = $_FILES['image']['tmp_name'];
+
+            if($_FILES['image']['error'] != 0 &&
+               empty($data['title_err']) &&
+               empty($data['price_err']) &&
+               empty($data['desc_err']))
+               {
+                if($this->InsturctorModel->update_without_image($data)){
+                    admin_flash('update_course', 'Updated', 'Your course is updated successfully');
+                    redirect('instructors/edit/' . $crsID . '/' . $slug);
+                } else{
+                    admin_flash('update_course', 'Error!', 'Your course is not updated, something went wrong');
+                    redirect('instructors/edit/' . $crsID . '/' . $slug);
+
+                }
+               } else{
+                
+                $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+
+                $allowed_img_ex = array('jpg', 'png', 'jpeg');
+
+                if (in_array($img_ex_lc, $allowed_img_ex)) {
+                    $new_img_name = $course->image;
+                    $img_path = '../public/images/courses/' . $new_img_name;
+                    move_uploaded_file($tmp_name, $img_path);
+                    $data['image'] = $new_img_name;
+                    if ($this->InsturctorModel->update_all($data)) {
+                        admin_flash('update_course', 'Updated', 'Your course is updated successfully');
+                        redirect('instructors/edit/' . $crsID . '/' . $slug);
+                    } else{
+                        admin_flash('update_course', 'Error!', 'Your course is not updated, something went wrong');
+                        redirect('instructors/edit/' . $crsID . '/' . $slug);
+                    }
+                } else{
+                    $data['image_err'] = 'Select jpg, png, or jpeg Extensions';
+                }
+                    
+               }
+
+
+        }else{
+            $data = [
+                'course' => $course,
+                'videos' => $videos,
+
+                # errors
+                'title_err' => '',
+                'price_err' => '',
+                'desc_err' => '',
+                'image_err' => '',
+            ];
+            $this->view('Instructor/edit_course', $data);
+        }
+    }
+
+    public function edit_public($id, $slug){
+        if (!isInstructor()) {
+            redirect();
+        }
+        // $val = $_POST['value'];
+        if($row = $this->InsturctorModel->update_course_status($id)){
+            if($row->public == 1){
+                admin_flash('update_course', 'Updated', 'Your course is available now');
+                redirect('instructors/edit/' . $id . '/' . $slug);
+            } else{
+                admin_flash('update_course', 'Updated', 'Your course is private now');
+                redirect('instructors/edit/' . $id . '/' . $slug);
+            }
+        } else{
+            admin_flash('update_course', 'Error!', 'Your course is not updated, something went wrong');
+            redirect('instructors/edit/' . $id . '/' . $slug);
+        }
+    }
+
+    public function update_vid_name($vid_ID){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $data = [
+                'vidID' => $vid_ID,
+                'vidName' => trim($_POST['video_name1'])
+            ];
+
+            $this->InsturctorModel->update_vid_name($data);
+        }
+    }
+
+    public function remove_vid($vidID){
+        $this->InsturctorModel->remove_video($vidID);
     }
 
     public function register(){

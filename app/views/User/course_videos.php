@@ -12,7 +12,7 @@ require APPROOT . '/views/Parts/header.php';
                 <div class="row box">
                     <div class="col-lg-8">
                         <video id="player" width="100%" playsinline controls data-poster="<?php echo URLROOT . '/images/courses/' . $data['course']->image ?>">
-                            <source src="<?php echo URLROOT . '../public/videos/' . $data['videos']->filename ?>" type="video/mp4" />
+                            <source src="<?php echo URLROOT . '../public/videos/' . $data['videos']->filename ?>" />
 
                         </video>
 
@@ -73,7 +73,7 @@ require APPROOT . '/views/Parts/header.php';
                                             <ul>
                                                 <?php foreach ($data['allClips'] as $vid) : ?>
                                                     <a class="text-white" href="<?php echo URLROOT . '/courses/learn/' . $vid->crs_ID . '/' . $data['course']->slug . '/' .$vid->vid_ID . '/' . $vid->slug ?>">
-                                                        <li>
+                                                        <li class="mb-4">
                                                             <i class="fas fa-play-circle"></i>
                                                             <?php echo $vid->name ?>
                                                             <!-- <span>06:00</span> -->

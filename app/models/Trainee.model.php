@@ -152,6 +152,8 @@ class Trainee extends User{
 
         return $this->db->fetchAll();
     }
+    
+    
 
     public function delete_Item($id){
 
