@@ -152,5 +152,25 @@ class Trainee extends User{
 
         return $this->db->fetchAll();
     }
+    
+    public function delete_Item($id){
+
+
+        $this->db->query('delete from cart
+                            WHERE cart_ID = :id ');
+
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+
+            return true;
+           
+        } else {
+            return false;
+        }
+      
+
+        
+    }
 
 }
