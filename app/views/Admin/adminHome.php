@@ -12,10 +12,6 @@
                                 <h5 class="font-weight-bolder">
                                 <?php echo $data['money']->price . ' SR'?>
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                    since yesterday
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -37,10 +33,6 @@
                                 <h5 class="font-weight-bolder">
                                 <?php echo $data['users']->users . ' Users'?>
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                    since last week
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -62,10 +54,6 @@
                                 <h5 class="font-weight-bolder">
                                 <?php echo $data['courses']->courses . ' Courses'?>
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                    since last quarter
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -90,9 +78,6 @@
 								<?php $total2= $total + $tax ?>
 								<?php echo $total2  . ' SR'?>
                                 </h5>
-                                <p class="mb-0">
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                                </p>
                             </div>
                         </div>
                         <div class="col-4 text-end">

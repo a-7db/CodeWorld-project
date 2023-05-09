@@ -111,6 +111,18 @@ class Admins extends Users {
         }
     }
 
+    public function update_cate_name(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $this->adminModel->update_cate_name($_POST['cateID'], $_POST['cate_name']);
+        }
+    }
+
+    public function remove_category($cateID){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $this->adminModel->remove_category($cateID);
+        }
+    }
+
 
     public function CreateCourse()
     {

@@ -82,4 +82,48 @@ class Admin extends User{
             return false;
         }
     }
+
+    public function update_cate_name($cateID, $cateName){
+        $slug = slug($cateName);
+        $this->db->query('SELECT slug FROM category WHERE slug LIKE :check_slug');
+        $this->db->bind(':check_slug', '%' . $slug . '%');
+
+        if ($this->db->execute()) {
+            $rows = $this->db->count();
+            if ($rows > 0) {
+                $obj = $this->db->fetchAll();
+                foreach ($obj as $row) {
+                    $slugs[] = $row->slug;
+                }
+                if (in_array($slug, $slugs)) {
+                    $count = 0;
+                    while (in_array(($slug . '-' . ++$count), $slugs));
+                    $slug = $slug . '-' . $count;
+                }
+            }
+        }
+
+        $this->db->query('UPDATE category SET name = :cateName, slug = :new_slug WHERE category_ID = :cateID');
+        $this->db->bind(':cateName', $cateName);
+        $this->db->bind(':new_slug', $slug);
+        $this->db->bind(':cateID', $cateID);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
+    public function remove_category($cateID){
+        $this->db->query('DELETE FROM category WHERE category_ID = :cateID');
+        $this->db->bind(':cateID', $cateID);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

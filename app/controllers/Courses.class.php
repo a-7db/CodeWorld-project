@@ -40,27 +40,28 @@ class Courses extends Controller {
 
     }
     
-    public function learn($params){
-        if(isLoggedIn() && $this->traineeModel->find_order($params[0])){
-            $course = $this->cmodel->Showdetails($params[0]);
-            $allClips = $this->cmodel->getVideos($params[0]);
-            $count = $this->cmodel->stdTotal($params[0]);
-            $vid_count = $this->cmodel->vidTotal($params[0]);
+    public function learn($crsID, $crs_slug, $vidID = '', $vid_Slug = ''){
+        $course = $this->cmodel->Showdetails($crsID);
+        if(isLoggedIn() && $this->traineeModel->find_order($crsID) || isLoggedIn() && $_SESSION['user_id'] == $course->userID){
+            $allClips = $this->cmodel->getVideos($crsID);
+            $stdTotal = $this->cmodel->stdTotal($crsID);
+            $vid_count = $this->cmodel->vidTotal($crsID);
             $crs_count = $this->cmodel->crsTotal($course->userID);
-            $lastVid = $this->cmodel->showlastVid($params[0]);
+            $firstVid = $this->cmodel->showlastVid($crsID);
+            
             $data = [
                     'course' => $course,
                     'videos' => '',
-                    'count' => $count,
+                    'count' => $stdTotal,
                     'vid_count' => $vid_count,
                     'crs_count' => $crs_count,
                     'allClips' => $allClips
                 ];
-            if (empty($params[2]) && empty($params[3])) {
-                $data['videos'] = $lastVid;
+            if (empty($vidID) && empty($vid_Slug)) {
+                $data['videos'] = $firstVid;
                 $this->view('User/course_videos', $data);
             } else {
-                $data['videos'] = $this->cmodel->getSelectedLecture($params[0], $params[1]);
+                $data['videos'] = $this->cmodel->getSelectedLecture($crsID, $vidID);
                 $this->view('User/course_videos', $data);
             }
         } else{

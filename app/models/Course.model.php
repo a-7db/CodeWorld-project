@@ -49,9 +49,11 @@ class Course{
                                 usr.profile,
                                 usr.user_ID as userID,
                                 cate.name,
+                                crs.cate_ID,
                                 crs.last_updated,
                                 crs.image,
-                                crs.slug
+                                crs.slug,
+                                crs.public
                             FROM
                                 courses crs
                             INNER JOIN
@@ -118,7 +120,7 @@ class Course{
 
     public function showlastVid($crsID)
     {
-        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID ORDER BY crs_ID DESC LIMIT 1');
+        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID ORDER BY crs_ID ASC LIMIT 1');
         $this->db->bind(':crsID', $crsID);
 
         $row = $this->db->fetchOne();
@@ -132,7 +134,7 @@ class Course{
 
     public function getSelectedLecture($crsID, $lecID)
     {
-        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID AND vid_ID = :vidID');
+        $this->db->query('SELECT * FROM videos WHERE crs_ID = :crsID AND vid_ID = :vidID LIMIT 1');
         $this->db->bind(':crsID', $crsID);
         $this->db->bind(':vidID', $lecID);
 

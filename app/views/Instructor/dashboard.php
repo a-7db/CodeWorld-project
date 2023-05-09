@@ -45,7 +45,7 @@
 				<li class="nav-item">
 					<a class="nav-link " href="<?php echo URLROOT ?>/Instructors/myCourses">
 						<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
+							<i class="ni ni-html5 text-warning text-sm opacity-10"></i>
 						</div>
 						<span class="nav-link-text ms-1">My Courses</span>
 					</a>
@@ -74,7 +74,7 @@
 							<input type="text" class="form-control" placeholder="Type here...">
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</nav>
