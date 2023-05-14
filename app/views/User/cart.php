@@ -87,7 +87,7 @@ require APPROOT . '/views/Parts/header.php';
                                                     </div>
 
                                                     <div class="form-outline form-white mb-4">
-                                                        <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
+                                                        <input type="number" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
                                                         <label class="form-label" for="typeText">Card Number</label>
                                                     </div>
 
@@ -106,53 +106,7 @@ require APPROOT . '/views/Parts/header.php';
                                                         </div>
                                                     </div>
 
-
-                                                </form>
-                                            </div>
-                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                                <form class="mt-4">
-                                                    <div class="form-outline form-white mb-4">
-                                                        <input type="text" id="typeName" class="form-control form-control-lg" siez="17" />
-                                                        <label class="form-label" for="typeName">Email</label>
-                                                    </div>
-
-                                                    <!-- <div class="form-outline form-white mb-4">
-                                                        <input type="text" id="typeText" class="form-control form-control-lg" siez="17" placeholder="1234 5678 1234 5678" minlength="19" maxlength="19" />
-                                                        <label class="form-label" for="typeText">Card Number</label>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <div class="col-md-6">
-                                                            <div class="form-outline form-white">
-                                                                <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" />
-                                                                <label class="form-label" for="typeExp">Expiration</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-outline form-white">
-                                                                <input type="password" id="typeText" class="form-control form-control-lg" placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                                                                <label class="form-label" for="typeText">CVV/CVC</label>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
-
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- <a href="#!" type="submit"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
-                                        <a href="#!" type="submit"><i class="fab fa-cc-paypal fa-2x"></i></a> -->
-
-
-
-                                        <hr class="my-4">
-
-
-
-
-                                        <?php $subtotal = 0; ?>
+                                                    <?php $subtotal = 0; ?>
                                         <!-- foreach start -->
 
                                         <?php foreach ($data['cart'] as $cart) : ?>
@@ -183,7 +137,7 @@ require APPROOT . '/views/Parts/header.php';
                                             <p class="mb-2"> SR <?php echo $total2 ?></p>
                                         </div>
 
-                                        <a href="<?php echo  URLROOT ?>/Trainees/checkout/">
+                                                    <a href="<?php echo  URLROOT ?>/Trainees/checkout/">
                                             <button type="button" class="btn-theme btn btn-block btn-lg">
 
                                                 <div class="d-flex justify-content-between">
@@ -192,9 +146,55 @@ require APPROOT . '/views/Parts/header.php';
                                                 </div>
 
                                             </button>
-                                        </a>
+                                          </a>
 
-                                        </br>
+                                                </form>
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                                                <form class="mt-4">
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="email" placeholder="email" id="email" class="form-control form-control-lg" siez="17" />
+                                                    </div>
+
+                                                    <hr class="my-4">
+
+
+
+
+
+<div class="d-flex justify-content-between">
+    <p class="mb-2">Subtotal: </p>
+    <p class="mb-2"> SR <?php echo $subtotal ?></p>
+</div>
+
+<div class="d-flex justify-content-between">
+    <p class="mb-2">Tax: </p>
+    <p class="mb-2"> SR <?php echo $total ?></p>
+</div>
+
+<div class="d-flex justify-content-between mb-4">
+    <p class="mb-2">Total: </p>
+    <p class="mb-2"> SR <?php echo $total2 ?></p>
+</div>
+
+
+
+ <!-- Set up a container element for the button -->
+ <div id="paypal-button-container"></div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- <a href="#!" type="submit"><i class="fab fa-cc-visa fa-2x me-2"></i></a>
+                                        <a href="#!" type="submit"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                                        <a href="#!" type="submit"><i class="fab fa-cc-amex fa-2x me-2"></i></a>
+                                        <a href="#!" type="submit"><i class="fab fa-cc-paypal fa-2x"></i></a> -->
+
+
+
+                                        
 
                                     </div>
                                 </div>
@@ -219,3 +219,50 @@ require APPROOT . '/views/Parts/header.php';
 <?php
 require APPROOT . '/views/Parts/footer.php';
 ?>
+
+<!-- Replace "test" with your own sandbox Business account app client ID -->
+<script src="https://www.paypal.com/sdk/js?client-id=AeVsTmH7yrlZI7bviF3O0oQSjKJqbxhHYad-0MUirXo2VNrcG7B5Ms9tdKfJHOV9xJYRFKJP9G_CSNB1&currency=USD"></script>
+
+
+<script>
+   
+     paypal.Buttons({
+       onInit(){
+
+        var email=$('#email').val();
+
+           if(email.length == 0){
+               alert("email is require");
+               return false;
+           }
+           else{
+            return true;
+           }
+       },
+       // Order is created on the server and the order id is returned
+       createOrder(data, actions) {
+         return actions.order.create({
+            purchase_units:[{
+                amount:{
+                    value:'<?php echo $total2?>'
+                }
+            }]
+         });
+         
+         
+       },
+       // Finalize the transaction on the server after payer approval
+       onApprove(data, actions) {
+         return actions.order.capture().then(function(orderData) {
+           // Successful capture! For dev/demo purposes:
+           console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+           const transaction = orderData.purchase_units[0].payments.captures[0];
+           alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+           // When ready to go live, remove the alert and show a success message within this page. For example:
+           // const element = document.getElementById('paypal-button-container');
+           // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+           // Or go to another URL:  window.location.href = 'thank_you.html';
+         });
+        }
+     }).render('#paypal-button-container');
+   </script>
