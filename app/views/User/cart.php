@@ -142,7 +142,7 @@ require APPROOT . '/views/Parts/header.php';
 
                                                 <div class="d-flex justify-content-between">
                                                     <span> SR <?php echo $total2 ?></span>
-                                                    <span>Pay <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                    <span>Pay test<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                                 </div>
 
                                             </button>
