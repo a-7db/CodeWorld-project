@@ -214,7 +214,7 @@ class Instructors extends Users {
                     'price' => trim($_POST['price']),
                     'desc' => trim($_POST['desc']),
                     'cate' => $_POST['cate'],
-                    'public' => $_POST['public'] == 'on' ? 1 : 0,
+                    'public' => $_POST['public'],
                     'time' => date_format($date, 'Y-m-d g:i:s A'),
                     'crsID' => $crsID,
                     'slug' => slug($_POST['title']),
@@ -299,24 +299,24 @@ class Instructors extends Users {
         }
     }
 
-    public function edit_public($id, $slug){
-        if (!isInstructor()) {
-            redirect();
-        }
-        // $val = $_POST['value'];
-        if($row = $this->InsturctorModel->update_course_status($id)){
-            if($row->public == 1){
-                admin_flash('update_course', 'Updated', 'Your course is available now');
-                redirect('instructors/edit/' . $id . '/' . $slug);
-            } else{
-                admin_flash('update_course', 'Updated', 'Your course is private now');
-                redirect('instructors/edit/' . $id . '/' . $slug);
-            }
-        } else{
-            admin_flash('update_course', 'Error!', 'Your course is not updated, something went wrong');
-            redirect('instructors/edit/' . $id . '/' . $slug);
-        }
-    }
+    // public function edit_public($id, $slug){
+    //     if (!isInstructor()) {
+    //         redirect();
+    //     }
+    //     // $val = $_POST['value'];
+    //     if($row = $this->InsturctorModel->update_course_status($id)){
+    //         if($row->public == 1){
+    //             admin_flash('update_course', 'Updated', 'Your course is available now');
+    //             redirect('instructors/edit/' . $id . '/' . $slug);
+    //         } else{
+    //             admin_flash('update_course', 'Updated', 'Your course is private now');
+    //             redirect('instructors/edit/' . $id . '/' . $slug);
+    //         }
+    //     } else{
+    //         admin_flash('update_course', 'Error!', 'Your course is not updated, something went wrong');
+    //         redirect('instructors/edit/' . $id . '/' . $slug);
+    //     }
+    // }
 
     public function update_vid_name($vid_ID){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

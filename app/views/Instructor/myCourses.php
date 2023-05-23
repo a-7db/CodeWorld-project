@@ -93,7 +93,11 @@
                     <img style="width: 100%;" src="<?php echo URLROOT . './public/images/courses/' . $crs->image ?>" alt="Image placeholder" class="card-img-top">
 
                     <div class="card-body pt-0">
-                        <div class="h6 mt-2">
+                        <div class="h6 mt-2" style="
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            ">
                             <i class="ni business_briefcase-24 mr-2"></i><?php echo $crs->title ?>
                         </div>
 

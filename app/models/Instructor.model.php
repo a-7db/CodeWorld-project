@@ -227,7 +227,7 @@ class Instructor extends User{
                         description = :desc,
                         price = :price,
                         cate_ID = :cate,
-                        -- public = :public,
+                        public = :public,
                         last_updated = :last_updated
                         WHERE crs_ID = :crsID');
 
@@ -236,7 +236,7 @@ class Instructor extends User{
         $this->db->bind(':desc', $data['desc']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':cate', $data['cate']);
-        // $this->db->bind(':public', $data['public']);
+        $this->db->bind(':public', $data['public']);
         $this->db->bind(':last_updated', $data['time']);
         $this->db->bind(':crsID', $data['crsID']);
 

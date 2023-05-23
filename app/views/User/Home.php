@@ -53,7 +53,7 @@ require APPROOT . '/views/Parts/header.php';
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
                         <h2 class="style-1"> <?php echo $data['users']->users ?>+</h2>
-                        <p>students we've hehehe</p>
+                        <p>students we've</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -97,14 +97,19 @@ require APPROOT . '/views/Parts/header.php';
             <?php foreach ($data['course'] as $crs) : ?>
                 <div class="col-md-6 col-lg-3">
                     <div class="courses-item">
-                        <a href="<?php echo URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
+                        <a href="<?php echo in_array($crs->crs_ID, $data['IDs'])? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
                             <div class="courses-item-inner">
                                 <div class="img-box">
                                     <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
                                 </div>
-                                <h3 class="title"><?php echo $crs->title ?></h3>
+                                <h3 class="title" style="
+                                overflow: hidden;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                "><?php echo $crs->title ?></h3>
                                 <div class="instructor">
-                                    <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile?>" alt="instructor img">
+                                    <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile ?>" alt="instructor img">
                                     <span class="instructor-name"><?php echo $crs->fname ?></span>
                                 </div>
                                 <div class="rating">
@@ -118,7 +123,7 @@ require APPROOT . '/views/Parts/header.php';
                                     </span>
                                     <span class="reviews">(230)</span>
                                 </div>
-                                <div class="price">SR <?php echo $crs->price ?></div>
+                                <div class="price"><?php echo in_array($crs->crs_ID, $data['IDs'])? 'Watch' : 'SR ' . $crs->price ?></div>
                             </div>
                         </a>
                     </div>

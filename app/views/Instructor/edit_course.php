@@ -32,11 +32,12 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="formFile" class="form-label">Image</label>
-                        <input class="form-control" type="file" value="<?php echo $data['course']->image ?>" name="image">
+                        <input class="form-control" type="file" name="image">
                         <p class="text-danger h6"><?php echo $data['image_err'] ?></p>
                     </div>
                     <div class="col-md-12 form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" onclick="public_switch(<?php echo $data['course']->crs_ID ?>);" <?php echo $data['course']->public == true ? 'checked' : '' ?>>
+                        <input class="form-check-input" id="value" type="checkbox" role="switch" data-on="1" data-off="0" <?php echo $data['course']->public == true ? 'checked' : '' ?>>
+                        <input type="hidden" id="public" name="public">
                         <label class="form-check-label" for="flexSwitchCheckChecked">Public</label>
                     </div>
                     <div class="col-md-12">
@@ -193,6 +194,18 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#value').change(function() {
+            if ($(this).prop("checked")) {
+                $('#public').val(1);
+            } else {
+                $('#public').val(0);
+            }
+        });
+    });
+</script>
 
 <script>
     $(document).ready(function() {
