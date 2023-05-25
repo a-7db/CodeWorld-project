@@ -87,8 +87,16 @@ class Trainees extends Users {
 
     public function myLearning()
     {
+        $courseIDs = [];
+        $crsIDs = $this->cmodel->allCourses();
+        foreach ($crsIDs as $crs) {
+            if ($this->traineeModel->find_order($crs->crs_ID)) {
+                $courseIDs[] = $crs->crs_ID;
+            }
+        }
         $data = [
-            'course' => $this->traineeModel->my_Learning()
+            'course' => $this->traineeModel->my_Learning(),
+            'IDs' => $courseIDs
         ];
         $this->view('User/myLearning', $data);
     }

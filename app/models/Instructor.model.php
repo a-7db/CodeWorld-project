@@ -343,4 +343,111 @@ class Instructor extends User{
         }
     }
 
+    public function getMyUsers(){
+        $this->db->query('SELECT 
+                        usr.profile,
+                        usr.fname,
+                        usr.email,
+                        crs.title,
+                        crs.price
+                        FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        INNER JOIN users usr
+                        ON ord.user_ID = usr.user_ID
+                        WHERE crs.instructor_ID = :instID
+                        ORDER BY ord.order_ID DESC
+                                    ');
+        $this->db->bind(':instID', $_SESSION['user_id']);
+
+        return $this->db->fetchAll();
+    }
+
+    public function getEachCourseUsers(){
+        $this->db->query('SELECT 
+                        usr.profile,
+                        usr.fname,
+                        usr.email,
+                        crs.title,
+                        crs.price
+                        FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        INNER JOIN users usr
+                        ON ord.user_ID = usr.user_ID
+                        WHERE crs.instructor_ID = :instID
+                        GROUP BY crs.title
+                                    ');
+        $this->db->bind(':instID', $_SESSION['user_id']);
+
+        return $this->db->fetchAll();
+    }
+
+    public function git_crs_with_count(){
+        $this->db->query('SELECT distinct crs.image, crs.title, crs.slug, crs.crs_ID, COUNT(ord.user_ID) as count
+                        FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        WHERE crs.instructor_ID = :instID
+                        GROUP BY crs.crs_ID
+                            ');
+        $this->db->bind(':instID', $_SESSION['user_id']);
+        
+        return $this->db->fetchAll();
+    }
+
+    public function getTrainees($crsID)
+    {
+        $this->db->query('SELECT DISTINCT crs.title, usr.fname, usr.email, usr.profile
+                        FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        INNER JOIN users usr
+                        ON usr.user_ID = ord.user_ID
+                        WHERE crs.instructor_ID = :instID AND crs.crs_ID = :crsID
+                            ');
+        $this->db->bind(':instID', $_SESSION['user_id']);
+        $this->db->bind(':crsID', $crsID);
+
+        return $this->db->fetchAll();
+    }
+
+    public function top_courses()
+    {
+        $this->db->query('SELECT crs.image, crs.title, COUNT(ord.course_ID) AS count
+                        FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        WHERE crs.instructor_ID = :instID
+                        GROUP BY crs.crs_ID
+                        ORDER BY count DESC
+                        LIMIT :num
+                        ');
+
+        $this->db->bind(':instID', $_SESSION['user_id']);
+        $this->db->bind(':num', 5);
+
+        return $this->db->fetchAll();
+    }
+
+    public function top_trainees()
+    {
+        $this->db->query('SELECT usr.fname, usr.email, usr.profile, COUNT(ord.course_ID) AS count
+                        FROM orders ord
+                        INNER JOIN courses crs
+                        ON crs.crs_ID = ord.course_ID
+                        INNER JOIN users usr
+                        ON usr.user_ID = ord.user_ID
+                        WHERE crs.instructor_ID = :instID
+                        GROUP BY usr.user_ID
+                        ORDER BY count DESC
+                        LIMIT :num
+                            ');
+
+        $this->db->bind(':instID', $_SESSION['user_id']);
+        $this->db->bind(':num', 5);
+
+        return $this->db->fetchAll();
+    }
+
 }

@@ -107,46 +107,46 @@ require APPROOT . '/views/Parts/header.php';
                                                     </div>
 
                                                     <?php $subtotal = 0; ?>
-                                        <!-- foreach start -->
+                                                    <!-- foreach start -->
 
-                                        <?php foreach ($data['cart'] as $cart) : ?>
+                                                    <?php foreach ($data['cart'] as $cart) : ?>
 
-                                            <!-- calculate total -->
+                                                        <!-- calculate total -->
 
-                                            <?php $pro = $cart->price * 1;
-                                            $subtotal = $subtotal + $pro; ?>
+                                                        <?php $pro = $cart->price * 1;
+                                                        $subtotal = $subtotal + $pro; ?>
 
-                                        <?php endforeach; ?>
+                                                    <?php endforeach; ?>
 
-                                        <!-- foreach end -->
-                                        <?php $total = $subtotal * 0.15; ?>
-                                        <?php $total2 = $total + $subtotal; ?>
+                                                    <!-- foreach end -->
+                                                    <?php $total = $subtotal * 0.15; ?>
+                                                    <?php $total2 = $total + $subtotal; ?>
 
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Subtotal: </p>
-                                            <p class="mb-2"> SR <?php echo $subtotal ?></p>
-                                        </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-2">Subtotal: </p>
+                                                        <p class="mb-2"> SR <?php echo $subtotal ?></p>
+                                                    </div>
 
-                                        <div class="d-flex justify-content-between">
-                                            <p class="mb-2">Tax: </p>
-                                            <p class="mb-2"> SR <?php echo $total ?></p>
-                                        </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-2">Tax: </p>
+                                                        <p class="mb-2"> SR <?php echo $total ?></p>
+                                                    </div>
 
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-2">Total: </p>
-                                            <p class="mb-2"> SR <?php echo $total2 ?></p>
-                                        </div>
+                                                    <div class="d-flex justify-content-between mb-4">
+                                                        <p class="mb-2">Total: </p>
+                                                        <p class="mb-2"> SR <?php echo $total2 ?></p>
+                                                    </div>
 
                                                     <a href="<?php echo  URLROOT ?>/Trainees/checkout/">
-                                            <button type="button" class="btn-theme btn btn-block btn-lg">
+                                                        <button type="button" class="btn-theme btn btn-block btn-lg">
 
-                                                <div class="d-flex justify-content-between">
-                                                    <span> SR <?php echo $total2 ?></span>
-                                                    <span>Pay<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                                </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <span> SR <?php echo $total2 ?></span>
+                                                                <span>Pay<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                            </div>
 
-                                            </button>
-                                          </a>
+                                                        </button>
+                                                    </a>
 
                                                 </form>
                                             </div>
@@ -164,25 +164,25 @@ require APPROOT . '/views/Parts/header.php';
 
 
 
-<div class="d-flex justify-content-between">
-    <p class="mb-2">Subtotal: </p>
-    <p class="mb-2"> SR <?php echo $subtotal ?></p>
-</div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-2">Subtotal: </p>
+                                                        <p class="mb-2"> SR <?php echo $subtotal ?></p>
+                                                    </div>
 
-<div class="d-flex justify-content-between">
-    <p class="mb-2">Tax: </p>
-    <p class="mb-2"> SR <?php echo $total ?></p>
-</div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="mb-2">Tax: </p>
+                                                        <p class="mb-2"> SR <?php echo $total ?></p>
+                                                    </div>
 
-<div class="d-flex justify-content-between mb-4">
-    <p class="mb-2">Total: </p>
-    <p class="mb-2"> SR <?php echo $total2 ?></p>
-</div>
+                                                    <div class="d-flex justify-content-between mb-4">
+                                                        <p class="mb-2">Total: </p>
+                                                        <p class="mb-2"> SR <?php echo $total2 ?></p>
+                                                    </div>
 
 
 
- <!-- Set up a container element for the button -->
- <div id="paypal-button-container"></div>
+                                                    <!-- Set up a container element for the button -->
+                                                    <div id="paypal-button-container"></div>
 
                                                 </form>
                                             </div>
@@ -194,7 +194,7 @@ require APPROOT . '/views/Parts/header.php';
 
 
 
-                                        
+
 
                                     </div>
                                 </div>
@@ -225,44 +225,39 @@ require APPROOT . '/views/Parts/footer.php';
 
 
 <script>
-   
-     paypal.Buttons({
-       onInit(){
+    paypal.Buttons({
+        onInit() {
 
-        var email=$('#email').val();
+            var email = $('#email').val();
 
-           if(email.length == 0){
-               alert("email is require");
-               return false;
-           }
-           else{
-            return true;
-           }
-       },
-       // Order is created on the server and the order id is returned
-       createOrder(data, actions) {
-         return actions.order.create({
-            purchase_units:[{
-                amount:{
-                    value:'<?php echo $total2?>'
-                }
-            }]
-         });
-         
-         
-       },
-       // Finalize the transaction on the server after payer approval
-       onApprove(data, actions) {
-         return actions.order.capture().then(function(orderData) {
-           // Successful capture! For dev/demo purposes:
-           console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-           const transaction = orderData.purchase_units[0].payments.captures[0];
-           alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-           // When ready to go live, remove the alert and show a success message within this page. For example:
-           // const element = document.getElementById('paypal-button-container');
-           // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-           // Or go to another URL:  window.location.href = 'thank_you.html';
-         });
+            if (email.length == 0) {
+                alert("email is require");
+                return false;
+            } else {
+                return true;
+            }
+        },
+        // Order is created on the server and the order id is returned
+        createOrder(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '<?php echo $total2 ?>'
+                    }
+                }]
+            });
+
+
+        },
+        // Finalize the transaction on the server after payer approval
+        onApprove(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+                // Successful capture! For dev/demo purposes:
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                const transaction = orderData.purchase_units[0].payments.captures[0];
+
+                window.location.href = '<?php echo URLROOT ?>/Trainees/checkout'
+            });
         }
-     }).render('#paypal-button-container');
-   </script>
+    }).render('#paypal-button-container');
+</script>

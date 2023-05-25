@@ -9,22 +9,27 @@ class Admins extends Users {
         if(!isAdmin()){
             redirect();
         }
-         $this->cmodel = $this->model('course');
+        $this->cmodel = $this->model('course');
         $this->adminModel = $this->model('Admin');
     }
 
     public function index()
     {
-       $money  = $this->cmodel->Count_Money();
-         $users =  $this->cmodel->countAllusers();
-         $courses =  $this->cmodel->countAllcourses();
-
+        $money  = $this->cmodel->Count_Money();
+        $users = $this->cmodel->countAllusers();
+        $courses = $this->cmodel->countAllcourses();
+        $paidUsers = $this->adminModel->getPaidUsers();
+        $topCourses = $this->adminModel->top_courses();
+        $topTrainees = $this->adminModel->top_trainees();
+        
         $data = [ 
 
-             'money' => $money,
-              'users' => $users,
-              'courses' => $courses
-
+            'money' => $money,
+            'users' => $users,
+            'courses' => $courses,
+            'paid_users' => $paidUsers,
+            'top_courses' => $topCourses,
+            'top_trainees' => $topTrainees,
             ];
 
           //  $this->view('Instructor/instructorHome', $data);

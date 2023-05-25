@@ -235,11 +235,10 @@ class Course{
     }
 
     public function count_users(){
-        $this->db->query('SELECT distinct count(ord.user_ID) as users FROM orders ord
+        $this->db->query('SELECT COUNT(ord.user_ID) as users FROM orders ord
         inner join courses crs
          on crs.crs_ID = ord.course_ID
          WHERE crs.instructor_ID  = :instructor_ID
-         order by ord.user_ID
          ');
          
 
@@ -295,10 +294,11 @@ class Course{
     }
 
     public function countAllusers(){
-        $this->db->query('SELECT distinct count(usr.user_ID) as users FROM users usr
+        $this->db->query('SELECT distinct count(user_ID) as users FROM users 
+                        WHERE Role_ID = :num
        
          ');
-         
+         $this->db->bind(':num', 3);
 
 
         $count = $this->db->fetchOne();

@@ -22,7 +22,7 @@ require APPROOT . '/views/Parts/header.php';
                         <?php foreach ($data['course'] as $crs) : ?>
                             <div class="col-md-6 col-lg-3">
                                 <div class="courses-item">
-                                    <a href="<?php echo URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
+                                    <a href="<?php echo in_array($crs->crs_ID, $data['IDs']) ? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
                                         <div class="courses-item-inner">
                                             <div class="img-box">
                                                 <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
@@ -33,7 +33,7 @@ require APPROOT . '/views/Parts/header.php';
                                                 <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile ?>" alt="instructor img">
                                                 <span class="instructor-name"><?php echo $crs->fname ?></span>
                                             </div>
-                                            <div class="price">SR <?php echo $crs->price ?></div>
+                                            <div class="price"><?php echo in_array($crs->crs_ID, $data['IDs']) ? 'Watch' : 'SR ' . $crs->price ?></div>
                                         </div>
                                     </a>
                                 </div>

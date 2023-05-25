@@ -19,13 +19,22 @@ class Instructors extends Users {
         $money  = $this->cmodel->instructor_Money();
         $users =  $this->cmodel->count_users();
         $courses =  $this->cmodel->count_courses();
+        $myTrainees = $this->InsturctorModel->getMyUsers();
+        $crsUsers = $this->InsturctorModel->getEachCourseUsers();
+        $myCourses = $this->InsturctorModel->git_crs_with_count();
+        $topCourses = $this->InsturctorModel->top_courses();
+        $topTrainees = $this->InsturctorModel->top_trainees();
 
         $data = [ 
 
              'money' => $money,
              'users' => $users,
-             'courses' => $courses
-
+             'courses' => $courses,
+             'myUsers' => $myTrainees,
+            'crsUsers' => $crsUsers,
+            'crs' => $myCourses,
+            'top_courses' => $topCourses,
+            'top_trainees' => $topTrainees,
             ];
 
             $this->view('Instructor/instructorHome', $data);
@@ -409,5 +418,11 @@ class Instructors extends Users {
             ];
             $this->view('User/register_as_insturctor', $data);
         }
+    }
+
+    public function show_my_trainees($crsID, $slug){
+        $data = $this->InsturctorModel->getTrainees($crsID);
+        
+        $this->view('Instructor/myTrainees', $data);
     }
 }
