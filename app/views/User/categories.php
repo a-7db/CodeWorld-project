@@ -27,32 +27,7 @@ require APPROOT . '/views/Parts/header.php';
           </div>
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-12 mt-3">
-          
-          <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <i class="fas fa-chevron-left"></i>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item active"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">40</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <i class="fas fa-chevron-right"></i>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          
-        </div>
-      </div> -->
+      
     </div>
   </section>
   <!-- courses section end -->

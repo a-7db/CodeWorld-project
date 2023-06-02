@@ -24,17 +24,25 @@ class Instructors extends Users {
         $myCourses = $this->InsturctorModel->git_crs_with_count();
         $topCourses = $this->InsturctorModel->top_courses();
         $topTrainees = $this->InsturctorModel->top_trainees();
+        $profitsTotal = 0;
+        $tax = 0;
+        foreach($myTrainees as $user){
+            $price = $user->price * 0.15;
+            $tax = $user->price - $price;
+            $profitsTotal += $user->price;
+        }
 
         $data = [ 
-
-             'money' => $money,
-             'users' => $users,
-             'courses' => $courses,
-             'myUsers' => $myTrainees,
+            'money' => $money,
+            'myUsers' => $myTrainees,
+            'users' => $users,
+            'courses' => $courses,
             'crsUsers' => $crsUsers,
             'crs' => $myCourses,
             'top_courses' => $topCourses,
             'top_trainees' => $topTrainees,
+            'profit_total' => $profitsTotal,
+            'tax' => $tax
             ];
 
             $this->view('Instructor/instructorHome', $data);

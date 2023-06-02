@@ -20,7 +20,9 @@ class Course{
                                 crs.image,
                                 crs.last_updated,
                                 usr.profile,
-                                crs.slug
+                                crs.slug,
+                                AVG(rat.rating) AS rating,
+                                COUNT(rat.rating) AS count_rating
                             FROM
                                 courses crs
                             INNER JOIN
@@ -28,7 +30,11 @@ class Course{
                             ON crs.instructor_ID = usr.user_ID 
                             INNER JOIN category cate
                             ON cate.category_ID = crs.cate_ID
+                            LEFT JOIN rating rat
+                            ON crs.crs_ID = rat.crs_ID
                             WHERE crs.public = :isPublic
+                            GROUP BY crs.crs_ID
+                            ORDER BY rat.rating DESC
                             LIMIT :limli;
         ');
         $this->db->bind(':isPublic', 1);
@@ -82,6 +88,7 @@ class Course{
                                 crs.last_updated,
                                 crs.image,
                                 crs.slug,
+                                crs.instructor_ID,
                                 crs.public
                             FROM
                                 courses crs
@@ -118,7 +125,9 @@ class Course{
                                 cate.name,
                                 crs.last_updated,
                                 crs.image,
-                                crs.slug
+                                crs.slug,
+                                AVG(rat.rating) AS rating,
+                                COUNT(rat.rating) AS count_rating
                             FROM
                                 courses crs
                             INNER JOIN
@@ -126,7 +135,12 @@ class Course{
                             ON crs.instructor_ID = usr.user_ID 
                             INNER JOIN category cate
                             ON cate.category_ID = crs.cate_ID
-                            WHERE cate.slug = :slug AND crs.public = :isPublic;');
+                            LEFT JOIN rating rat
+                            ON crs.crs_ID = rat.crs_ID
+                            WHERE cate.slug = :slug AND crs.public = :isPublic
+                            ORDER BY rat.rating, COUNT(rat.rating) DESC
+                            ');
+                            
         $this->db->bind(':slug', $cate);
         $this->db->bind(':isPublic', 1);
 
@@ -372,6 +386,168 @@ class Course{
         $this->db->bind(':instID', $_SESSION['user_id']);
 
         return $this->db->fetchOne();
+    }
+
+    public function send_feedback($data)
+    {
+        $this->db->query('INSERT INTO rating(crs_ID, user_ID, rating) VALUES 
+                        (:crsID, :userID, :rate)');
+
+        $this->db->bind(':crsID', $data['crsID']);
+        $this->db->bind(':userID', $_SESSION['user_id']);
+        $this->db->bind(':rate', $data['rating']);
+
+        if($this->db->execute()){
+            $this->db->query('INSERT INTO comments(content, crs_ID, user_ID, dateTime) VALUES 
+                        (:content, :crsID, :userID, :dtime)');
+
+            $this->db->bind(':content', $data['content']);
+            $this->db->bind(':crsID', $data['crsID']);
+            $this->db->bind(':userID', $_SESSION['user_id']);
+            $this->db->bind(':dtime', $data['dtime']);
+
+            if($this->db->execute()){
+                return true;
+            } else{
+                return false;
+            }
+        } else{
+            return false;
+        }
+    }
+
+    public function find_feedback($Course_ID)
+    {
+        $this->db->query('SELECT * FROM rating WHERE crs_ID = :crsID AND user_ID = :userID');
+
+        $this->db->bind(':userID', $_SESSION['user_id']);
+        $this->db->bind(':crsID',  $Course_ID);
+
+        $this->db->execute();
+
+        if ($this->db->count() > 0) {
+            return $this->db->fetchOne();
+        } else {
+            return false;
+        }
+    }
+
+    public function show_feedbacks($crsID)
+    {
+        $this->db->query('SELECT comm.content,
+                            comm.dateTime,
+                            rat.rating,
+                            usr.fname,
+                            usr.profile
+                            FROM comments comm
+                            INNER JOIN rating rat
+                            ON comm.user_ID = rat.user_ID
+                            INNER JOIN users usr
+                            ON usr.user_ID = comm.user_ID
+                            WHERE comm.crs_ID = :crsID AND rat.crs_ID = :crsID
+                            GROUP BY comm.comment_ID
+                            ORDER BY dateTime DESC
+                            ');
+
+        $this->db->bind(':crsID',  $crsID);
+
+        return $this->db->fetchAll();
+    }
+
+    public function send_comment($data)
+    {
+        $this->db->query('INSERT INTO comments(content, crs_ID, user_ID, dateTime) VALUES 
+                        (:content, :crsID, :userID, :dtime)');
+
+        $this->db->bind(':content', $data['content']);
+        $this->db->bind(':crsID', $data['crsID']);
+        $this->db->bind(':userID', $_SESSION['user_id']);
+        $this->db->bind(':dtime', $data['dtime']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function reviewTotal($crsID)
+    {
+        $this->db->query('SELECT COUNT(rating) as count FROM rating WHERE crs_ID = :crsID');
+
+        $this->db->bind(':crsID', $crsID);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+    public function AVG($crsID)
+    {
+        $this->db->query('SELECT AVG(rating) as avg FROM rating WHERE crs_ID = :crsID');
+
+        $this->db->bind(':crsID', $crsID);
+
+        $count = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $count;
+        } else {
+            return false;
+        }
+    }
+
+    public function stu_feedback($crsID, $counter)
+    {
+        $this->db->query('SELECT COUNT(rating) / SUM(rating) * 100 AS percent FROM rating WHERE crs_ID = :crsID
+                             AND rating BETWEEN :num1 AND :num2 ');
+
+        $this->db->bind(':crsID', $crsID);
+        $this->db->bind(':num1', $counter);
+        $this->db->bind(':num2', $counter + 0.9);
+
+        $result = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $result->percent;
+        } else {
+            return false;
+        }
+    }
+
+    public function instructorJob($instructor_ID)
+    {
+        $this->db->query('SELECT COUNT(rating) AS count, AVG(rating) AS avg FROM rating rat
+                          INNER JOIN courses crs
+                          ON crs.crs_ID = rat.crs_ID
+                          WHERE crs.instructor_ID = :instID  ');
+
+        $this->db->bind(':instID', $instructor_ID);
+
+        $result = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    public function Count_ratings()
+    {
+        $this->db->query('SELECT COUNT(rating) as rating FROM rating');
+
+        $result = $this->db->fetchOne();
+
+        if ($this->db->count() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
     }
 
 }

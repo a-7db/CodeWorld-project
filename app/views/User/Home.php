@@ -64,7 +64,7 @@ require APPROOT . '/views/Parts/header.php';
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
-                        <h2 class="style-3">50+</h2>
+                        <h2 class="style-3"><?php echo $data['ratings']->rating ?>+</h2>
                         <p>rating</p>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ require APPROOT . '/views/Parts/header.php';
             <?php foreach ($data['course'] as $crs) : ?>
                 <div class="col-md-6 col-lg-3">
                     <div class="courses-item">
-                        <a href="<?php echo in_array($crs->crs_ID, $data['IDs'])? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
+                        <a href="<?php echo in_array($crs->crs_ID, $data['IDs']) ? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
                             <div class="courses-item-inner">
                                 <div class="img-box">
                                     <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
@@ -113,17 +113,32 @@ require APPROOT . '/views/Parts/header.php';
                                     <span class="instructor-name"><?php echo $crs->fname ?></span>
                                 </div>
                                 <div class="rating">
-                                    <span class="average-rating">(4.5)</span>
+                                    <span class="average-rating">(<?php echo number_format($crs->rating, 1) ?>)</span>
                                     <span class="average-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
+                                        <?php 
+                                        if($crs->rating > 0){
+                                            $rating = explode('.', $crs->rating);
+                                            $count = empty($rating[1]) ? 0 : 1;
+                                            $empty = 5 - ($rating[0] + $count);
+                                            while ($rating[0] > 0) {
+                                                echo '<i style="margin-right: 3px;"  class="fas fa-star"></i>';
+                                                $rating[0]--;
+                                            }
+                                            echo !empty($rating[1]) ? '<i style="margin-right: 3px;"  class="fas fa-star-half-alt"></i>' : '';
+                                            while ($empty > 0) {
+                                                echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                                                $empty--;
+                                            }
+                                        } else{
+                                            for($i = 0; $i <=5; $i++){
+                                                echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                                            }
+                                        }
+                                        ?>
                                     </span>
-                                    <span class="reviews">(230)</span>
+                                    <span class="reviews">(<?php echo $crs->count_rating ?>)</span>
                                 </div>
-                                <div class="price"><?php echo in_array($crs->crs_ID, $data['IDs'])? 'Watch' : 'SR ' . $crs->price ?></div>
+                                <div class="price"><?php echo in_array($crs->crs_ID, $data['IDs']) ? 'Watch' : 'SR ' . $crs->price ?></div>
                             </div>
                         </a>
                     </div>
@@ -134,7 +149,7 @@ require APPROOT . '/views/Parts/header.php';
         </div>
         <div class="row">
             <div class="col-12 text-center mt-3">
-                <a href="courses.html" class="btn btn-theme">view all courses</a>
+                <a href="<?php echo URLROOT ?>/courses" class="btn btn-theme">view all courses</a>
             </div>
         </div>
     </div>
