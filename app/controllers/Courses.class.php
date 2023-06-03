@@ -86,6 +86,7 @@ class Courses extends Controller {
                                 display: -webkit-box;
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
+                                min-height: 50px;
                                 ">' . $crs->title . '</h3>
                                 <div class="instructor">
                                   <img src="'. URLROOT . '/images/instructor/' . $crs->profile .'" alt="instructor img">

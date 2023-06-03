@@ -107,6 +107,7 @@ require APPROOT . '/views/Parts/header.php';
                                 display: -webkit-box;
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
+                                min-height: 50px;
                                 "><?php echo $crs->title ?></h3>
                                 <div class="instructor">
                                     <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile ?>" alt="instructor img">
@@ -115,8 +116,8 @@ require APPROOT . '/views/Parts/header.php';
                                 <div class="rating">
                                     <span class="average-rating">(<?php echo number_format($crs->rating, 1) ?>)</span>
                                     <span class="average-stars">
-                                        <?php 
-                                        if($crs->rating > 0){
+                                        <?php
+                                        if ($crs->rating > 0) {
                                             $rating = explode('.', $crs->rating);
                                             $count = empty($rating[1]) ? 0 : 1;
                                             $empty = 5 - ($rating[0] + $count);
@@ -129,8 +130,8 @@ require APPROOT . '/views/Parts/header.php';
                                                 echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
                                                 $empty--;
                                             }
-                                        } else{
-                                            for($i = 0; $i <=5; $i++){
+                                        } else {
+                                            for ($i = 0; $i <= 5; $i++) {
                                                 echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
                                             }
                                         }
@@ -176,31 +177,29 @@ require APPROOT . '/views/Parts/header.php';
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="img-box rounded-circle position-relative">
-                    <img src="<?php echo URLROOT ?>/images/testimonial/1.png" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
+                    <img src="<?php echo URLROOT . '/images/profile/' . $data['feedbacks'][0]->profile ?>" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
                 </div>
                 <div id="carouselOne" class="carousel slide text-center" data-bs-ride="carousel">
                     <div class="carousel-inner mb-4">
-                        <div class="carousel-item active" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/1.png">
+                        <div class="carousel-item active" data-js-testimonial-img="<?php echo URLROOT . '/images/profile/' . $data['feedbacks'][0]->profile ?>">
                             <div class="testimonials-item">
-                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                                <h3>john doe</h3>
-                                <p class="text-2">web developer</p>
+                                <p class="text-1"><?php echo $data['feedbacks'][0]->content ?></p>
+                                <h3><?php echo $data['feedbacks'][0]->fname ?></h3>
+                                <p class="text-2"><?php echo $data['feedbacks'][0]->orders ?> courses</p>
                             </div>
                         </div>
-                        <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/2.png">
-                            <div class="testimonials-item">
-                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                                <h3>john doe</h3>
-                                <p class="text-2">web developer</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/3.png">
-                            <div class="testimonials-item">
-                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                                <h3>john doe</h3>
-                                <p class="text-2">web developer</p>
-                            </div>
-                        </div>
+                        <?php foreach ($data['feedbacks'] as $comm) : ?>
+                            <?php if ($comm != $data['feedbacks'][0]) : ?>
+                                <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT . '/images/profile/' . $comm->profile ?>">
+                                    <div class="testimonials-item">
+                                        <p class="text-1"><?php echo $comm->content ?></p>
+                                        <h3><?php echo $comm->fname ?></h3>
+                                        <p class="text-2"><?php echo $comm->orders ?> courses</p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselOne" data-bs-slide="prev">
                         <i class="fas fa-arrow-left"></i>

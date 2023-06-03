@@ -550,5 +550,28 @@ class Course{
         }
     }
 
+    public function get_selected_feedbacks()
+    {
+        $this->db->query('SELECT 
+                            comm.comment_ID AS commID,
+                            comm.content,
+                            comm.dateTime,
+                            usr.fname,
+                            usr.profile,
+                            COUNT(ord.user_ID) AS orders
+                            FROM comments comm
+                            INNER JOIN users usr
+                            ON usr.user_ID = comm.user_ID
+                            INNER JOIN orders ord
+                            ON ord.user_ID = usr.user_ID
+                            WHERE comm.home_view = :homeView
+                            GROUP BY commID
+                            ');
+
+        $this->db->bind(':homeView', true);
+
+        return $this->db->fetchAll();
+    }
+
 }
 ?>

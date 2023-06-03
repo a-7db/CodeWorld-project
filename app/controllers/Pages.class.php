@@ -15,6 +15,7 @@ Class Pages extends Controller{
         $users =  $this->crsModel->Count_student();
         $instructors =  $this->crsModel->Count_instructor();
         $ratings =  $this->crsModel->Count_ratings();
+        $feedbacks = $this->crsModel->get_selected_feedbacks();
 
         foreach($course as $crs){
             if($this->traineeModel->find_order($crs->crs_ID)){
@@ -28,7 +29,8 @@ Class Pages extends Controller{
             'users' => $users,
             'instructors' => $instructors,
             'IDs' => $courseIDs,
-            'ratings' => $ratings
+            'ratings' => $ratings,
+            'feedbacks' => $feedbacks
         ];
         $this->view('User/Home', $data);
     }

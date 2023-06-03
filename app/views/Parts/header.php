@@ -51,9 +51,7 @@
                                     <?php if (isLoggedIn() && isTrainee()) : ?>
                                         <li class="sub-menu-item "><a href="<?php echo URLROOT . '/Trainees/myLearning' ?>">My Learning</a></li>
                                     <?php endif; ?>
-                                    <?php foreach ($allcate['cate'] as $category) : ?>
-                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses/' . $category->slug ?>"><?php echo $category->name ?></a></li>
-                                    <?php endforeach; ?>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses' ?>">categories</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>

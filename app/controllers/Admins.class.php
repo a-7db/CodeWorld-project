@@ -129,24 +129,52 @@ class Admins extends Users {
     }
 
 
-    public function CreateCourse()
+    public function Feedback()
     {
+        $feedbacks = $this->adminModel->getFeedbacks();
+        $selectedFeddbacks = $this->adminModel->get_selected_feedbacks();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'comments' => $feedbacks,
+                'selectedFeddbacks' => $selectedFeddbacks,
+                'error' => ''
+            ];
+
+            if(empty($_POST['feedbacks'])){
+                $data['error'] = 'There is no feedback selected!';
+                $this->view('Admin/feedback', $data);
+            } else{
+                $IDS = [];
+                foreach($_POST['feedbacks'] as $IDs){
+                    $IDS[] = $IDs;
+                }
+                for($i = 0; $i < count($IDS); $i++){
+                    $this->adminModel->update_feedbacks_home($IDS[$i]);
+                }
+                redirect('Admins/Feedback');
+            }
+        } else{
+
+            $data = [
+                'comments' => $feedbacks,
+                'selectedFeddbacks' => $selectedFeddbacks,
+                'error' => ''
+            ];
+
+            $this->view('Admin/feedback', $data);
+        }
+
     }
 
-    public function EditCourse()
+    public function delete_comment($commID)
     {
+        if(isset($commID)){
+            $this->adminModel->delete_comment($commID);
+            redirect('Admins/Feedback');
+        }else{
+            redirect('Admins/Feedback');
+        }
     }
 
-    public function DeleteCourse()
-    {
-    }
-
-    public function AddVideo()
-    {
-    }
-
-    public function AddQuestions()
-    {
-    }
 }
 ?>
