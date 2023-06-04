@@ -230,6 +230,45 @@ class Courses extends Controller {
         }
     }
 
+    public function search()
+    {
+        $courseIDs = [];
+        $crsIDs = $this->cmodel->allCourses();
+        foreach ($crsIDs as $crs) {
+            if ($this->traineeModel->find_order($crs->crs_ID)) {
+                $courseIDs[] = $crs->crs_ID;
+            }
+        }
+        if(isset($_POST['text'])){
+            $inputText = $_POST['text'];
+            if($data = $this->cmodel->search($inputText)){
+                foreach($data as $row){
+                    $url = in_array($row->crs_ID, $courseIDs) ? URLROOT . '/courses/learn/' . $row->crs_ID . '/' . $row->slug : URLROOT . '/courses/details/' . $row->crs_ID . '/' . $row->slug;
+                    echo '<a href="' . $url .'" 
+                    class="list-group-item  d-flex justify-content-between border-1 box" style="padding: 0.5rem 1rem; margin-bottom: 0px;">
+                    <div class="d-flex align-items-center">
+                    <img width="15%" src="'. URLROOT . '/images/courses/' . $row->image . '" alt="course img">
+                    <div class="d-flex flex-column courses-item" style="margin: 0">
+                      <h6 style="
+                                overflow: hidden;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 1;
+                                -webkit-box-orient: vertical;
+                                " class="mb-1 title mx-3 w-75">'. $row->title . '</h6>
+                      <h6 class="mx-3">'. $row->fname .'</h6>
+                    </div>
+                  </div>
+                </a>';
+                }
+            } else{
+                echo '<a class="list-group-item list-group-item-action border-1 box title" style="padding: 0.5rem 1rem;">
+                no data
+                </a>';
+            }
+        } else{
+            redirect('Courses');
+        }
+    }
 
 }
 

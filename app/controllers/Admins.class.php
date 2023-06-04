@@ -176,5 +176,10 @@ class Admins extends Users {
         }
     }
 
+    public function taxes()
+    {
+        $this->view('Admin/tax');
+    }
+
 }
 ?>

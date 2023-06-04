@@ -573,5 +573,29 @@ class Course{
         return $this->db->fetchAll();
     }
 
+    public function search($input)
+    {
+        $this->db->query('SELECT crs.crs_ID, crs.title, crs.price, crs.image, usr.fname, crs.slug
+                        FROM courses crs
+                        INNER JOIN users usr
+                        ON usr.user_ID = crs.instructor_ID
+                        INNER JOIN category cate
+                        ON cate.category_ID = crs.cate_ID
+                        WHERE crs.title LIKE :input
+                        OR usr.fname LIKE :input
+                        OR cate.name LIKE :input
+                        ');
+
+        $this->db->bind(':input', '%' . $input . '%');
+
+        $rows = $this->db->fetchAll();
+
+        if($this->db->count() > 0){
+            return $rows;
+        } else{
+            return false;
+        }
+    }
+
 }
 ?>

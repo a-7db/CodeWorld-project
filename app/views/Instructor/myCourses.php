@@ -31,7 +31,7 @@
                         <div class="col-7 row">
                             <div class="col-form-label col-6">Course Fees:</div>
                             <div class="input-group col">
-                                <input type="number" class="form-control" name="price" id="price">
+                                <input type="number" maxlength="5" onkeypress="return onlyNum(event)" class="form-control" name="price" id="price">
                             </div>
                             <p class="text-danger h6" id="price_err"></p>
                         </div>
@@ -163,6 +163,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    function onlyNum(e) {
+        var x = e.which || e.keycode;
+        if (x >= 48 && x <= 57) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

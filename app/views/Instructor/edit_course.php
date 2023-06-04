@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Course Fees</label>
-                        <input type="number" name="price" value="<?php echo $data['course']->price ?>" id="price" class="form-control">
+                        <input type="number" maxlength="5" onkeypress="return onlyNum(event)" name="price" value="<?php echo $data['course']->price ?>" id="price" class="form-control">
                         <p class="text-danger h6"><?php echo $data['price_err'] ?></p>
                     </div>
                     <div class="col-12">
@@ -190,6 +190,17 @@
     </div>
 </div>
 <!-- course preview modal end -->
+
+<script>
+    function onlyNum(e) {
+        var x = e.which || e.keycode;
+        if (x >= 48 && x <= 57) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
