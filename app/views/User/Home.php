@@ -66,7 +66,7 @@ require APPROOT . '/views/Parts/header.php';
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="fun-facts-item">
-                        <h2 class="style-3">50+</h2>
+                        <h2 class="style-3"><?php echo $data['ratings']->rating ?>+</h2>
                         <p>rating</p>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ require APPROOT . '/views/Parts/header.php';
             <?php foreach ($data['course'] as $crs) : ?>
                 <div class="col-md-6 col-lg-3">
                     <div class="courses-item">
-                        <a href="<?php echo in_array($crs->crs_ID, $data['IDs'])? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
+                        <a href="<?php echo in_array($crs->crs_ID, $data['IDs']) ? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug ?>" class="link">
                             <div class="courses-item-inner">
                                 <div class="img-box">
                                     <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
@@ -109,23 +109,39 @@ require APPROOT . '/views/Parts/header.php';
                                 display: -webkit-box;
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
+                                min-height: 50px;
                                 "><?php echo $crs->title ?></h3>
                                 <div class="instructor">
                                     <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile ?>" alt="instructor img">
                                     <span class="instructor-name"><?php echo $crs->fname ?></span>
                                 </div>
                                 <div class="rating">
-                                    <span class="average-rating">(4.5)</span>
+                                    <span class="average-rating">(<?php echo number_format($crs->rating, 1) ?>)</span>
                                     <span class="average-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
+                                        <?php
+                                        if ($crs->rating > 0) {
+                                            $rating = explode('.', $crs->rating);
+                                            $count = empty($rating[1]) ? 0 : 1;
+                                            $empty = 5 - ($rating[0] + $count);
+                                            while ($rating[0] > 0) {
+                                                echo '<i style="margin-right: 3px;"  class="fas fa-star"></i>';
+                                                $rating[0]--;
+                                            }
+                                            echo !empty($rating[1]) ? '<i style="margin-right: 3px;"  class="fas fa-star-half-alt"></i>' : '';
+                                            while ($empty > 0) {
+                                                echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                                                $empty--;
+                                            }
+                                        } else {
+                                            for ($i = 0; $i <= 5; $i++) {
+                                                echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                                            }
+                                        }
+                                        ?>
                                     </span>
-                                    <span class="reviews">(230)</span>
+                                    <span class="reviews">(<?php echo $crs->count_rating ?>)</span>
                                 </div>
-                                <div class="price"><?php echo in_array($crs->crs_ID, $data['IDs'])? 'Watch' : 'SR ' . $crs->price ?></div>
+                                <div class="price"><?php echo in_array($crs->crs_ID, $data['IDs']) ? 'Watch' : 'SR ' . $crs->price ?></div>
                             </div>
                         </a>
                     </div>
@@ -136,7 +152,7 @@ require APPROOT . '/views/Parts/header.php';
         </div>
         <div class="row">
             <div class="col-12 text-center mt-3">
-                <a href="courses.html" class="btn btn-theme">view all courses</a>
+                <a href="<?php echo URLROOT ?>/courses" class="btn btn-theme">view all courses</a>
             </div>
         </div>
     </div>
@@ -163,31 +179,29 @@ require APPROOT . '/views/Parts/header.php';
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="img-box rounded-circle position-relative">
-                    <img src="<?php echo URLROOT ?>/images/testimonial/1.png" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
+                    <img src="<?php echo URLROOT . '/images/profile/' . $data['feedbacks'][0]->profile ?>" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
                 </div>
                 <div id="carouselOne" class="carousel slide text-center" data-bs-ride="carousel">
                     <div class="carousel-inner mb-4">
-                        <div class="carousel-item active" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/1.png">
+                        <div class="carousel-item active" data-js-testimonial-img="<?php echo URLROOT . '/images/profile/' . $data['feedbacks'][0]->profile ?>">
                             <div class="testimonials-item">
-                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                                <h3>john doe</h3>
-                                <p class="text-2">web developer</p>
+                                <p class="text-1"><?php echo $data['feedbacks'][0]->content ?></p>
+                                <h3><?php echo $data['feedbacks'][0]->fname ?></h3>
+                                <p class="text-2"><?php echo $data['feedbacks'][0]->orders ?> courses</p>
                             </div>
                         </div>
-                        <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/2.png">
-                            <div class="testimonials-item">
-                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                                <h3>john doe</h3>
-                                <p class="text-2">web developer</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT ?>/images/testimonial/3.png">
-                            <div class="testimonials-item">
-                                <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                                <h3>john doe</h3>
-                                <p class="text-2">web developer</p>
-                            </div>
-                        </div>
+                        <?php foreach ($data['feedbacks'] as $comm) : ?>
+                            <?php if ($comm != $data['feedbacks'][0]) : ?>
+                                <div class="carousel-item" data-js-testimonial-img="<?php echo URLROOT . '/images/profile/' . $comm->profile ?>">
+                                    <div class="testimonials-item">
+                                        <p class="text-1"><?php echo $comm->content ?></p>
+                                        <h3><?php echo $comm->fname ?></h3>
+                                        <p class="text-2"><?php echo $comm->orders ?> courses</p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselOne" data-bs-slide="prev">
                         <i class="fas fa-arrow-left"></i>

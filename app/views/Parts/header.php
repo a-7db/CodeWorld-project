@@ -12,7 +12,7 @@
     <link rel="stylesheet" class="js-color-style" href=" <?php echo URLROOT ?> ./css/colors/color-1.css">
     <link rel="stylesheet" class="js-glass-style" href=" <?php echo URLROOT ?> ./css/glass.css" disabled>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <title><?php echo SITENAME ?></title>
 </head>
 
@@ -48,12 +48,10 @@
                             <li class="menu-item menu-item-has-children">
                                 <a class="js-toggle-sub-menu">Tutorials <i class="fas fa-chevron-down"></i></a>
                                 <ul class="sub-menu js-sub-menu">
-                                    <?php if(isLoggedIn() && isTrainee()): ?>
-                                    <li class="sub-menu-item "><a href="<?php echo URLROOT . '/Trainees/myLearning' ?>">My Learning</a></li>
+                                    <?php if (isLoggedIn() && isTrainee()) : ?>
+                                        <li class="sub-menu-item "><a href="<?php echo URLROOT . '/Trainees/myLearning' ?>">My Learning</a></li>
                                     <?php endif; ?>
-                                    <?php foreach ($allcate['cate'] as $category) : ?>
-                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses/' . $category->slug ?>"><?php echo $category->name ?></a></li>
-                                    <?php endforeach; ?>
+                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses' ?>">categories</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>

@@ -1,5 +1,7 @@
 <?php require APPROOT . '/views/Instructor/dashboard.php' ?>
-
+<div class="col-12 text-end mt-3 mb-3">
+    <a class="btn bg-gradient-dark mb-0" href="<?php echo URLROOT ?>/Instructors"><i class="ni ni-bold-left text-light text-sm opacity-10"></i>&nbsp;&nbsp;Back</a>
+</div>
 <div class="row mt-4">
     <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card ">
@@ -14,7 +16,7 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Course Name</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,7 +36,7 @@
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0 text-wrap"><?php echo $myusers->title ?></p>
                                         </td>
-                                        
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

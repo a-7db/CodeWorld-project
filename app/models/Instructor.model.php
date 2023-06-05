@@ -79,7 +79,7 @@ class Instructor extends User{
                 }
             }
         }
-        $this->db->query('INSERT INTO courses (title, slug, description, price, instructor_ID, cate_ID, image, public, last_updated) VALUES (:title , :slug, :descc , :price, :instID, :cate, :imagee, :public, :timeNow)');
+        $this->db->query('INSERT INTO courses (title, slug, description, price, instructor_ID, cate_ID, image, public, last_updated, tax_ID) VALUES (:title , :slug, :descc , :price, :instID, :cate, :imagee, :public, :timeNow, :tax)');
 
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':descc', $data['desc']);
@@ -90,6 +90,7 @@ class Instructor extends User{
         $this->db->bind(':public', $data['public']);
         $this->db->bind(':timeNow', $data['time']);
         $this->db->bind(':slug', $slug);
+        $this->db->bind(':tax', 1);
 
         if ($this->db->execute()) {
             return true;

@@ -179,4 +179,69 @@ class Admin extends User{
 
         return $this->db->fetchAll();
     }
+
+    public function getFeedbacks()
+    {
+        $this->db->query('SELECT 
+                            comm.comment_ID AS commID,
+                            comm.content,
+                            usr.fname
+                            FROM comments comm
+                            INNER JOIN users usr
+                            ON usr.user_ID = comm.user_ID
+                            WHERE comm.home_view = :homeView
+                            ');
+
+        $this->db->bind(':homeView', false);
+
+        return $this->db->fetchAll();
+    }
+
+    public function get_selected_feedbacks()
+    {
+        $this->db->query('SELECT 
+                            comm.comment_ID AS commID,
+                            comm.content,
+                            comm.dateTime,
+                            usr.fname,
+                            usr.profile
+                            FROM comments comm
+                            INNER JOIN users usr
+                            ON usr.user_ID = comm.user_ID
+                            WHERE comm.home_view = :homeView
+                            ');
+
+        $this->db->bind(':homeView', true);
+
+        return $this->db->fetchAll();
+    }
+
+    public function update_feedbacks_home($commID)
+    {
+        $this->db->query('UPDATE comments SET home_view = :homeView WHERE comment_ID = :commID');
+
+        $this->db->bind(':homeView', true);
+        $this->db->bind(':commID', $commID);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function delete_comment($commID)
+    {
+        $this->db->query('UPDATE comments SET home_view = :homeView WHERE comment_ID = :commID');
+
+        $this->db->bind(':homeView', false);
+        $this->db->bind(':commID', $commID);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

@@ -53,6 +53,25 @@ class Courses extends Controller {
                     foreach ($course as $crs) {
                         $isPaied = in_array($crs->crs_ID, $courseIDs) ? 'Watch' : 'SR ' . $crs->price;
                         $url = in_array($crs->crs_ID, $courseIDs) ? URLROOT . '/courses/learn/' . $crs->crs_ID . '/' . $crs->slug : URLROOT . '/courses/details/' . $crs->crs_ID . '/' . $crs->slug;
+                        $stars = '';
+                        if ($crs->rating > 0) {
+                            $rating = explode('.', $crs->rating);
+                            $count = empty($rating[1]) ? 0 : 1;
+                            $empty = 5 - ($rating[0] + $count);
+                            while ($rating[0] > 0) {
+                                $stars .= '<i style="margin-right: 3px;"  class="fas fa-star"></i>';
+                                $rating[0]--;
+                            }
+                            $stars .= !empty($rating[1]) ? '<i style="margin-right: 3px;"  class="fas fa-star-half-alt"></i>' : '';
+                            while ($empty > 0) {
+                                $stars .= '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                                $empty--;
+                            }
+                        } else {
+                            for ($i = 0; $i < 5; $i++) {
+                                $stars .= '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                            }
+                        }
                         $content .= '
                         <!-- courses item start -->
                         <div class="col-md-6 col-lg-3">
@@ -67,21 +86,20 @@ class Courses extends Controller {
                                 display: -webkit-box;
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
+                                min-height: 50px;
                                 ">' . $crs->title . '</h3>
                                 <div class="instructor">
                                   <img src="'. URLROOT . '/images/instructor/' . $crs->profile .'" alt="instructor img">
                                   <span class="instructor-name">'. $crs->fname .'</span>
                                 </div>
                                 <div class="rating">
-                                  <span class="average-rating">(4.5)</span>
+                                  <span class="average-rating">('. number_format($crs->rating, 1) .')</span>
                                   <span class="average-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
+                                    '.
+                                        $stars
+                                    .'
                                   </span>
-                                  <span class="reviews">(230)</span>
+                                  <span class="reviews">('. $crs->count_rating .')</span>
                                 </div>
                                 <div class="price">'. $isPaied .'</div>
                               </div>
@@ -138,14 +156,32 @@ class Courses extends Controller {
             $vid_count = $this->cmodel->vidTotal($crsID);
             $crs_count = $this->cmodel->crsTotal($course->userID);
             $firstVid = $this->cmodel->showlastVid($crsID);
-            
+            $allFeedBacks = $this->cmodel->show_feedbacks($crsID);
+            $review_count = $this->cmodel->reviewTotal($crsID);
+            $avg = $this->cmodel->AVG($crsID);
+            $instructorJob = $this->cmodel->instructorJob($course->instructor_ID);
+            $counter = 5;
+            $list = [];
+
+            while($counter > 0){
+               $list[] = $stu_feedback = $this->cmodel->stu_feedback($crsID, $counter);
+               $counter--;
+            }
+
             $data = [
                     'course' => $course,
                     'videos' => '',
                     'count' => $stdTotal,
                     'vid_count' => $vid_count,
                     'crs_count' => $crs_count,
-                    'allClips' => $allClips
+                    'allClips' => $allClips,
+                    'isRated' => $this->cmodel->find_feedback($crsID),
+                    'allFeedbacks' => $allFeedBacks,
+                    'review_count' => $review_count,
+                    'avg' => $avg,
+                    'stu_feedback' => $list,
+                    'instructorJob' => $instructorJob
+
                 ];
             if (empty($vidID) && empty($vid_Slug)) {
                 $data['videos'] = $firstVid;
@@ -160,6 +196,79 @@ class Courses extends Controller {
 
     }
 
+    public function send_feedback($crsID, $crs_slug, $vidID, $vid_Slug)
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $date = date_create();
+            $data = [
+                'rating' => !empty($_POST['rating'])? (float)trim($_POST['rating']) : '',
+                'content' => trim($_POST['content']),
+                'crsID' => $crsID,
+                'dtime' => date_format($date, 'Y-m-d g:i:s A')
+            ];
+            
+            if(empty($data['rating'])){
+                if ($this->cmodel->send_comment($data)) {
+                    echo 'yes';
+                    $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
+                } else {
+                    echo 'no';
+                    $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
+                }
+            } else{
+                if ($this->cmodel->send_feedback($data)) {
+                    echo 'yes';
+                    $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
+                } else {
+                    echo 'no';
+                    $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
+                }
+            }
+        } else{
+
+            $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
+        }
+    }
+
+    public function search()
+    {
+        $courseIDs = [];
+        $crsIDs = $this->cmodel->allCourses();
+        foreach ($crsIDs as $crs) {
+            if ($this->traineeModel->find_order($crs->crs_ID)) {
+                $courseIDs[] = $crs->crs_ID;
+            }
+        }
+        if(isset($_POST['text'])){
+            $inputText = $_POST['text'];
+            if($data = $this->cmodel->search($inputText)){
+                foreach($data as $row){
+                    $url = in_array($row->crs_ID, $courseIDs) ? URLROOT . '/courses/learn/' . $row->crs_ID . '/' . $row->slug : URLROOT . '/courses/details/' . $row->crs_ID . '/' . $row->slug;
+                    echo '<a href="' . $url .'" 
+                    class="list-group-item  d-flex justify-content-between border-1 box" style="padding: 0.5rem 1rem; margin-bottom: 0px;">
+                    <div class="d-flex align-items-center">
+                    <img width="15%" src="'. URLROOT . '/images/courses/' . $row->image . '" alt="course img">
+                    <div class="d-flex flex-column courses-item" style="margin: 0">
+                      <h6 style="
+                                overflow: hidden;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 1;
+                                -webkit-box-orient: vertical;
+                                " class="mb-1 title mx-3 w-75">'. $row->title . '</h6>
+                      <h6 class="mx-3">'. $row->fname .'</h6>
+                    </div>
+                  </div>
+                </a>';
+                }
+            } else{
+                echo '<a class="list-group-item list-group-item-action border-1 box title" style="padding: 0.5rem 1rem;">
+                no data
+                </a>';
+            }
+        } else{
+            redirect('Courses');
+        }
+    }
 
 }
 

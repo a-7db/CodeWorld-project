@@ -27,7 +27,13 @@ require APPROOT . '/views/Parts/header.php';
                                             <div class="img-box">
                                                 <img src="<?php echo URLROOT . '/images/courses/' . $crs->image ?>" alt="course img">
                                             </div>
-                                            <h6 class="title"><?php echo $crs->title ?></h6>
+                                            <h6 class="title" style="
+                                overflow: hidden;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                min-height: 40px;
+                                "><?php echo $crs->title ?></h6>
                                             <p><?php echo $crs->name ?></p>
                                             <div class="instructor">
                                                 <img src="<?php echo URLROOT . '/images/instructor/' . $crs->profile ?>" alt="instructor img">

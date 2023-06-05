@@ -76,7 +76,7 @@ class Trainee extends User{
     public function find_order($Course_ID){
         $this->db->query('SELECT * FROM orders WHERE course_ID = :crsID AND user_ID = :userID');
 
-        $this->db->bind(':userID',  $_SESSION['user_id']);
+        $this->db->bind(':userID', isLoggedIn()? $_SESSION['user_id']: 0);
         $this->db->bind(':crsID',  $Course_ID);
 
         $this->db->execute();

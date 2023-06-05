@@ -46,6 +46,8 @@
 }
 
 
+
+
 /* ------------------------
  01. =google fonts 
  -------------------------*/
@@ -131,6 +133,11 @@ h3{
     border-radius: 5px;
     box-shadow: var(--shadow);
     padding: 30px;
+}
+
+.myActive {
+    background-color: var(--main-color) !important;
+    color: var(--WHITE) !important;
 }
 
 /* ------------------------------------ 
