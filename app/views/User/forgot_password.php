@@ -26,7 +26,7 @@ require APPROOT . '/views/Parts/header.php';
                             case 'enter_code':
                     ?>
                                 <h2 class="form-title fs-6 text-center">We've send you a 4 digit code. Please check <span class="title fs-6 "> <?php echo $data['email'] ?></span> and enter the code here.</h2>
-                                <p class="text-center">expires at 60s. <span style="margin-right: 15px;"></span> <a href="<?php echo URLROOT ?>/Users/resend">Resend</a></p>
+                                <p class="text-center">expires in <span id="CountDown"></span> <span style="margin-right: 15px;"></span> <a href="<?php echo URLROOT ?>/Users/resend">Resend</a></p>
                                 <form action="<?php echo URLROOT ?>/Users/forgot_password" method="POST">
                                     <div class="form-group">
                                         <input type="text" name="enter_code" style="text-align: center;" class="w-50 mx-auto form-control <?php echo (empty($data['code_err']) ? '' : 'is-invalid') ?>" placeholder="1234">

@@ -26,7 +26,9 @@ require APPROOT . '/views/Parts/header.php';
                     <h2 class="mb-3">Learn without limits</h2>
                     <h1 class="mb-3 text-capitalize">Start solving the world's problem</h1>
                     <p class="mb-4">Take the next step toward your personal and professional goals with Code World</p>
+                    <?php if(!isLoggedIn()) : ?>
                     <a href="<?php echo URLROOT ?>/Users/register" class="btn btn-theme">join free</a>
+                    <?php endif ?>
 
                 </div>
             </div>
