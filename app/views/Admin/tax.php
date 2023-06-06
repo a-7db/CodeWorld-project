@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/Admin/dashboard.php' ?>
 
-<style>
+<style> 
     <?php if (!empty($data['tax_err'])) : ?>.cateInput::-webkit-input-placeholder {
         color: #f00;
     }
