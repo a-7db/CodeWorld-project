@@ -265,7 +265,7 @@ class Admin extends User{
 
         $this->db->query('UPDATE taxes SET Tax = :newTax');
 
-        $this->db->bind(':newTax', $newTax);
+        $this->db->bind(':newTax', $newTax / 100);
         
 
         if($this->db->execute()){
