@@ -30,6 +30,8 @@ class Trainee extends User{
        on crs.crs_ID = course_ID 
        inner join users usr
        on usr.user_ID = crs.instructor_ID
+       inner join taxes txes
+       on crs.crs_ID = txes.tax_ID
 
        where crt.user_ID = :userID
        order by cart_ID desc
