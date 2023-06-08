@@ -117,7 +117,7 @@ require APPROOT . '/views/Parts/header.php';
                                                         $subtotal = $subtotal + $pro; ?>
 
                                                     <?php endforeach; ?>
-
+                                                                                                                                                                                                                                                                   
                                                     <!-- foreach end -->
                                                     <?php $total = $subtotal * 0.15; ?>
                                                     <?php $total2 = $total + $subtotal; ?>

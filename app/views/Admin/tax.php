@@ -29,17 +29,20 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center text-secondary text-lg font-weight-bold">
-                            15%
+                        
+                        <?php echo $data['tax']?>
+                        
                         </div>
                     </li>
                 </div>
 
                 <div class="mx-5 mt-5">
-                    <form action="<?php echo URLROOT ?>/Admins/edit_tax" method="POST" class="row g-3">
+                    <form action="<?php echo URLROOT ?>/Admins/Tax" method="POST" class="row g-3">
                         <div class="col-5">
-                            <input type="text" maxlength="3" onkeypress="return onlyNum(event)" class="form-control cateInput" name="cate" placeholder="<?php echo empty($data['tax_err']) ? 'New Tax' : $data['tax_err'] ?>">
+                            <input type="float" maxlength="3" onkeypress="return onlyNum(event)" class="form-control cateInput" id="Tax" name="Tax" placeholder="<?php echo empty($data['tax_err']) ? 'New Tax' : $data['tax_err'] ?>">
                         </div>
                         <div class="col-auto">
+                           
                             <button type="submit" class="btn btn-secondary mb-3 addcate">Update</button>
                         </div>
                     </form>

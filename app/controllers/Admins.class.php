@@ -181,5 +181,29 @@ class Admins extends Users {
         $this->view('Admin/tax');
     }
 
+    public function Tax1()
+    {
+       
+        
+        $row=$this->adminModel->getTax();
+        $data =[
+            'tax' =>$row->Tax,
+           
+        ];
+
+        $this->view('Admin/tax',$data);
+       
+       
+      
+    }
+
+    public function Tax()
+    {
+
+        $this->adminModel->update_Tax($_POST['Tax']);
+
+         redirect('Admin/Tax');
+    }
+
 }
 ?>

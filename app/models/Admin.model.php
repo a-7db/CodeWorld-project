@@ -244,4 +244,34 @@ class Admin extends User{
         }
 
     }
+
+    public function getTax(){
+
+        $this->db->query('SELECT * FROM taxes  ');
+        
+        $row=$this->db->fetchone();
+        if($this->db->count()> 0){
+            return $row;
+
+        }
+        else{
+           return false;
+        }
+
+    }
+
+    public function update_Tax($newTax)
+    {
+
+        $this->db->query('UPDATE taxes SET Tax = :newTax');
+
+        $this->db->bind(':newTax', $newTax);
+        
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
