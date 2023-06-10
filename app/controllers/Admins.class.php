@@ -21,7 +21,7 @@ class Admins extends Users {
         $paidUsers = $this->adminModel->getPaidUsers();
         $topCourses = $this->adminModel->top_courses();
         $topTrainees = $this->adminModel->top_trainees();
-        
+        $row=$this->adminModel->getTax();
         $data = [ 
 
             'money' => $money,
@@ -30,10 +30,11 @@ class Admins extends Users {
             'paid_users' => $paidUsers,
             'top_courses' => $topCourses,
             'top_trainees' => $topTrainees,
+            'Tax' => $row->Tax,
             ];
 
-          //  $this->view('Instructor/instructorHome', $data);
-        $this->view('Admin/adminHome' ,$data);
+
+            $this->view('Admin/adminHome' ,$data);
     }
 
     public function users()
@@ -178,31 +179,35 @@ class Admins extends Users {
 
     public function taxes()
     {
-        $this->view('Admin/tax');
-    }
-
-    public function Tax1()
-    {
-       
-        
         $row=$this->adminModel->getTax();
         $data =[
-            'tax' =>$row->Tax,
+            'Show_Tax' =>$row->Tax,
+            'Update_Tax' =>'',
+            'tax_err' =>'',
            
         ];
+        if (isset($_POST['Tax'])) {
 
-        $this->view('Admin/tax',$data);
-       
-       
-      
-    }
+            $data['Update_Tax']=$_POST['Tax'];
+            redirect('Admins/taxes');
+        
+            if (empty($data['Update_Tax'])) {
+                $data['tax_err'] = 'No data to add!';
+                $this->view('Admin/tax',$data);
+            } 
+            else{
+                $this->view('Admin/tax');
+                echo'hehehehe'; 
+            }
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    public function Tax()
-    {
+                $this->adminModel->update_Tax($data['Update_Tax']);     
+            }
+           
+        }
 
-        $this->adminModel->update_Tax($_POST['Tax']);
-
-         redirect('Admin/Tax');
+        $this->view('Admin/tax' , $data);
+        
     }
 
 }
