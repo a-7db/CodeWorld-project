@@ -34,7 +34,7 @@ class Course{
                             ON crs.crs_ID = rat.crs_ID
                             WHERE crs.public = :isPublic
                             GROUP BY crs.crs_ID
-                            ORDER BY rat.rating DESC
+                            ORDER BY rating DESC
                             LIMIT :limli;
         ');
         $this->db->bind(':isPublic', 1);

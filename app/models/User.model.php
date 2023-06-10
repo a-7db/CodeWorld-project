@@ -2,7 +2,7 @@
 class User {
     protected $db;
     protected $userRole = 3;
-    protected $status = true;
+    protected $status = false;
 
     public function __construct()
     {
@@ -105,6 +105,19 @@ class User {
            return false;
         }
 
+    }
+
+    public function udpdate_status($id)
+    {
+        $this->db->query('UPDATE users SET statu = :statu WHERE user_ID = :id');
+        $this->db->bind(':statu', true);
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

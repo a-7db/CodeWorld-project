@@ -15,7 +15,7 @@
 
 
             <!-- Here The Form -->
-            <form action="#" method="POST" enctype="multipart/form-data" id="insertData">
+            <form onsubmit="ll()" action="#" method="POST" enctype="multipart/form-data" id="insertData">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="col-form-label">Course Title:</label>

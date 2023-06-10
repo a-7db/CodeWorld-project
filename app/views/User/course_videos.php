@@ -235,7 +235,6 @@ require APPROOT . '/views/Parts/header.php';
                                     width: 0;
                                 }
                             </style>
-                            <?php print_r($data['stu_feedback']) ?>
                             <!-- reviews list start -->
                             <div class="reviews-list scrol" style="max-height: 200px; overflow-y: scroll;">
                                 <?php

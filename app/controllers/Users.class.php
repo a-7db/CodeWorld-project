@@ -11,6 +11,9 @@
 
     public function login()
     {
+        if(isLoggedIn()){
+            redirect();
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $data = [
@@ -49,7 +52,7 @@
                 $loggedInUser = $this->userModel->login($data['email'], $data['pass']);
 
                 if($loggedInUser){
-                    if($loggedInUser->statu == true){
+                    if($loggedInUser->statu == true & $loggedInUser->Role_ID != 4){
                         $this->createUserSession($loggedInUser);
                     } else{
                         flash('watit_acception', 'Wait Email', 'Please wait for our acceptance and then you can log in');
@@ -77,6 +80,9 @@
 
     public function register()
     {
+        if (isLoggedIn()) {
+            redirect();
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $data = [
@@ -129,12 +135,8 @@
                 
                 if ($this->userModel->register($data)) {
                     $this->send_email($data['email']);
-
-                    // flash('rege_success', 'Well done', 'You are registered and can log in.');
-                    // redirect('Users/login');
-
-                    // $_SESSION['emailverify'] = $data['email'];
-                    $this->view('User/Verify', $data['email']);
+                    $_SESSION['data'] = $data['email'];
+                    redirect('Users/verifyEmail');
                 } else{
                     flash('rege_success', 'Erorr', 'Something went wrong!.');
                     redirect('Users/login');
@@ -160,44 +162,51 @@
             $this->view('User/registeration', $data);
         }
     }
-
+    
     public function verifyEmail()
     {
-        if(isset($_POST['enter_code'])){
-            $data = [
-             'code' => '',
-             'code_err' => '',
-             'email' => $_SESSION['emailverify']
-              ];
-            $data['code'] = trim($_POST['enter_code']);
-            
-            if(empty($data['code'])){
-                $data['code_err'] = 'Please Enter The Code';
-                $this->view('User/verify', $data);
-            } else{
-                $currentExpire = time();
-                if ($row = $this->userModel->getCodeFromUser($data['email'], $data['code'])) {
-                    if ($row->expire > $currentExpire) {
-                        flash('rege_success', 'Well done', 'You are registered and can log in.');
-                        redirect('Users/login');
+        if (isLoggedIn()) {
+            redirect();
+        }
+        $data = [
+            'email' => $_SESSION['data'],
+            'code' => '',
+            'code_err' =>'',
+            'type' => 0
+        ];
+        
+        if(!empty($data['email']))
+        {
+            if(isset($_POST['code'])){
+                $data['code'] = trim($_POST['code']);
+
+                if (empty($data['code'])) {
+                    $data['code_err'] = 'Please Enter The Code';
+                    $this->view('User/verify', $data);
+                } else {
+                    if ($row = $this->userModel->getCodeFromUser($data['email'], $data['code'])) {
+                        unset($_SESSION['data']);
+                        
+                        if($this->userModel->udpdate_status($row->user_ID)){
+                            flash('rege_success', 'Well done', 'You are registered and can log in.');
+                            redirect('Users/login');
+                        } else{
+                            flash('rege_success', 'Error', 'Something went wrong.');
+                            redirect('Users/login');
+                        }
                     } else {
-                        $data['code_err'] = 'The Code Is Expired';
+                        $data['code_err'] = 'The Code Is Incorrect';
                         $this->view('User/verify', $data);
                     }
-                } else {
-                    $data['code_err'] = 'The Code Is Incorrect';
-                    $this->view('User/verify', $data);
                 }
+            }else{
+                $this->view('User/verify', $data);
             }
         } else{
-            $data = [
-                'code' => '',
-                'code_err' => '',
-                'email' => $_SESSION['emailverify']
-            ];
-            $this->view('User/verify', $data);
+            redirect();
         }
     }
+    
 
     public function createUserSession($user){
         $_SESSION['user_id'] = $user->user_ID;

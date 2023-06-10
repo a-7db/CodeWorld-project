@@ -14,9 +14,9 @@ require APPROOT . '/views/Parts/header.php';
 </div>
 <!-- breadcrumb end -->
 <?php
-  flash('watit_acception'); 
-  flash('rege_success'); 
-  flash('updatePassword');
+flash('watit_acception');
+flash('rege_success');
+flash('updatePassword');
 ?>
 <!-- login section start -->
 <section class="login-section section-padding">
@@ -25,7 +25,7 @@ require APPROOT . '/views/Parts/header.php';
       <div class="col-md-7 col-lg-6 col-xl-5">
         <div class="login-form box">
           <h2 class="form-title text-center">Log In to Your Account</h2>
-          <form action="<?php echo URLROOT ?>/Users/login" method="POST">
+          <form onsubmit="onloading()" action="<?php echo URLROOT ?>/Users/login" method="POST">
             <div class="form-group">
               <input type="text" name="email" class="form-control <?php echo (empty($data['email_err']) ? '' : 'is-invalid') ?>" placeholder="Email">
               <p class="title invalid-feedback"><?php echo $data['email_err'] ?></p>

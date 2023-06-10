@@ -37,7 +37,7 @@
                 <div class="mx-5 mt-5">
                     <form action="<?php echo URLROOT ?>/Admins/edit_tax" method="POST" class="row g-3">
                         <div class="col-5">
-                            <input type="text" maxlength="3" onkeypress="return onlyNum(event)" class="form-control cateInput" name="cate" placeholder="<?php echo empty($data['tax_err']) ? 'New Tax' : $data['tax_err'] ?>">
+                            <input type="text" maxlength="3" onkeypress="return onlyNum(event)" class="form-control cateInput" name="tax" placeholder="<?php echo empty($data['tax_err']) ? 'New Tax' : $data['tax_err'] ?>">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-secondary mb-3 addcate">Update</button>

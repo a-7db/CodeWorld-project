@@ -16,14 +16,15 @@ class Admin extends User{
 
     
     public function showInstructors(){
-        $this->db->query('SELECT * FROM users WHERE Role_ID = :roleid ORDER BY user_ID DESC');
+        $this->db->query('SELECT * FROM users WHERE Role_ID = :roleid OR Role_ID = :roleid4 ORDER BY user_ID DESC');
         $this->db->bind(':roleid', 2);
+        $this->db->bind(':roleid4', 4);
         return $this->db->fetchAll();
     }
 
     public function activeUser($userID){
-        $this->db->query('UPDATE users SET statu = :user_status WHERE user_ID = :userID');
-        $this->db->bind(':user_status', true);
+        $this->db->query('UPDATE users SET Role_ID = :Role_ID WHERE user_ID = :userID');
+        $this->db->bind(':Role_ID', 2);
         $this->db->bind(':userID', $userID);
 
         if($this->db->execute()){

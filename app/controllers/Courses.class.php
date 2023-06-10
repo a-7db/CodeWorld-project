@@ -136,13 +136,31 @@ class Courses extends Controller {
         $videos = $this->cmodel->getVideos($course->crs_ID);
         $count = $this->cmodel->stdTotal($course->crs_ID);
         $vid_count = $this->cmodel->vidTotal($course->crs_ID);
-        $crs_count = $this->cmodel->crsTotal($course->userID);
+        $crs_count = $this->cmodel->crsTotal($course->instructor_ID);
+        $review_count = $this->cmodel->reviewTotal($course->crs_ID);
+        $allFeedBacks = $this->cmodel->show_feedbacks($course->crs_ID);
+        $avg = $this->cmodel->AVG($course->crs_ID);
+        $instructorJob = $this->cmodel->instructorJob($course->instructor_ID);
+        $counter = 5;
+        $list = [];
+
+        while ($counter > 0) {
+            $list[] = $this->cmodel->stu_feedback($course->crs_ID, $counter);
+            $counter--;
+        }
         $data = [
             'course' => $course,
             'videos' => $videos,
             'count' => $count,
             'vid_count' => $vid_count,
             'crs_count' => $crs_count,
+            'review_count' => $review_count,
+            'crs_count' => $crs_count,
+            'isRated' => $this->cmodel->find_feedback($course->crs_ID),
+            'allFeedbacks' => $allFeedBacks,
+            'avg' => $avg,
+            'stu_feedback' => $list,
+            'instructorJob' => $instructorJob
         ];
         $this->view('User/course_details', $data);
 
@@ -164,7 +182,7 @@ class Courses extends Controller {
             $list = [];
 
             while($counter > 0){
-               $list[] = $stu_feedback = $this->cmodel->stu_feedback($crsID, $counter);
+               $list[] = $this->cmodel->stu_feedback($crsID, $counter);
                $counter--;
             }
 

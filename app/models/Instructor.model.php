@@ -2,7 +2,7 @@
 
 class Instructor extends User{
 
-    protected $userRole = 2;
+    protected $userRole = 4;
     protected $status = false;
 
     public function __construct()

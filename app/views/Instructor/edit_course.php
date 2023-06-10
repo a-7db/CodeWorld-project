@@ -6,7 +6,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <form action="<?php echo URLROOT . '/Instructors/edit/' . $data['course']->crs_ID . '/' . $data['course']->slug ?>" class="row g-3" id="editing" method="POST" enctype="multipart/form-data">
+                <form onsubmit="ll()" action="<?php echo URLROOT . '/Instructors/edit/' . $data['course']->crs_ID . '/' . $data['course']->slug ?>" class="row g-3" id="editing" method="POST" enctype="multipart/form-data">
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Title</label>
                         <input type="text" value="<?php echo $data['course']->title ?>" name="title" class="form-control">
@@ -104,7 +104,7 @@
 
 
             <!-- Here The Form -->
-            <form action="#" method="POST" enctype="multipart/form-data" id="add_video">
+            <form onsubmit="ll()" action="#" method="POST" enctype="multipart/form-data" id="add_video">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="col-form-label">Video Name:</label>
@@ -130,7 +130,7 @@
 <!-- Edit Modal -->
 <div class="modal fade" id="editVidModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form id="update">
+        <form onsubmit="ll()" id="update">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Video Name</h1>
@@ -154,7 +154,7 @@
 <!-- Delete Modal -->
 <div class="modal fade" id="reomveVidModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form id="delete">
+        <form onsubmit="ll()" id="delete">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h1>

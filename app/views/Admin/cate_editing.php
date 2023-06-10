@@ -12,7 +12,7 @@
     <?php endif; ?>
 </style>
 
-<form action="<?php echo URLROOT ?>/Admins/edit_categories" method="POST" class="row g-3">
+<form onsubmit="ll()" action="<?php echo URLROOT ?>/Admins/edit_categories" method="POST" class="row g-3">
     <div class="col-3">
         <input type="text" class="form-control cateInput" name="cate" placeholder="<?php echo empty($data['cate_err']) ? 'Category name' : $data['cate_err'] ?>">
     </div>
@@ -75,7 +75,7 @@
     <!-- Edit Modal -->
     <div class="modal fade" id="editCateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="update">
+            <form onsubmit="ll()" id="update">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category Name</h1>
@@ -101,7 +101,7 @@
     <!-- Delete Modal -->
     <div class="modal fade" id="reomveCateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="delete">
+            <form onsubmit="ll()" id="delete">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure?</h1>

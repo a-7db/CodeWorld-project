@@ -19,11 +19,58 @@
 	<link href="<?php echo URLROOT ?> ./dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
 	<!-- CSS Files -->
 	<link id="pagestyle" href="<?php echo URLROOT ?> ./dashboard/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+	<style>
+		.loader {
+			background: white;
+			/* opacity: 0.3; */
+			height: 100vh;
+			width: 100%;
+			position: fixed;
+			z-index: 100;
+			display: none;
+		}
+
+		.log {
+			background: url('<?php echo URLROOT ?>/images/loader.gif') no-repeat center center;
+			background-size: 25%;
+			position: fixed;
+			z-index: 110;
+			display: block;
+			height: 100vh;
+			width: 100%;
+			display: none;
+		}
+	</style>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
+	<div class="loader"></div>
+	<div class="log"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>
+		function ll() {
+			document.addEventListener('DOMContentLoaded', function() {
+				document.querySelector(".lift").style.display = "block";
+				document.querySelector(".loader").style.display = "none";
+				document.querySelector(".log").style.display = "none";
+			}, false);
+			$('#createCourse').modal('hide');
+			$('#editmodel').modal('hide');
+			$('#video-modal').modal('hide');
+			$('#reomveVidModal').modal('hide');
+			$('#editVidModal').modal('hide');
+			$('#addVideo').modal('hide');
+			$('#reomveCateModal').modal('hide');
+			$('#editCateModal').modal('hide');
+
+			document.querySelector(".loader").style.display = "block";
+			document.querySelector(".log").style.display = "block";
+			document.querySelector(".lift").style.display = "none";
+		}
+		ll();
+	</script>
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
-	<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+	<aside class="lift sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
 		<div class="sidenav-header">
 			<i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 			<a class="navbar-brand m-0">
@@ -67,7 +114,7 @@
 					<h6 class="font-weight-bolder text-white mb-0">Instructor Dashboard</h6>
 					<span class="breadcrumb-item text-sm opacity-5 text-white"><?php echo $_SESSION['user_name'] ?></span>
 				</nav>
-				
+
 			</div>
 		</nav>
 		<!-- End Navbar -->

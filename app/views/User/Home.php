@@ -218,6 +218,7 @@ require APPROOT . '/views/Parts/header.php';
 </section>
 <!-- testimonials section end -->
 
+<?php if(!isLoggedIn()):?>
 <!-- become a instructor section start -->
 <section class="bai-section section-padding">
     <div class="container">
@@ -248,7 +249,7 @@ require APPROOT . '/views/Parts/header.php';
     </div>
 </section>
 <!-- become a instructor section end -->
-
+<?php endif; ?>
 
 
 <?php

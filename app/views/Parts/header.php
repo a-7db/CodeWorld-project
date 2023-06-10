@@ -21,9 +21,21 @@
 
     <!-- page loader start -->
     <div class="page-loader js-page-loader">
-        <div></div>
+        <div id="anim"></div>
     </div>
     <!-- page loader end -->
+    <script>
+        function onloading() {
+            var animation = document.getElementById('anim');
+            animation.style.marginTop = window.innerHeight / 2 - animation.clientHeight / 2 + 'px';
+            document.querySelector(".js-page-loader").classList.remove("fade-out");
+            document.querySelector(".js-page-loader").style.display = "block";
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector(".js-page-loader").classList.add("fade-out");
+                document.querySelector(".js-page-loader").style.display = "none";
+            }, false);
+        }
+    </script>
 
     <!-- main wrapper start -->
     <div class="main-wrapper">
@@ -51,7 +63,7 @@
                                     <?php if (isLoggedIn() && isTrainee()) : ?>
                                         <li class="sub-menu-item "><a href="<?php echo URLROOT . '/Trainees/myLearning' ?>">My Learning</a></li>
                                     <?php endif; ?>
-                                        <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses' ?>">categories</a></li>
+                                    <li class="sub-menu-item"><a href="<?php echo URLROOT . '/' . 'Courses' ?>">categories</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item"><a href="<?php echo URLROOT ?>/Pages/contact">contact</a></li>

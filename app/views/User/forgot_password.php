@@ -86,6 +86,8 @@ require APPROOT . '/views/Parts/header.php';
     </div>
 </section>
 
+<script src=" <?php echo URLROOT ?> ./js/seconds.js"></script>
+
 <?php
 require APPROOT . '/views/Parts/footer.php';
 ?>

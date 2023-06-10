@@ -316,26 +316,10 @@ class Instructors extends Users {
         }
     }
 
-    // public function edit_public($id, $slug){
-    //     if (!isInstructor()) {
-    //         redirect();
-    //     }
-    //     // $val = $_POST['value'];
-    //     if($row = $this->InsturctorModel->update_course_status($id)){
-    //         if($row->public == 1){
-    //             admin_flash('update_course', 'Updated', 'Your course is available now');
-    //             redirect('instructors/edit/' . $id . '/' . $slug);
-    //         } else{
-    //             admin_flash('update_course', 'Updated', 'Your course is private now');
-    //             redirect('instructors/edit/' . $id . '/' . $slug);
-    //         }
-    //     } else{
-    //         admin_flash('update_course', 'Error!', 'Your course is not updated, something went wrong');
-    //         redirect('instructors/edit/' . $id . '/' . $slug);
-    //     }
-    // }
-
     public function update_vid_name($vid_ID){
+        if (!isInstructor()) {
+            redirect();
+        }
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $data = [
                 'vidID' => $vid_ID,
@@ -347,10 +331,26 @@ class Instructors extends Users {
     }
 
     public function remove_vid($vidID){
+        if (!isInstructor()) {
+            redirect();
+        }
         $this->InsturctorModel->remove_video($vidID);
     }
 
+    public function show_my_trainees($crsID, $slug)
+    {
+        if (!isInstructor()) {
+            redirect();
+        }
+        $data = $this->InsturctorModel->getTrainees($crsID);
+
+        $this->view('Instructor/myTrainees', $data);
+    }
+
     public function register(){
+        if (isLoggedIn()) {
+            redirect();
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $data = [
@@ -403,8 +403,9 @@ class Instructors extends Users {
                 $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
 
                 if ($this->InsturctorModel->register($data)) {
-                    flash('watit_acception', 'Wait Email', 'Please wait for our acceptance and then you can log in');
-                    redirect();
+                    $this->send_email($data['email']);
+                    $_SESSION['data'] = $data['email'];
+                    redirect('Instructors/verifyEmail');
                 } else {
                     die('Something went wrong');
                 }
@@ -428,9 +429,59 @@ class Instructors extends Users {
         }
     }
 
-    public function show_my_trainees($crsID, $slug){
-        $data = $this->InsturctorModel->getTrainees($crsID);
-        
-        $this->view('Instructor/myTrainees', $data);
+    public function verifyEmail()
+    {
+        if (isLoggedIn()) {
+            redirect();
+        }
+        $data = [
+            'email' => $_SESSION['data'],
+            'code' => '',
+            'code_err' => '',
+            'type' => 1
+        ];
+
+        if (!empty($data['email'])) {
+            if (isset($_POST['code'])) {
+                $data['code'] = trim($_POST['code']);
+
+                if (empty($data['code'])) {
+                    $data['code_err'] = 'Please Enter The Code';
+                    $this->view('User/verify', $data);
+                } else {
+                    if ($row = $this->userModel->getCodeFromUser($data['email'], $data['code'])) {
+                        unset($_SESSION['data']);
+                        flash('watit_acception', 'Wait Email', 'Please wait for our acceptance and then you can log in');
+                        redirect();
+                        if ($this->userModel->udpdate_status($row->user_ID)) {
+                            flash('watit_acception', 'Wait Email', 'Please wait for our acceptance and then you can log in');
+                            redirect();
+                        } else {
+                            flash('rege_success', 'Error', 'Something went wrong.');
+                            redirect();
+                        }
+                    } else {
+                        $data['code_err'] = 'The Code Is Incorrect';
+                        $this->view('User/verify', $data);
+                    }
+                }
+            } else {
+                $this->view('User/verify', $data);
+            }
+        } else {
+            redirect();
+        }
     }
+
+    private function send_email($email)
+    {
+        $expire = time() + (60 * 1);
+        $code = rand(1000, 9999);
+
+        $this->userModel->forgotpass($email, $code, $expire);
+
+        $message = '<p>Your code is <b style="font-size: 25px;">' . $code . '<b/><p/>';
+        send_mail($email, 'Password Reset', $message);
+    }
+    
 }

@@ -21,13 +21,13 @@ require APPROOT . '/views/Parts/header.php'
     <div class="row justify-content-center">
       <div class="col-md-7 col-lg-6 col-xl-5">
         <div class="signup-form box">
-          <div >
+          <div>
             <lottie-player class="lottie-size" src="<?php echo URLROOT ?>/lottiefiles/teaching.json" background="transparent" speed="1" loop autoplay></lottie-player>
           </div>
 
           <h2 class="form-title text-center">Join as instructor</h2>
 
-          <form action="<?php echo URLROOT ?>/Instructors/register" method="POST">
+          <form onsubmit="onloading()" action="<?php echo URLROOT ?>/Instructors/register" method="POST">
             <div class="form-group">
               <input type="text" class="form-control <?php echo (empty($data['fname_err']) ? '' : 'is-invalid') ?>" placeholder="First Name" name="Fname" value="<?php echo $data['fname'] ?>">
               <p class="title invalid-feedback">dd</p>

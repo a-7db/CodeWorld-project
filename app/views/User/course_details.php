@@ -20,7 +20,7 @@ require APPROOT . '/views/Parts/header.php';
               <i class="fas fa-star"></i>
               <i class="fas fa-star-half-alt"></i>
             </span>
-            <span class="reviews">(230 Reviews)</span>
+            <span class="reviews">(<?php echo $data['review_count']->count ?> Reviews)</span>
           </div>
           <ul>
             <li>enrolled students - <span><?php echo $data['count']->total ?></span></li>
@@ -106,7 +106,7 @@ require APPROOT . '/views/Parts/header.php';
                     <ul>
                       <li><i class="fas fa-star"></i> 4.5 Rating</li>
                       <li><i class="fas fa-play-circle"></i> <?php echo $data['crs_count']->crs_count ?> Courses</li>
-                      <li><i class="fas fa-certificate"></i> 3000 Reviews</li>
+                      <li><i class="fas fa-certificate"></i> <?php echo $data['review_count']->count ?> Reviews</li>
                     </ul>
                   </div>
                 </div>
@@ -117,23 +117,35 @@ require APPROOT . '/views/Parts/header.php';
           <!-- course instructor end -->
 
           <!-- course reviews start -->
-          <div class="tab-pane fade " id="course-reviews" role="tabpanel" aria-labelledby="course-reviews-tab">
+          <div class="tab-pane fade" id="course-reviews" role="tabpanel" aria-labelledby="course-reviews-tab">
             <div class="course-reviews box">
               <!-- rating summary start -->
               <div class="rating-summary">
                 <h3 class="mb-4 text-capitalize">students feedback</h3>
+
                 <div class="row">
                   <div class="col-md-4 d-flex align-items-center justify-content-center text-center">
                     <div class="rating-box">
-                      <div class="average-rating">4.5</div>
+                      <div class="average-rating"><?php echo number_format($data['avg']->avg, 1) ?></div>
                       <div class="average-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                        <?php
+                        if (!empty($data['avg']->avg)) {
+                          $rating = explode('.', $data['avg']->avg);
+                          $count = empty($rating[1]) ? 0 : 1;
+                          $empty = 5 - ($rating[0] + $count);
+                          while ($rating[0] > 0) {
+                            echo '<i style="margin-right: 3px;"  class="fas fa-star"></i>';
+                            $rating[0]--;
+                          }
+                          echo !empty($rating[1]) ? '<i style="margin-right: 3px;"  class="fas fa-star-half-alt"></i>' : '';
+                          while ($empty > 0) {
+                            echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                            $empty--;
+                          }
+                        }
+                        ?>
                       </div>
-                      <div class="reviews">230 Reviews</div>
+                      <div class="reviews"><?php echo $data['review_count']->count ?> Reviews</div>
                     </div>
                   </div>
                   <div class="col-md-8">
@@ -142,45 +154,45 @@ require APPROOT . '/views/Parts/header.php';
                       <div class="rating-bars-item">
                         <div class="star-text">5 Star</div>
                         <div class="progress">
-                          <div class="progress-bar" style="width: 50%;"></div>
+                          <div class="progress-bar" style="width: <?php echo $data['stu_feedback'][0] ?>%;"></div>
                         </div>
-                        <div class="percent">50%</div>
+                        <div class="percent"><?php echo empty($data['stu_feedback'][0]) ? 0 : number_format($data['stu_feedback'][0], 0) ?>%</div>
                       </div>
                       <!-- rating bars item end -->
                       <!-- rating bars item start -->
                       <div class="rating-bars-item">
                         <div class="star-text">4 Star</div>
                         <div class="progress">
-                          <div class="progress-bar" style="width: 30%;"></div>
+                          <div class="progress-bar" style="width: <?php echo $data['stu_feedback'][1] ?>%;"></div>
                         </div>
-                        <div class="percent">30%</div>
+                        <div class="percent"><?php echo empty($data['stu_feedback'][1]) ? 0 : number_format($data['stu_feedback'][1], 0) ?>%</div>
                       </div>
                       <!-- rating bars item end -->
                       <!-- rating bars item start -->
                       <div class="rating-bars-item">
                         <div class="star-text">3 Star</div>
                         <div class="progress">
-                          <div class="progress-bar" style="width: 10%;"></div>
+                          <div class="progress-bar" style="width: <?php echo $data['stu_feedback'][2] ?>%;"></div>
                         </div>
-                        <div class="percent">10%</div>
+                        <div class="percent"><?php echo empty($data['stu_feedback'][2]) ? 0 : number_format($data['stu_feedback'][2], 0) ?>%</div>
                       </div>
                       <!-- rating bars item end -->
                       <!-- rating bars item start -->
                       <div class="rating-bars-item">
                         <div class="star-text">2 Star</div>
                         <div class="progress">
-                          <div class="progress-bar" style="width: 7%;"></div>
+                          <div class="progress-bar" style="width: <?php echo $data['stu_feedback'][3] ?>%;"></div>
                         </div>
-                        <div class="percent">7%</div>
+                        <div class="percent"><?php echo empty($data['stu_feedback'][3]) ? 0 : number_format($data['stu_feedback'][3], 0) ?>%</div>
                       </div>
                       <!-- rating bars item end -->
                       <!-- rating bars item start -->
                       <div class="rating-bars-item">
                         <div class="star-text">1 Star</div>
                         <div class="progress">
-                          <div class="progress-bar" style="width: 3%;"></div>
+                          <div class="progress-bar" style="width: <?php echo $data['stu_feedback'][4] ?>%;"></div>
                         </div>
-                        <div class="percent">3%</div>
+                        <div class="percent"><?php echo empty($data['stu_feedback'][4]) ? 0 : number_format($data['stu_feedback'][4], 0) ?>%</div>
                       </div>
                       <!-- rating bars item end -->
                     </div>
@@ -192,78 +204,52 @@ require APPROOT . '/views/Parts/header.php';
               <!-- reviews filter start -->
               <div class="reviews-filter">
                 <h3 class="mb-4 text-capitalize">reviews</h3>
-                <form action="">
-                  <div class="form-group">
-                    <i class="fas fa-chevron-down select-icon"></i>
-                    <select class="form-control">
-                      <option value="">All Reviews</option>
-                      <option value="1">1 Star</option>
-                      <option value="2">2 Star</option>
-                      <option value="3">3 Star</option>
-                      <option value="4">4 Star</option>
-                      <option value="5">5 Star</option>
-                    </select>
-                  </div>
-                </form>
+
               </div>
               <!-- reviews filter end -->
-
+              <style>
+                .scrol::-webkit-scrollbar {
+                  width: 0;
+                }
+              </style>
               <!-- reviews list start -->
-              <div class="reviews-list">
-                <!-- reviews item start -->
-                <div class="reviews-item">
-                  <div class="img-box">
-                    <img src="img/profile/user.png" alt="review img">
-                  </div>
-                  <h4>john doe</h4>
-                  <div class="stars-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="date">1 week ago</span>
-                  </div>
-                  <p>Great work. I learnt lot of things about javascript in this course.</p>
-                </div>
-                <!-- reviews item end -->
-                <!-- reviews item start -->
-                <div class="reviews-item">
-                  <div class="img-box">
-                    <img src="img/review/1.png" alt="review img">
-                  </div>
-                  <h4>john doe</h4>
-                  <div class="stars-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="date">1 week ago</span>
-                  </div>
-                  <p>Great work. I learnt lot of things about javascript in this course.</p>
-                </div>
-                <!-- reviews item end -->
-                <!-- reviews item start -->
-                <div class="reviews-item">
-                  <div class="img-box">
-                    <img src="img/profile/user.png" alt="review img">
-                  </div>
-                  <h4>john doe</h4>
-                  <div class="stars-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="date">1 week ago</span>
-                  </div>
-                  <p>Great work. I learnt lot of things about javascript in this course.</p>
-                </div>
-                <!-- reviews item end -->
+              <div class="reviews-list scrol" style="max-height: 200px; overflow-y: scroll;">
+                <?php
+                if (!empty($data['allFeedbacks'])) {
+                  foreach ($data['allFeedbacks'] as $comm) : ?>
+                    <!-- reviews item start -->
+                    <div class="reviews-item">
+                      <div class="img-box">
+                        <img src="<?php echo URLROOT . './public/images/profile/' . $comm->profile ?>" alt="review img">
+                      </div>
+                      <h4><?php echo $comm->fname ?></h4>
+                      <div class="stars-rating">
+                        <?php $rating = explode('.', $comm->rating);
+                        $count = empty($rating[1]) ? 0 : 1;
+                        $empty = 5 - ($rating[0] + $count);
+                        while ($rating[0] > 0) {
+                          echo '<i style="margin-right: 3px;"  class="fas fa-star"></i>';
+                          $rating[0]--;
+                        }
+                        echo !empty($rating[1]) ? '<i style="margin-right: 3px;"  class="fas fa-star-half-alt"></i>' : '';
+                        while ($empty > 0) {
+                          echo '<i style="margin-right: 3px;"  class="far fa-star fa-sm"></i>';
+                          $empty--;
+                        }
+                        ?>
+
+                        <span class="col-md-8 date"><?php echo date('Y-m-d', strtotime($comm->dateTime)) ?></span>
+                      </div>
+                      <p><?php echo $comm->content ?></p>
+                    </div>
+                    <!-- reviews item end -->
+                <?php endforeach;
+                }
+                ?>
               </div>
+
               <!-- reviews list end -->
-              <button type="button" class="btn btn-theme">more reviews</button>
+              
             </div>
           </div>
           <!-- course reviews end -->

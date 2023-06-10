@@ -104,9 +104,9 @@
                                             <p class="text-xs font-weight-bold mb-0"><?php echo $inst->email ?></p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm <?php echo $inst->statu == true ? 'bg-gradient-success' : 'bg-gradient-danger' ?>">
+                                            <span class="badge badge-sm <?php echo $inst->Role_ID != 4 ? 'bg-gradient-success' : 'bg-gradient-danger' ?>">
                                                 <?php
-                                                echo $inst->statu == false ? 'Unactive' : 'Active'
+                                                echo $inst->Role_ID == 4 ? 'Unactive' : 'Active'
                                                 ?>
                                         </td>
                                         <td class="align-middle text-center">
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="modal-footer">
 
-                                    <form action="<?php echo URLROOT . '/Admins/deleteUser' ?>" method="GET">
+                                    <form onsubmit="ll()" action="<?php echo URLROOT . '/Admins/deleteUser' ?>" method="GET">
                                         <input type="hidden" name="user_id" id="user_id">
 
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -146,7 +146,7 @@
                                     </form>
 
 
-                                    <form action="<?php echo URLROOT . '/Admins/activeUser' ?>" method="POST">
+                                    <form onsubmit="ll()" action="<?php echo URLROOT . '/Admins/activeUser' ?>" method="POST">
                                         <input type="hidden" name="user_id_active" id="user_id_active">
                                         <input type="hidden" name="email_active" id="email_active">
                                         <button type="submit" class="btn btn-primary">Active</button>

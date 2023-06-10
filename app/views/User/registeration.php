@@ -22,7 +22,7 @@ require APPROOT . '/views/Parts/header.php'
       <div class="col-md-7 col-lg-6 col-xl-5">
         <div class="signup-form box">
           <h2 class="form-title text-center">Create Your Account</h2>
-          <form action="<?php echo URLROOT ?>/Users/register" method="POST">
+          <form onsubmit="onloading()" action="<?php echo URLROOT ?>/Users/register" method="POST">
             <div class="form-group">
               <input type="text" class="form-control <?php echo (empty($data['fname_err']) ? '' : 'is-invalid') ?>" placeholder="First Name" name="Fname" value="<?php echo $data['fname'] ?>">
               <p class="title invalid-feedback"><?php echo $data['fname_err'] ?></p>
