@@ -31,7 +31,6 @@ require APPROOT . '/views/Parts/header.php';
                                                         <img width="333px" hight="333px" src="<?php echo URLROOT . '/images/courses/' . $cart->image ?> " alt="course img">
                                                     </div>
                                                     <div class="ms-3">
-                                                        <h5>Course</h5>
                                                         <p class="small mb-0"><?php echo  $cart->title ?></p>
                                                     </div>
                                                 </div>
@@ -119,7 +118,7 @@ require APPROOT . '/views/Parts/header.php';
                                                     <?php endforeach; ?>
 
                                                     <!-- foreach end -->
-                                                    <?php $total = $subtotal * 0.15; ?>
+                                                    <?php $total = $subtotal * 0.15 ; ?>
                                                     <?php $total2 = $total + $subtotal; ?>
 
                                                     <div class="d-flex justify-content-between">
