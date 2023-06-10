@@ -99,7 +99,8 @@
 												<h5 class="font-weight-bolder">
 
 													<?php $total = $data['money']->price  ?>
-													<?php $tax = $total * 0.15  ?>
+													<?php $Tax_Percentage = $data['Tax']?>
+													<?php $tax = $total * $Tax_Percentage  ?>
 													<?php $total2 = $total + $tax ?>
 													<?php echo $total2  . ' SR' ?>
 												</h5>
@@ -161,7 +162,7 @@
 												</td>
 												<td class="align-middle text-center">
 													<?php $price = $myusers->price * 1;
-													$tax = $price * 0.15;
+													$tax = $price * $Tax_Percentage;
 													$price = $tax - $price;
 													?>
 													<span class="text-danger text-xs font-weight-bold">- SR <?php echo $tax ?></span>
@@ -173,16 +174,7 @@
 												</td> -->
 											</tr>
 										<?php endforeach; ?>
-										<tr>
-											<td>Total</td>
-											<td></td>
-											<td>
-												<h6 class="text-md text-success">SR <?php echo $data['profit_total'] ?></h6>
-											</td>
-											<td>
-												<h6 class="text-md text-danger">SR <?php echo $data['tax'] ?></h6>
-											</td>
-										</tr>
+										
 									</tbody>
 								</table>
 							</div>

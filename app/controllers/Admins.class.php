@@ -21,7 +21,7 @@ class Admins extends Users {
         $paidUsers = $this->adminModel->getPaidUsers();
         $topCourses = $this->adminModel->top_courses();
         $topTrainees = $this->adminModel->top_trainees();
-        
+        $row=$this->adminModel->getTax();
         $data = [ 
 
             'money' => $money,
@@ -30,10 +30,11 @@ class Admins extends Users {
             'paid_users' => $paidUsers,
             'top_courses' => $topCourses,
             'top_trainees' => $topTrainees,
+            'Tax' => $row->Tax,
             ];
 
-          //  $this->view('Instructor/instructorHome', $data);
-        $this->view('Admin/adminHome' ,$data);
+
+            $this->view('Admin/adminHome' ,$data);
     }
 
     public function users()
@@ -204,6 +205,8 @@ class Admins extends Users {
         }
         
     }
+
+
 
 }
 ?>

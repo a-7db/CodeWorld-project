@@ -30,14 +30,14 @@
                         </div>
                         <div class="d-flex align-items-center text-secondary text-lg font-weight-bold">
                         
-                        % <?php echo $data['tax']?>
+                        <?php echo $data['Show_Tax']?>
                         
                         </div>
                     </li>
                 </div>
 
                 <div class="mx-5 mt-5">
-                    <form action="<?php echo URLROOT ?>/Admins/tax" method="POST" class="row g-3">
+                    <form action="<?php echo URLROOT ?>/Admins/taxes" method="POST" class="row g-3">
                         <div class="col-5">
                             <input type="text" maxlength="3" onkeypress="return onlyNum(event)" class="form-control cateInput" id="Tax" name="Tax" placeholder="<?php echo empty($data['tax_err']) ? 'New Tax' : $data['tax_err'] ?>">
                         </div>

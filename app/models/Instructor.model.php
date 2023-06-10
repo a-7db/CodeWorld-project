@@ -451,4 +451,19 @@ class Instructor extends User{
         return $this->db->fetchAll();
     }
 
+    public function getTax(){
+
+        $this->db->query('SELECT * FROM taxes  ');
+        
+        $row=$this->db->fetchone();
+        if($this->db->count()> 0){
+            return $row;
+
+        }
+        else{
+           return false;
+        }
+
+    }
+
 }

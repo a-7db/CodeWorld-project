@@ -26,6 +26,7 @@ class Instructors extends Users {
         $topTrainees = $this->InsturctorModel->top_trainees();
         $profitsTotal = 0;
         $tax = 0;
+        $row=$this->InsturctorModel->getTax();
         foreach($myTrainees as $user){
             $price = $user->price * 0.15;
             $tax = $user->price - $price;
@@ -42,7 +43,8 @@ class Instructors extends Users {
             'top_courses' => $topCourses,
             'top_trainees' => $topTrainees,
             'profit_total' => $profitsTotal,
-            'tax' => $tax
+            'tax' => $tax,
+            'Tax' => $row->Tax
             ];
 
             $this->view('Instructor/instructorHome', $data);
