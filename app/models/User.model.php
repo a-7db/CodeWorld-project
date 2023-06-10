@@ -120,6 +120,54 @@ class User {
         }
     }
 
+    public function count_crs($userID){
+        $this->db->query('SELECT COUNT(user_ID) AS count
+                        FROM orders
+                        WHERE user_ID = :usrID');
+
+        $this->db->bind(':usrID', $userID);
+
+        $row = $this->db->fetchOne();
+
+        if ($this->db->execute()) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function count_reviews($userID){
+        $this->db->query('SELECT COUNT(user_ID) AS count
+                        FROM comments
+                        WHERE user_ID = :usrID');
+
+        $this->db->bind(':usrID', $userID);
+
+        $row = $this->db->fetchOne();
+
+        if ($this->db->execute()) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function count_rating($userID){
+        $this->db->query('SELECT COUNT(user_ID) AS count
+                        FROM rating
+                        WHERE user_ID = :usrID');
+
+        $this->db->bind(':usrID', $userID);
+
+        $row = $this->db->fetchOne();
+
+        if ($this->db->execute()) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 ?>

@@ -25,19 +25,19 @@
                         <div class="d-flex align-items-center">
                             <i class="fa fa-usd text-secondary text-lg opacity-10"></i>
                             <div class="d-flex flex-column">
-                                <h6 class="mb-1 mx-3 text-secondary text-sm">Sales Tax</h6>
+                                <h6 class="mb-1 mx-3 text-secondary text-sm">Value Added Tax (VAT)</h6>
                             </div>
                         </div>
                         <div class="d-flex align-items-center text-secondary text-lg font-weight-bold">
                         
-                        <?php echo $data['Show_Tax']?>
+                        % <?php echo $data['tax']?>
                         
                         </div>
                     </li>
                 </div>
 
                 <div class="mx-5 mt-5">
-                    <form action="<?php echo URLROOT ?>/Admins/taxes" method="POST" class="row g-3">
+                    <form onsubmit="ll()" action="<?php echo URLROOT ?>/Admins/tax" method="POST" class="row g-3">
                         <div class="col-5">
                             <input type="text" maxlength="3" onkeypress="return onlyNum(event)" class="form-control cateInput" id="Tax" name="Tax" placeholder="<?php echo empty($data['tax_err']) ? 'New Tax' : $data['tax_err'] ?>">
                         </div>

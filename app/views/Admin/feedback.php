@@ -1,18 +1,7 @@
 <?php require APPROOT . '/views/Admin/dashboard.php' ?>
 
 <div class="row mt-4">
-    <!-- <div class="col-lg-6 mb-lg-0 mb-4">
-        <div class="card ">
-            <div class="card-header pb-0 p-3">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-2">Last Feedbacks</h6>
-                </div>
-            </div>
-            <div class="table-responsive">
-                
-            </div>
-        </div>
-    </div> -->
+
     <div class="col-lg-6">
         <div class="card" style="height: 75vh;">
             <div class="card-header pb-0 p-3">

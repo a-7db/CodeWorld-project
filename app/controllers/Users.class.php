@@ -228,13 +228,23 @@
 
     public function profile()
     {
+        if(!isLoggedIn() || !isTrainee()){
+            redirect();
+        }
         if(isset($_SESSION['user_id'])){
         
-        $row=$this->userModel->getInfo($_SESSION['user_id']);
+        $row = $this->userModel->getInfo($_SESSION['user_id']);
+        $count_crs = $this->userModel->count_crs($_SESSION['user_id']);
+        $count_reviews = $this->userModel->count_reviews($_SESSION['user_id']);
+        $count_rating = $this->userModel->count_rating($_SESSION['user_id']);
+
         $data =[
             'name' =>$row->fname,
             'email' =>$row->email,
-            'avatar' =>$row->profile
+            'avatar' =>$row->profile,
+            'count_crs' => $count_crs,
+            'count_reviews' => $count_reviews,
+            'count_rating' => $count_rating,
         ];
 
         $this->view('User/profile',$data);

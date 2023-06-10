@@ -118,7 +118,7 @@ require APPROOT . '/views/Parts/header.php';
                                                     <?php endforeach; ?>
 
                                                     <!-- foreach end -->
-                                                    <?php $total = $subtotal * 0.15 ; ?>
+                                                    <?php $total = $subtotal * $data['cart'][0]->Tax ; ?>
                                                     <?php $total2 = $total + $subtotal; ?>
 
                                                     <div class="d-flex justify-content-between">

@@ -263,7 +263,7 @@ class Courses extends Controller {
                 foreach($data as $row){
                     $url = in_array($row->crs_ID, $courseIDs) ? URLROOT . '/courses/learn/' . $row->crs_ID . '/' . $row->slug : URLROOT . '/courses/details/' . $row->crs_ID . '/' . $row->slug;
                     echo '<a href="' . $url .'" 
-                    class="list-group-item  d-flex justify-content-between border-1 box" style="padding: 0.5rem 1rem; margin-bottom: 0px;">
+                    class="list-group-item d-flex justify-content-between border-1 box" style="padding: 0.5rem 1rem; margin-bottom: 0px;">
                     <div class="d-flex align-items-center">
                     <img width="15%" src="'. URLROOT . '/images/courses/' . $row->image . '" alt="course img">
                     <div class="d-flex flex-column courses-item" style="margin: 0">
@@ -279,8 +279,8 @@ class Courses extends Controller {
                 </a>';
                 }
             } else{
-                echo '<a class="list-group-item list-group-item-action border-1 box title" style="padding: 0.5rem 1rem;">
-                no data
+                echo '<a class="list-group-item d-flex justify-content-between border-1 box" style="padding: 0.5rem 1rem;">
+                <h6>no data</h6>
                 </a>';
             }
         } else{

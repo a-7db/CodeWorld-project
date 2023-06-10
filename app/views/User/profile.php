@@ -2,7 +2,7 @@
 require APPROOT . '/views/Parts/header.php';
 ?>
 
-<section class="vh-100" >
+<section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-12 col-xl-4">
@@ -10,39 +10,26 @@ require APPROOT . '/views/Parts/header.php';
         <div class="box" style="border-radius: 15px;">
           <div class="card-body text-center">
             <div class="mt-3 mb-4">
-              <img src="<?php echo URLROOT?>/public/images/profile/<?php echo $data['avatar']?>"
-                class="rounded-circle img-fluid" style="width: 100px;" />
+              <img src="<?php echo URLROOT ?>/public/images/profile/<?php echo $data['avatar'] ?>" class="rounded-circle img-fluid" style="width: 100px;" />
             </div>
             <h4 class="mb-2"><?php echo $data['name'] ?></h4>
-            
-             <a
-                href="#!"><?php echo $data['email'] ?></a></p>
-            <div class="mb-4 pb-2">
-              <button type="button" class="btn btn-outline-primary btn-floating">
-                <i class="fab fa-facebook-f fa-lg"></i>
-              </button>
-              <button type="button" class="btn btn-outline-primary btn-floating">
-                <i class="fab fa-twitter fa-lg"></i>
-              </button>
-              <button type="button" class="btn btn-outline-primary btn-floating">
-                <i class="fab fa-skype fa-lg"></i>
-              </button>
-            </div>
+
+            <a href=""><?php echo $data['email'] ?></a></p>
             <button data-bs-toggle="modal" data-bs-target="#edit" type="button" class="btn btn-primary btn-rounded btn-lg">
               Edit
             </button>
-            <div class="d-flex justify-content-between text-center mt-5 mb-2">
+            <div class="d-flex justify-content-evenly text-center mt-5 mb-2">
               <div>
-                <p class="mb-2 h5">8471</p>
-                <p class="text-muted mb-0">Wallets Balance</p>
+                <p class="mb-2 h5"><?php echo $data['count_crs']->count ?></p>
+                <p class="text-muted mb-0">Courses</p>
               </div>
               <div class="px-3">
-                <p class="mb-2 h5">8512</p>
-                <p class="text-muted mb-0">Passed Quiz</p>
+                <p class="mb-2 h5"><?php echo $data['count_reviews']->count ?></p>
+                <p class="text-muted mb-0">Reviews</p>
               </div>
               <div>
-                <p class="mb-2 h5">4751</p>
-                <p class="text-muted mb-0">bought course</p>
+                <p class="mb-2 h5"><?php echo $data['count_rating']->count ?></p>
+                <p class="text-muted mb-0">Rating</p>
               </div>
             </div>
           </div>
