@@ -235,8 +235,6 @@ class Course{
         $this->db->query('SELECT distinct SUM(ord.price) as price FROM orders ord
         inner join courses crs
          on crs.crs_ID = ord.course_ID
-         inner join taxes txes 
-         on crs.crs_ID = txes.tax_ID
          WHERE crs.instructor_ID  = :instructor_ID');
 
         $this->db->bind(':instructor_ID', $_SESSION['user_id']);
