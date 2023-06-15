@@ -111,8 +111,9 @@
                             Status - <span class="<?php echo $crs->public == 1 ? 'text-success' : 'text-warning' ?> font-weight-bold"><?php echo $crs->public == 1 ? 'Public' : 'Private' ?></span>
                         </div>
                         <div class="mt-1"><?php echo date('Y-m-d', strtotime($crs->ddate)) ?></div>
+                        <?php if($crs->public != false): ?>
                         <div><a class="mt-1" href="<?php echo URLROOT . '/Courses/learn/' . $crs->crs_ID . '/' . $crs->slug ?>">Preview</a></div>
-
+                            <?php endif; ?>
                     </div>
 
                     <div class="card-header text-center border-0 pt-0 pb-4 pb-lg-3">

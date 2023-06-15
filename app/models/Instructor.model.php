@@ -39,7 +39,8 @@ class Instructor extends User{
                                 crs.image,
                                 crs.public,
                                 crs.last_updated as ddate,
-                                crs.slug
+                                crs.slug,
+                                crs.public
                             FROM
                                 courses crs
                             INNER JOIN

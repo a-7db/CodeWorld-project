@@ -227,18 +227,14 @@ class Courses extends Controller {
             
             if(empty($data['rating'])){
                 if ($this->cmodel->send_comment($data)) {
-                    echo 'yes';
                     $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
                 } else {
-                    echo 'no';
                     $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
                 }
             } else{
                 if ($this->cmodel->send_feedback($data)) {
-                    echo 'yes';
                     $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
                 } else {
-                    echo 'no';
                     $this->learn($crsID, $crs_slug, $vidID, $vid_Slug);
                 }
             }

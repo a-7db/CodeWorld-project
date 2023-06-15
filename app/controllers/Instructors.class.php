@@ -285,7 +285,7 @@ class Instructors extends Users {
                 $allowed_img_ex = array('jpg', 'png', 'jpeg');
 
                 if (in_array($img_ex_lc, $allowed_img_ex)) {
-                    $new_img_name = $course->image;
+                    $new_img_name = uniqid('CRS-' . $crsID, true) . '.' . $img_ex_lc;
                     $img_path = '../public/images/courses/' . $new_img_name;
                     move_uploaded_file($tmp_name, $img_path);
                     $data['image'] = $new_img_name;
